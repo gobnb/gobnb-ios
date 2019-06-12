@@ -1,0 +1,782 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2683DE28586C7EFC519DC325 /* Pods_gobnb_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720D861A0523EAFCFCEAB53 /* Pods_gobnb_iosTests.framework */; };
+		43F851FE39159C306570116C /* Pods_gobnb_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14865D3F1064FE0C1E1C4E85 /* Pods_gobnb_ios.framework */; };
+		45071992C603E498DC296DC1 /* Pods_gobnb_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26ACF454BF3A18125BE11F1 /* Pods_gobnb_iosUITests.framework */; };
+		A347334922910A5300D7F8B0 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334822910A5300D7F8B0 /* PaymentViewController.swift */; };
+		A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334A22912CED00D7F8B0 /* StartViewController.swift */; };
+		A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */; };
+		A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8C228F801B0032717B /* AppDelegate.swift */; };
+		A3726A8F228F801B0032717B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8E228F801B0032717B /* ViewController.swift */; };
+		A3726A92228F801B0032717B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3726A90228F801B0032717B /* Main.storyboard */; };
+		A3726A94228F801D0032717B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3726A93228F801D0032717B /* Assets.xcassets */; };
+		A3726A97228F801D0032717B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3726A95228F801D0032717B /* LaunchScreen.storyboard */; };
+		A3726AA2228F801E0032717B /* BinancePayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726AA1228F801E0032717B /* BinancePayTests.swift */; };
+		A3726AAD228F801E0032717B /* BinancePayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726AAC228F801E0032717B /* BinancePayUITests.swift */; };
+		A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EC22908930006DB2F9 /* WalletViewController.swift */; };
+		A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */; };
+		A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A3726A9E228F801E0032717B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3726A81228F801B0032717B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3726A88228F801B0032717B;
+			remoteInfo = BinancePay;
+		};
+		A3726AA9228F801E0032717B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3726A81228F801B0032717B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3726A88228F801B0032717B;
+			remoteInfo = BinancePay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0720D861A0523EAFCFCEAB53 /* Pods_gobnb_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gobnb_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14865D3F1064FE0C1E1C4E85 /* Pods_gobnb_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gobnb_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		29806F526BCA14FACBE15EB5 /* Pods-gobnb-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-iosUITests.release.xcconfig"; path = "Target Support Files/Pods-gobnb-iosUITests/Pods-gobnb-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2E3021CF49F6761A759C8B56 /* Pods-BinancePay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePay.debug.xcconfig"; path = "Target Support Files/Pods-BinancePay/Pods-BinancePay.debug.xcconfig"; sourceTree = "<group>"; };
+		4440FBDBE09F137F9A3FDE92 /* Pods-gobnb-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-iosUITests.debug.xcconfig"; path = "Target Support Files/Pods-gobnb-iosUITests/Pods-gobnb-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		4F2D15193839FF7DDFFDAB4B /* Pods-gobnb-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-ios.release.xcconfig"; path = "Target Support Files/Pods-gobnb-ios/Pods-gobnb-ios.release.xcconfig"; sourceTree = "<group>"; };
+		6134E39D484612B54BAA8E38 /* Pods-gobnb-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-ios.debug.xcconfig"; path = "Target Support Files/Pods-gobnb-ios/Pods-gobnb-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		85DDF36EEBD0895CC3C84780 /* Pods-gobnb-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-iosTests.debug.xcconfig"; path = "Target Support Files/Pods-gobnb-iosTests/Pods-gobnb-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		94F0ED9FC0AEF4A443525E5B /* Pods-BinancePayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePayUITests.release.xcconfig"; path = "Target Support Files/Pods-BinancePayUITests/Pods-BinancePayUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9BD780BE652EBDD61F09ED29 /* Pods-BinancePay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePay.release.xcconfig"; path = "Target Support Files/Pods-BinancePay/Pods-BinancePay.release.xcconfig"; sourceTree = "<group>"; };
+		A347334822910A5300D7F8B0 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		A347334A22912CED00D7F8B0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScanViewController.swift; sourceTree = "<group>"; };
+		A3726A89228F801B0032717B /* gobnb-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gobnb-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3726A8C228F801B0032717B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A3726A8E228F801B0032717B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A3726A91228F801B0032717B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A3726A93228F801D0032717B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A3726A96228F801D0032717B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A3726A98228F801D0032717B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3726A9D228F801E0032717B /* gobnb-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gobnb-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3726AA1228F801E0032717B /* BinancePayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinancePayTests.swift; sourceTree = "<group>"; };
+		A3726AA3228F801E0032717B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3726AA8228F801E0032717B /* gobnb-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gobnb-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3726AAC228F801E0032717B /* BinancePayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinancePayUITests.swift; sourceTree = "<group>"; };
+		A3726AAE228F801E0032717B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A37BD5EC22908930006DB2F9 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
+		BC3C539C0464C99B4E0DFFBC /* Pods-BinancePayTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePayTests.debug.xcconfig"; path = "Target Support Files/Pods-BinancePayTests/Pods-BinancePayTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C21D9E0CDD35050B2FBFF18E /* Pods-gobnb-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-iosTests.release.xcconfig"; path = "Target Support Files/Pods-gobnb-iosTests/Pods-gobnb-iosTests.release.xcconfig"; sourceTree = "<group>"; };
+		CDD96A7DE953A5819070C2C9 /* Pods-BinancePayTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePayTests.release.xcconfig"; path = "Target Support Files/Pods-BinancePayTests/Pods-BinancePayTests.release.xcconfig"; sourceTree = "<group>"; };
+		D26ACF454BF3A18125BE11F1 /* Pods_gobnb_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gobnb_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBAD8CF8654EE8B559C3720B /* Pods-BinancePayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePayUITests.debug.xcconfig"; path = "Target Support Files/Pods-BinancePayUITests/Pods-BinancePayUITests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A3726A86228F801B0032717B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F851FE39159C306570116C /* Pods_gobnb_ios.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3726A9A228F801E0032717B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2683DE28586C7EFC519DC325 /* Pods_gobnb_iosTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3726AA5228F801E0032717B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45071992C603E498DC296DC1 /* Pods_gobnb_iosUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2002B6DB107779E2162A5F8B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2E3021CF49F6761A759C8B56 /* Pods-BinancePay.debug.xcconfig */,
+				9BD780BE652EBDD61F09ED29 /* Pods-BinancePay.release.xcconfig */,
+				BC3C539C0464C99B4E0DFFBC /* Pods-BinancePayTests.debug.xcconfig */,
+				CDD96A7DE953A5819070C2C9 /* Pods-BinancePayTests.release.xcconfig */,
+				DBAD8CF8654EE8B559C3720B /* Pods-BinancePayUITests.debug.xcconfig */,
+				94F0ED9FC0AEF4A443525E5B /* Pods-BinancePayUITests.release.xcconfig */,
+				6134E39D484612B54BAA8E38 /* Pods-gobnb-ios.debug.xcconfig */,
+				4F2D15193839FF7DDFFDAB4B /* Pods-gobnb-ios.release.xcconfig */,
+				85DDF36EEBD0895CC3C84780 /* Pods-gobnb-iosTests.debug.xcconfig */,
+				C21D9E0CDD35050B2FBFF18E /* Pods-gobnb-iosTests.release.xcconfig */,
+				4440FBDBE09F137F9A3FDE92 /* Pods-gobnb-iosUITests.debug.xcconfig */,
+				29806F526BCA14FACBE15EB5 /* Pods-gobnb-iosUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A3726A80228F801B0032717B = {
+			isa = PBXGroup;
+			children = (
+				A3726A8B228F801B0032717B /* gobnb-ios */,
+				A3726AA0228F801E0032717B /* gobnb-iosTests */,
+				A3726AAB228F801E0032717B /* gobnb-iosUITests */,
+				A3726A8A228F801B0032717B /* Products */,
+				2002B6DB107779E2162A5F8B /* Pods */,
+				C055223731005C8241554B6D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A3726A8A228F801B0032717B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3726A89228F801B0032717B /* gobnb-ios.app */,
+				A3726A9D228F801E0032717B /* gobnb-iosTests.xctest */,
+				A3726AA8228F801E0032717B /* gobnb-iosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3726A8B228F801B0032717B /* gobnb-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A3726A8E228F801B0032717B /* ViewController.swift */,
+				A347334822910A5300D7F8B0 /* PaymentViewController.swift */,
+				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
+				A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */,
+				A347334A22912CED00D7F8B0 /* StartViewController.swift */,
+				A3726A8C228F801B0032717B /* AppDelegate.swift */,
+				A3726A90228F801B0032717B /* Main.storyboard */,
+				A3726A93228F801D0032717B /* Assets.xcassets */,
+				A3726A95228F801D0032717B /* LaunchScreen.storyboard */,
+				A3726A98228F801D0032717B /* Info.plist */,
+				A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */,
+				A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */,
+			);
+			path = "gobnb-ios";
+			sourceTree = "<group>";
+		};
+		A3726AA0228F801E0032717B /* gobnb-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				A3726AA1228F801E0032717B /* BinancePayTests.swift */,
+				A3726AA3228F801E0032717B /* Info.plist */,
+			);
+			path = "gobnb-iosTests";
+			sourceTree = "<group>";
+		};
+		A3726AAB228F801E0032717B /* gobnb-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A3726AAC228F801E0032717B /* BinancePayUITests.swift */,
+				A3726AAE228F801E0032717B /* Info.plist */,
+			);
+			path = "gobnb-iosUITests";
+			sourceTree = "<group>";
+		};
+		C055223731005C8241554B6D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14865D3F1064FE0C1E1C4E85 /* Pods_gobnb_ios.framework */,
+				0720D861A0523EAFCFCEAB53 /* Pods_gobnb_iosTests.framework */,
+				D26ACF454BF3A18125BE11F1 /* Pods_gobnb_iosUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A3726A88228F801B0032717B /* gobnb-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3726AB1228F801E0032717B /* Build configuration list for PBXNativeTarget "gobnb-ios" */;
+			buildPhases = (
+				8B633547920D15E14A5C4F93 /* [CP] Check Pods Manifest.lock */,
+				A3726A85228F801B0032717B /* Sources */,
+				A3726A86228F801B0032717B /* Frameworks */,
+				A3726A87228F801B0032717B /* Resources */,
+				3260572CEBE9E302CB23B508 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "gobnb-ios";
+			productName = BinancePay;
+			productReference = A3726A89228F801B0032717B /* gobnb-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A3726A9C228F801E0032717B /* gobnb-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3726AB4228F801E0032717B /* Build configuration list for PBXNativeTarget "gobnb-iosTests" */;
+			buildPhases = (
+				4020D6113EF370D8C68359F0 /* [CP] Check Pods Manifest.lock */,
+				A3726A99228F801E0032717B /* Sources */,
+				A3726A9A228F801E0032717B /* Frameworks */,
+				A3726A9B228F801E0032717B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3726A9F228F801E0032717B /* PBXTargetDependency */,
+			);
+			name = "gobnb-iosTests";
+			productName = BinancePayTests;
+			productReference = A3726A9D228F801E0032717B /* gobnb-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A3726AA7228F801E0032717B /* gobnb-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3726AB7228F801E0032717B /* Build configuration list for PBXNativeTarget "gobnb-iosUITests" */;
+			buildPhases = (
+				B48C9EF0882F89FDDB8F9998 /* [CP] Check Pods Manifest.lock */,
+				A3726AA4228F801E0032717B /* Sources */,
+				A3726AA5228F801E0032717B /* Frameworks */,
+				A3726AA6228F801E0032717B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3726AAA228F801E0032717B /* PBXTargetDependency */,
+			);
+			name = "gobnb-iosUITests";
+			productName = BinancePayUITests;
+			productReference = A3726AA8228F801E0032717B /* gobnb-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A3726A81228F801B0032717B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Hammad Tariq";
+				TargetAttributes = {
+					A3726A88228F801B0032717B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					A3726A9C228F801E0032717B = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = A3726A88228F801B0032717B;
+					};
+					A3726AA7228F801E0032717B = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = A3726A88228F801B0032717B;
+					};
+				};
+			};
+			buildConfigurationList = A3726A84228F801B0032717B /* Build configuration list for PBXProject "gobnb-ios" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A3726A80228F801B0032717B;
+			productRefGroup = A3726A8A228F801B0032717B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3726A88228F801B0032717B /* gobnb-ios */,
+				A3726A9C228F801E0032717B /* gobnb-iosTests */,
+				A3726AA7228F801E0032717B /* gobnb-iosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A3726A87228F801B0032717B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3726A97228F801D0032717B /* LaunchScreen.storyboard in Resources */,
+				A3726A94228F801D0032717B /* Assets.xcassets in Resources */,
+				A3726A92228F801B0032717B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3726A9B228F801E0032717B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3726AA6228F801E0032717B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3260572CEBE9E302CB23B508 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-gobnb-ios/Pods-gobnb-ios-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gobnb-ios/Pods-gobnb-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4020D6113EF370D8C68359F0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gobnb-iosTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B633547920D15E14A5C4F93 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gobnb-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B48C9EF0882F89FDDB8F9998 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gobnb-iosUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A3726A85228F801B0032717B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3726A8F228F801B0032717B /* ViewController.swift in Sources */,
+				A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */,
+				A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */,
+				A347334922910A5300D7F8B0 /* PaymentViewController.swift in Sources */,
+				A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */,
+				A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */,
+				A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */,
+				A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3726A99228F801E0032717B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3726AA2228F801E0032717B /* BinancePayTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3726AA4228F801E0032717B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3726AAD228F801E0032717B /* BinancePayUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A3726A9F228F801E0032717B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3726A88228F801B0032717B /* gobnb-ios */;
+			targetProxy = A3726A9E228F801E0032717B /* PBXContainerItemProxy */;
+		};
+		A3726AAA228F801E0032717B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3726A88228F801B0032717B /* gobnb-ios */;
+			targetProxy = A3726AA9228F801E0032717B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A3726A90228F801B0032717B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3726A91228F801B0032717B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A3726A95228F801D0032717B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3726A96228F801D0032717B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A3726AAF228F801E0032717B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A3726AB0228F801E0032717B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A3726AB2228F801E0032717B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6134E39D484612B54BAA8E38 /* Pods-gobnb-ios.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YFV22SC6UJ;
+				INFOPLIST_FILE = "$(SRCROOT)/gobnb-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iologics.gobnb-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A3726AB3228F801E0032717B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F2D15193839FF7DDFFDAB4B /* Pods-gobnb-ios.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YFV22SC6UJ;
+				INFOPLIST_FILE = "$(SRCROOT)/gobnb-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iologics.gobnb-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A3726AB5228F801E0032717B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85DDF36EEBD0895CC3C84780 /* Pods-gobnb-iosTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BinancePayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.iologics.BinancePayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gobnb-ios.app/gobnb-ios";
+			};
+			name = Debug;
+		};
+		A3726AB6228F801E0032717B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C21D9E0CDD35050B2FBFF18E /* Pods-gobnb-iosTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BinancePayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.iologics.BinancePayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gobnb-ios.app/gobnb-ios";
+			};
+			name = Release;
+		};
+		A3726AB8228F801E0032717B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4440FBDBE09F137F9A3FDE92 /* Pods-gobnb-iosUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BinancePayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.iologics.BinancePayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BinancePay;
+			};
+			name = Debug;
+		};
+		A3726AB9228F801E0032717B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29806F526BCA14FACBE15EB5 /* Pods-gobnb-iosUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BinancePayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.iologics.BinancePayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BinancePay;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A3726A84228F801B0032717B /* Build configuration list for PBXProject "gobnb-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3726AAF228F801E0032717B /* Debug */,
+				A3726AB0228F801E0032717B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3726AB1228F801E0032717B /* Build configuration list for PBXNativeTarget "gobnb-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3726AB2228F801E0032717B /* Debug */,
+				A3726AB3228F801E0032717B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3726AB4228F801E0032717B /* Build configuration list for PBXNativeTarget "gobnb-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3726AB5228F801E0032717B /* Debug */,
+				A3726AB6228F801E0032717B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3726AB7228F801E0032717B /* Build configuration list for PBXNativeTarget "gobnb-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3726AB8228F801E0032717B /* Debug */,
+				A3726AB9228F801E0032717B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A3726A81228F801B0032717B /* Project object */;
+}

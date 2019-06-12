@@ -1,0 +1,6 @@
+framework module Pods_gobnb_iosTests {
+  umbrella header "Pods-gobnb-iosTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
