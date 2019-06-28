@@ -156,13 +156,13 @@
 				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
 				A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */,
 				A347334A22912CED00D7F8B0 /* StartViewController.swift */,
+				A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */,
+				A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */,
 				A3726A8C228F801B0032717B /* AppDelegate.swift */,
 				A3726A90228F801B0032717B /* Main.storyboard */,
 				A3726A93228F801D0032717B /* Assets.xcassets */,
 				A3726A95228F801D0032717B /* LaunchScreen.storyboard */,
 				A3726A98228F801D0032717B /* Info.plist */,
-				A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */,
-				A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */,
 			);
 			path = "gobnb-ios";
 			sourceTree = "<group>";

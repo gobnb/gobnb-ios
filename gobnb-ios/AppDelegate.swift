@@ -16,6 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        
+        let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+        
+        let walletKey = UserDefaults.standard.string(forKey: "walletKey") ?? ""
+        print(walletKey)
+        if walletKey != "" {
+            
+            let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
+            
+            self.window?.rootViewController = vc2
+        }else {
+            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+            self.window?.rootViewController = vc1
+        }
+        
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

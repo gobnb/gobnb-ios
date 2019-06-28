@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SKZ-Sz-sc9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--gobnb-ios-->
+        <!--GoBNB-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="BinancePay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e2Y-aG-VAH">
@@ -19,11 +23,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultsCellMain" rowHeight="200" id="WAu-Da-uE6" customClass="DealsTableViewCell" customModule="BinancePay" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultsCellMain" rowHeight="200" id="WAu-Da-uE6" customClass="DealsTableViewCell" customModule="gobnb_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WAu-Da-uE6" id="ESK-RV-BSE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lqV-WT-N6q">
@@ -67,7 +71,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="gobnb-ios" id="Sil-QC-fx5">
+                    <navigationItem key="navigationItem" title="GoBNB" id="Sil-QC-fx5">
                         <barButtonItem key="leftBarButtonItem" title="Scan" image="scan" id="n6E-nI-thz">
                             <connections>
                                 <segue destination="PMi-Mh-Mvy" kind="show" identifier="goToScan" id="9WZ-lF-wXd"/>
@@ -92,9 +96,9 @@
         <!--Scan View Controller-->
         <scene sceneID="6GR-72-imy">
             <objects>
-                <viewController id="PMi-Mh-Mvy" customClass="ScanViewController" customModule="BinancePay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PMi-Mh-Mvy" customClass="ScanViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cXn-LY-hFe">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="j5r-Hx-Cya"/>
@@ -110,21 +114,21 @@
         <!--Items Table View Controller-->
         <scene sceneID="w2L-eK-BDG">
             <objects>
-                <tableViewController id="gOc-8R-6E0" customClass="ItemsTableViewController" customModule="BinancePay" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="gOc-8R-6E0" customClass="ItemsTableViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FAm-9x-eOO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.72156862749999995" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultsCellItems" rowHeight="200" id="qEu-c0-jcJ" customClass="ItemTableViewCell" customModule="BinancePay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="200"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultsCellItems" rowHeight="200" id="qEu-c0-jcJ" customClass="ItemTableViewCell" customModule="gobnb_ios" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qEu-c0-jcJ" id="2b8-T5-if1">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iGW-qW-ung">
-                                            <rect key="frame" x="4" y="-1" width="375" height="201"/>
+                                            <rect key="frame" x="0.0" y="-0.5" width="375" height="200.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="375" id="G0v-Rx-hwq"/>
                                             </constraints>
@@ -203,13 +207,13 @@
         <!--Payment View Controller-->
         <scene sceneID="Pfn-dE-ppl">
             <objects>
-                <viewController id="Sms-YB-rEs" customClass="PaymentViewController" customModule="BinancePay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Sms-YB-rEs" customClass="PaymentViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pMU-za-dyJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ajl-YR-5wv">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJA-1e-HVb">
                                         <rect key="frame" x="0.0" y="134" width="375" height="469"/>
@@ -276,12 +280,12 @@
             </objects>
             <point key="canvasLocation" x="4224.8000000000002" y="821.73913043478262"/>
         </scene>
-        <!--Wallet-->
+        <!--Your Wallet-->
         <scene sceneID="KLi-KI-kPa">
             <objects>
-                <viewController id="URx-UF-cCC" customClass="WalletViewController" customModule="BinancePay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="URx-UF-cCC" customClass="WalletViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2kI-cI-kV4">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eno-PC-Bgg">
@@ -297,18 +301,18 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zcw-eH-6c8" id="BkX-sZ-jvc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="327" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="328" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kqd-S4-02S">
-                                                            <rect key="frame" x="16" y="4" width="34" height="21"/>
+                                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zpy-gW-4It">
-                                                            <rect key="frame" x="16" y="25" width="44" height="15"/>
+                                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
@@ -337,7 +341,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="kjO-ep-qwU"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Wallet" id="rVX-Kg-TIp">
+                    <navigationItem key="navigationItem" title="Your Wallet" id="rVX-Kg-TIp">
                         <barButtonItem key="leftBarButtonItem" title="Scan" image="scan" id="JX0-Io-PPw">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" id="XfM-aK-Qe1"/>
@@ -361,7 +365,7 @@
         <!--Scan-->
         <scene sceneID="2xK-VZ-JB4">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VgT-k4-vZb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="VgT-k4-vZb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Scan" image="scan" id="JDX-xN-7Ml"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wOJ-DR-jhn">
@@ -380,9 +384,9 @@
         <!--Start View Controller-->
         <scene sceneID="epJ-bf-tgv">
             <objects>
-                <viewController id="SKZ-Sz-sc9" customClass="StartViewController" customModule="BinancePay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartViewController" id="SKZ-Sz-sc9" customClass="StartViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BfL-wu-zeU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SL8-be-4Qe">
@@ -423,9 +427,9 @@
         <!--Wallet Scan View Controller-->
         <scene sceneID="YbT-kP-eyw">
             <objects>
-                <viewController id="TTn-aX-oL3" customClass="WalletScanViewController" customModule="BinancePay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TTn-aX-oL3" customClass="WalletScanViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oGx-LP-eu9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="D4b-Oo-s69"/>
@@ -465,7 +469,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jQ8-dy-MAS"/>
-        <segue reference="YL7-zI-8rm"/>
-        <segue reference="XfM-aK-Qe1"/>
+        <segue reference="2Y6-e3-F22"/>
+        <segue reference="eh2-2r-uBG"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -29,6 +29,7 @@ class StartViewController: UIViewController {
     
     func checkWallet(){
         let walletKey = UserDefaults.standard.string(forKey: "walletKey") ?? ""
+        print(walletKey)
         if(walletKey != ""){
             performSegue(withIdentifier: "goToScan", sender: nil)
         }
