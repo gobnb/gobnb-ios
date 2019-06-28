@@ -8,6 +8,7 @@ target 'gobnb-ios' do
   # Pods for BinancePay
   pod 'BinanceChain', :git => 'https://github.com/mh7821/SwiftBinanceChain.git'
   pod 'SVProgressHUD'
+  pod 'SwiftKeychainWrapper'
 
   target 'gobnb-iosTests' do
     inherit! :search_paths

@@ -27,6 +27,7 @@ PODS:
   - Starscream (3.1.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.0.3)
+  - SwiftKeychainWrapper (3.3.0)
   - SwiftProtobuf (1.5.0)
   - SwiftyJSON (4.3.0)
   - XCGLogger (7.0.0):
@@ -37,6 +38,7 @@ PODS:
 DEPENDENCIES:
   - BinanceChain (from `https://github.com/mh7821/SwiftBinanceChain.git`)
   - SVProgressHUD
+  - SwiftKeychainWrapper
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -48,6 +50,7 @@ SPEC REPOS:
     - Starscream
     - SVProgressHUD
     - SwiftDate
+    - SwiftKeychainWrapper
     - SwiftProtobuf
     - SwiftyJSON
     - XCGLogger
@@ -71,10 +74,11 @@ SPEC CHECKSUMS:
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 8d4f14bf1ef68e95094511504856547bf9e3e1a6
+  SwiftKeychainWrapper: ef5ad793bc0e08e24a5913f28345b8f7bc8e4123
   SwiftProtobuf: 241400280f912735c1e1b9fe675fdd2c6c4d42e2
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 2654665ca871c491d4b1748e467031557586b283
+PODFILE CHECKSUM: 007c33440c2ac94bf6480367b83a82e4ef43c827
 
 COCOAPODS: 1.6.2

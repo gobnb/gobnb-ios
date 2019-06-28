@@ -8,6 +8,7 @@
 
 import AVFoundation
 import UIKit
+import SwiftKeychainWrapper
 
 class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
@@ -94,9 +95,13 @@ class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjects
     func found(code: String) {
         print(code)
         self.scannedCode = code
-        UserDefaults.standard.set(code, forKey: "walletKey")
-
-        performSegue(withIdentifier: "goToScanAfterWallet", sender: self)
+        
+        let saveSuccessful: Bool = KeychainWrapper.standard.set(code, forKey: "walletKey")
+        if saveSuccessful {
+            performSegue(withIdentifier: "goToScanAfterWallet", sender: self)
+        }else {
+            print("error")
+        }
     }
     
     override var prefersStatusBarHidden: Bool {

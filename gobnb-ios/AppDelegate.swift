@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,9 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
         
-        let walletKey = UserDefaults.standard.string(forKey: "walletKey") ?? ""
-        print(walletKey)
-        if walletKey != "" {
+        let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
+        if walletKey != nil {
             
             let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
             

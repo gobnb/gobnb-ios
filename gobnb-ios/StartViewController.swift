@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class StartViewController: UIViewController {
 
@@ -28,9 +29,8 @@ class StartViewController: UIViewController {
     }
     
     func checkWallet(){
-        let walletKey = UserDefaults.standard.string(forKey: "walletKey") ?? ""
-        print(walletKey)
-        if(walletKey != ""){
+        let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
+        if((walletKey) != nil){
             performSegue(withIdentifier: "goToScan", sender: nil)
         }
     }
