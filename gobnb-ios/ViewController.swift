@@ -33,9 +33,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         self.tableView.separatorStyle = .none
         tableView.rowHeight = 200
-        fetchDeals(url: "http://zerobillion.com/binancepay/index.php");
         
-        
+        fetchDeals(url: Obfuscator().reveal(key: Constants.backendServerURL))
         
         //testTransaction();
         //testBinance();

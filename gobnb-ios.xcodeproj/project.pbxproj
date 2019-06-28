@@ -22,6 +22,8 @@
 		A3726AAD228F801E0032717B /* BinancePayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726AAC228F801E0032717B /* BinancePayUITests.swift */; };
 		A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EC22908930006DB2F9 /* WalletViewController.swift */; };
 		A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */; };
+		A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39FADD522C642CE00BA1FFF /* Constants.swift */; };
+		A39FADDA22C6446A00BA1FFF /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39FADD922C6446A00BA1FFF /* Obfuscator.swift */; };
 		A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,8 @@
 		A3726AAE228F801E0032717B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A37BD5EC22908930006DB2F9 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		A39FADD522C642CE00BA1FFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A39FADD922C6446A00BA1FFF /* Obfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
 		A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
 		BC3C539C0464C99B4E0DFFBC /* Pods-BinancePayTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePayTests.debug.xcconfig"; path = "Target Support Files/Pods-BinancePayTests/Pods-BinancePayTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C21D9E0CDD35050B2FBFF18E /* Pods-gobnb-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-iosTests.release.xcconfig"; path = "Target Support Files/Pods-gobnb-iosTests/Pods-gobnb-iosTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 				A3726A93228F801D0032717B /* Assets.xcassets */,
 				A3726A95228F801D0032717B /* LaunchScreen.storyboard */,
 				A3726A98228F801D0032717B /* Info.plist */,
+				A39FADD822C6445D00BA1FFF /* Utils */,
 			);
 			path = "gobnb-ios";
 			sourceTree = "<group>";
@@ -183,6 +188,15 @@
 				A3726AAE228F801E0032717B /* Info.plist */,
 			);
 			path = "gobnb-iosUITests";
+			sourceTree = "<group>";
+		};
+		A39FADD822C6445D00BA1FFF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A39FADD922C6446A00BA1FFF /* Obfuscator.swift */,
+				A39FADD522C642CE00BA1FFF /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		C055223731005C8241554B6D /* Frameworks */ = {
@@ -445,10 +459,12 @@
 				A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */,
 				A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */,
 				A347334922910A5300D7F8B0 /* PaymentViewController.swift in Sources */,
+				A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */,
 				A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */,
 				A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */,
 				A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */,
 				A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */,
+				A39FADDA22C6446A00BA1FFF /* Obfuscator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
