@@ -10,6 +10,7 @@ import UIKit
 import BinanceChain
 import SwiftyJSON
 import SVProgressHUD
+import SwiftKeychainWrapper
 
 class WalletViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let testnet = "https://testnet-explorer.binance.org/tx/"
@@ -88,7 +89,11 @@ class WalletViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     @IBAction func logOutPressed(_ sender: Any) {
-        UserDefaults.standard.set("", forKey: "walletKey")
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
+        if removeSuccessful {
+            let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+            self.present(vc1, animated: true, completion: nil)
+        }
     }
 }
