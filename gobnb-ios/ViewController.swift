@@ -26,9 +26,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let binance = BinanceChain(endpoint: .testnet)
     var dealsArray = [[String]]()
     var dealAddress:String = ""
+    
+    @IBOutlet weak var shoppingCartView: UIView!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        shoppingCartView.isHidden = false
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.separatorStyle = .none

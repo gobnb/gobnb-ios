@@ -11,6 +11,7 @@ import SwiftKeychainWrapper
 
 class StartViewController: UIViewController {
 
+    @IBOutlet weak var textAreaOutlet: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         print("start")
@@ -35,5 +36,14 @@ class StartViewController: UIViewController {
         }
     }
 
+    @IBAction func submitPressed(_ sender: Any) {
+        print(textAreaOutlet.text as! String)
+        let saveSuccessful: Bool = KeychainWrapper.standard.set(textAreaOutlet.text, forKey: "walletKey")
+        if saveSuccessful {
+            performSegue(withIdentifier: "goToFeed", sender: self)
+        }else {
+            print("error")
+        }
+    }
     
 }
