@@ -249,6 +249,14 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nac-7x-xX8">
+                                                        <rect key="frame" x="0.0" y="41" width="94" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" red="0.99215686270000003" green="0.79607843140000001" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Add to cart">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="0.72156862749999995" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
@@ -272,6 +280,36 @@
                                             <action selector="payButtonPressed:" destination="Sms-YB-rEs" eventType="touchUpInside" id="DRQ-9U-LYP"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oSH-xL-7dk">
+                                        <rect key="frame" x="284" y="8" width="75" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qjr-ys-Nf5">
+                                                <rect key="frame" x="8" y="8" width="15" height="13"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="add-white"/>
+                                                <connections>
+                                                    <action selector="plusItemAction:" destination="Sms-YB-rEs" eventType="touchUpInside" id="rlO-xg-SbS"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwq-aK-soy">
+                                                <rect key="frame" x="52" y="8" width="15" height="13"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="subtract-white"/>
+                                                <connections>
+                                                    <action selector="subtractItemAction:" destination="Sms-YB-rEs" eventType="touchUpInside" id="8Cv-Ym-UJW"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plp-TN-iqr">
+                                                <rect key="frame" x="32" y="4" width="10" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.23529411764705882" green="0.38823529411764707" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -288,6 +326,7 @@
                     <connections>
                         <outlet property="itemImageView" destination="gJA-1e-HVb" id="LSC-pm-G51"/>
                         <outlet property="itemPrice" destination="2te-cc-na3" id="Gu0-Fx-dyU"/>
+                        <outlet property="shoppingCartCounterLabel" destination="Plp-TN-iqr" id="qfW-vR-GBi"/>
                         <outlet property="titleOfItem" destination="0Yo-Ol-Szr" id="dfK-4E-kz6"/>
                     </connections>
                 </viewController>
@@ -539,9 +578,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add-white" width="32" height="32"/>
         <image name="poor" width="512" height="512"/>
         <image name="purse" width="21" height="21"/>
         <image name="scan" width="21" height="21"/>
+        <image name="subtract-white" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="n6d-5N-eeE"/>

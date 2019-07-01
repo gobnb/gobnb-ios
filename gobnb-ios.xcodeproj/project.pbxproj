@@ -13,6 +13,8 @@
 		A347334922910A5300D7F8B0 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334822910A5300D7F8B0 /* PaymentViewController.swift */; };
 		A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334A22912CED00D7F8B0 /* StartViewController.swift */; };
 		A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */; };
+		A34CA0FB22CA36D200FE1D8D /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */; };
+		A34CA0FD22CA374000FE1D8D /* ShoppingCartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */; };
 		A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8C228F801B0032717B /* AppDelegate.swift */; };
 		A3726A8F228F801B0032717B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8E228F801B0032717B /* ViewController.swift */; };
 		A3726A92228F801B0032717B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3726A90228F801B0032717B /* Main.storyboard */; };
@@ -58,6 +60,8 @@
 		A347334822910A5300D7F8B0 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		A347334A22912CED00D7F8B0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScanViewController.swift; sourceTree = "<group>"; };
+		A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
+		A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartModel.swift; sourceTree = "<group>"; };
 		A3726A89228F801B0032717B /* gobnb-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gobnb-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3726A8C228F801B0032717B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3726A8E228F801B0032717B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +134,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A34CA0F722CA334F00FE1D8D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */,
+				A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A3726A80228F801B0032717B = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +168,7 @@
 		A3726A8B228F801B0032717B /* gobnb-ios */ = {
 			isa = PBXGroup;
 			children = (
+				A34CA0F722CA334F00FE1D8D /* Model */,
 				A3726A8E228F801B0032717B /* ViewController.swift */,
 				A347334822910A5300D7F8B0 /* PaymentViewController.swift */,
 				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
@@ -460,6 +474,8 @@
 				A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */,
 				A347334922910A5300D7F8B0 /* PaymentViewController.swift in Sources */,
 				A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */,
+				A34CA0FD22CA374000FE1D8D /* ShoppingCartModel.swift in Sources */,
+				A34CA0FB22CA36D200FE1D8D /* ShoppingItemModel.swift in Sources */,
 				A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */,
 				A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */,
 				A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */,

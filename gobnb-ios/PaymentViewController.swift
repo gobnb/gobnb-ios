@@ -15,6 +15,8 @@ import SwiftKeychainWrapper
 
 class PaymentViewController: UIViewController {
     let testnet = "https://testnet-explorer.binance.org/tx/"
+    
+    @IBOutlet weak var shoppingCartCounterLabel: UILabel!
     @IBOutlet weak var titleOfItem: UILabel!
     @IBOutlet weak var itemDescription: UILabel!
     @IBOutlet weak var itemImageView: UIImageView!
@@ -45,6 +47,12 @@ class PaymentViewController: UIViewController {
                 print("Data is nil. I don't know what to do :(")
             }
         }
+    }
+    
+    @IBAction func subtractItemAction(_ sender: Any) {
+    }
+    
+    @IBAction func plusItemAction(_ sender: Any) {
     }
     
     
