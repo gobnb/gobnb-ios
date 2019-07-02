@@ -9,5 +9,5 @@
 import Foundation
 
 struct ShoppingCartModel {
-    var ShoppingItemArray = [String]()
+    static var shoppingCartArray : [ShoppingItemModel] = []
 }

@@ -10,6 +10,6 @@ import Foundation
 
 struct ShoppingItemModel {
     var name: String = ""
-    var desc: String = ""
-    var options: String = ""
+    var qty: Int = 0
+    var price: Double = 0.00
 }

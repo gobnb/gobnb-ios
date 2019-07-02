@@ -18,13 +18,13 @@ class PaymentViewController: UIViewController {
     
     @IBOutlet weak var shoppingCartCounterLabel: UILabel!
     @IBOutlet weak var titleOfItem: UILabel!
-    @IBOutlet weak var itemDescription: UILabel!
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var itemPrice: UILabel!
     
     var itemArray = [String]()
     var addressToPay:String = ""
     var totalPrice:Double?
+    var cartCounter: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +34,6 @@ class PaymentViewController: UIViewController {
     func fillDetails(){
         titleOfItem.text = itemArray[0]
         itemPrice.text = "\(itemArray[3]) BNB"
-        //itemDescription.text = itemArray[1]
-        //titleOfItem.sizeToFit()
-        //itemDescription.sizeToFit()
         addressToPay = itemArray[4]
         totalPrice = Double(itemArray[3])
         Alamofire.request(itemArray[2]).response { response in
@@ -50,11 +47,27 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func subtractItemAction(_ sender: Any) {
+        if cartCounter != 1 {
+            cartCounter = cartCounter - 1
+            shoppingCartCounterLabel.text = "\(cartCounter)"
+        }
     }
     
     @IBAction func plusItemAction(_ sender: Any) {
+        if cartCounter != 9 {
+            cartCounter = cartCounter + 1
+            shoppingCartCounterLabel.text = "\(cartCounter)"
+        }
     }
     
+    @IBAction func addToCartButtonPressed(_ sender: Any) {
+        let shoppingCartItem = ShoppingItemModel(name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
+        ShoppingCartModel.shoppingCartArray.append(shoppingCartItem)
+        
+        
+        print("printing shopping cart")
+        print(ShoppingCartModel.shoppingCartArray)
+    }
     
     @IBAction func payButtonPressed(_ sender: Any) {
         SVProgressHUD.show()
