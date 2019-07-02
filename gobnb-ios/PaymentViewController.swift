@@ -46,6 +46,8 @@ class PaymentViewController: UIViewController {
         }
     }
     
+    // BUTTON ACTIONS
+    
     @IBAction func subtractItemAction(_ sender: Any) {
         if cartCounter != 1 {
             cartCounter = cartCounter - 1
@@ -63,10 +65,6 @@ class PaymentViewController: UIViewController {
     @IBAction func addToCartButtonPressed(_ sender: Any) {
         let shoppingCartItem = ShoppingItemModel(name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
         ShoppingCartModel.shoppingCartArray.append(shoppingCartItem)
-        
-        
-        print("printing shopping cart")
-        print(ShoppingCartModel.shoppingCartArray)
     }
     
     @IBAction func payButtonPressed(_ sender: Any) {

@@ -31,7 +31,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        shoppingCartView.isHidden = false
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.separatorStyle = .none
@@ -45,6 +44,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //testBroadcastControl();
         //testNodeRPC();
         //getTransactions();
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if ShoppingCartModel.shoppingCartArray.isEmpty {
+            shoppingCartView.isHidden = true
+        }else{
+            shoppingCartView.isHidden = false
+        }
     }
     
     func fetchDeals(url: String){

@@ -24,6 +24,8 @@
 		A3726AAD228F801E0032717B /* BinancePayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726AAC228F801E0032717B /* BinancePayUITests.swift */; };
 		A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EC22908930006DB2F9 /* WalletViewController.swift */; };
 		A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */; };
+		A39F070E22CB81B300C01D32 /* ShoppingCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39F070D22CB81B300C01D32 /* ShoppingCartView.xib */; };
+		A39F071022CB834700C01D32 /* ShoppingCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F070F22CB834700C01D32 /* ShoppingCartView.swift */; };
 		A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39FADD522C642CE00BA1FFF /* Constants.swift */; };
 		A39FADDA22C6446A00BA1FFF /* Obfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39FADD922C6446A00BA1FFF /* Obfuscator.swift */; };
 		A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */; };
@@ -77,6 +79,8 @@
 		A3726AAE228F801E0032717B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A37BD5EC22908930006DB2F9 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		A39F070D22CB81B300C01D32 /* ShoppingCartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartView.xib; sourceTree = "<group>"; };
+		A39F070F22CB834700C01D32 /* ShoppingCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartView.swift; sourceTree = "<group>"; };
 		A39FADD522C642CE00BA1FFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A39FADD922C6446A00BA1FFF /* Obfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obfuscator.swift; sourceTree = "<group>"; };
 		A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 		A3726A8B228F801B0032717B /* gobnb-ios */ = {
 			isa = PBXGroup;
 			children = (
+				A39F070C22CB819C00C01D32 /* View */,
 				A34CA0F722CA334F00FE1D8D /* Model */,
 				A3726A8E228F801B0032717B /* ViewController.swift */,
 				A347334822910A5300D7F8B0 /* PaymentViewController.swift */,
@@ -202,6 +207,15 @@
 				A3726AAE228F801E0032717B /* Info.plist */,
 			);
 			path = "gobnb-iosUITests";
+			sourceTree = "<group>";
+		};
+		A39F070C22CB819C00C01D32 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A39F070D22CB81B300C01D32 /* ShoppingCartView.xib */,
+				A39F070F22CB834700C01D32 /* ShoppingCartView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A39FADD822C6445D00BA1FFF /* Utils */ = {
@@ -333,6 +347,7 @@
 			files = (
 				A3726A97228F801D0032717B /* LaunchScreen.storyboard in Resources */,
 				A3726A94228F801D0032717B /* Assets.xcassets in Resources */,
+				A39F070E22CB81B300C01D32 /* ShoppingCartView.xib in Resources */,
 				A3726A92228F801B0032717B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,6 +488,7 @@
 				A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */,
 				A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */,
 				A347334922910A5300D7F8B0 /* PaymentViewController.swift in Sources */,
+				A39F071022CB834700C01D32 /* ShoppingCartView.swift in Sources */,
 				A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */,
 				A34CA0FD22CA374000FE1D8D /* ShoppingCartModel.swift in Sources */,
 				A34CA0FB22CA36D200FE1D8D /* ShoppingItemModel.swift in Sources */,
