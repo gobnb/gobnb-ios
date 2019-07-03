@@ -143,7 +143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1KK-bl-HFP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2689" y="52"/>
+            <point key="canvasLocation" x="3474" y="2"/>
         </scene>
         <!--Items Table View Controller-->
         <scene sceneID="w2L-eK-BDG">
@@ -237,6 +237,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gM-Ud-KiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3440.8000000000002" y="821.73913043478262"/>
+        </scene>
+        <!--Shopping Cart View Controller-->
+        <scene sceneID="BLs-4I-HIT">
+            <objects>
+                <viewController storyboardIdentifier="ShoppingCartVC" id="Q3W-Zr-DsC" customClass="ShoppingCartViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W8D-zh-hBN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shopping Cart" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fir-RP-mlg">
+                                <rect key="frame" x="59" y="54" width="111" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="n2w-TI-oTe"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qi5-Xg-Qop" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2134" y="985"/>
         </scene>
         <!--Payment View Controller-->
         <scene sceneID="Pfn-dE-ppl">
@@ -615,7 +639,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="n6d-5N-eeE"/>
-        <segue reference="2Y6-e3-F22"/>
+        <segue reference="YL7-zI-8rm"/>
         <segue reference="eh2-2r-uBG"/>
     </inferredMetricsTieBreakers>
 </document>

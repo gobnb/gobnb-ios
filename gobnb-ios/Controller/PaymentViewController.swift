@@ -27,7 +27,6 @@ class PaymentViewController: UIViewController {
     var addressToPay:String = ""
     var totalPrice:Double?
     var cartCounter: Int = 1
-    var cartSubView : ShoppingCartView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,10 +89,17 @@ class PaymentViewController: UIViewController {
             totalPriceInCart = ShoppingCartModel.shoppingCartArray[i].price + totalPriceInCart
             totalItemsInCart = ShoppingCartModel.shoppingCartArray[i].qty + totalItemsInCart
         }
-        print(totalPriceInCart) // 136
         shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
         shoppingCartView.totalQty.text = "\(totalItemsInCart)"
+        shoppingCartView.viewCartButton.addTarget(self, action: Selector("cartButtonTapped:"), for: .touchUpInside)
         showShoppingCartView()
+    }
+    
+    @objc func cartButtonTapped(_ sender: UIButton){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCartVC") as? UIViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func payButtonPressed(_ sender: Any) {

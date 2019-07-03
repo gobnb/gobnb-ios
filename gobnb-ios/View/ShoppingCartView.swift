@@ -14,6 +14,7 @@ import UIKit
     
     @IBOutlet weak var totalPrice: UILabel!
     @IBOutlet weak var totalQty: UILabel!
+    @IBOutlet weak var viewCartButton: UIButton!
     override init(frame: CGRect)
     {
         super.init(frame: frame)
@@ -42,18 +43,13 @@ import UIKit
         
         return view
     }
-
-    @IBInspectable var mytitleLabelText: String? {
-        get {
-            return totalPrice.text
-        }
-        set(mytitleLabelText) {
-            totalPrice.text = mytitleLabelText
-        }
-    }
     
     @IBAction func viewCartPressed(_ sender: Any) {
         print("view pressed")
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCartVC") as? UIViewController {
+            //self.present(viewController, animated: true, completion: nil)
+        }
     }
     
 }
