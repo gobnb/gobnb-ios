@@ -43,6 +43,15 @@ import UIKit
         return view
     }
 
+    @IBInspectable var mytitleLabelText: String? {
+        get {
+            return totalPrice.text
+        }
+        set(mytitleLabelText) {
+            totalPrice.text = mytitleLabelText
+        }
+    }
+    
     @IBAction func viewCartPressed(_ sender: Any) {
         print("view pressed")
     }

@@ -81,7 +81,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultsCellMain", for: indexPath) as! DealsTableViewCell
         var deals = dealsArray[indexPath.item]
-        print(deals)
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.placeLabel.text = deals[0]
         cell.descriptionLabel.text = NSLocalizedString("\(deals[1])", comment: "")

@@ -17,6 +17,8 @@ class PaymentViewController: UIViewController {
     let testnet = "https://testnet-explorer.binance.org/tx/"
     
     @IBOutlet weak var shoppingCartCounterLabel: UILabel!
+    
+    @IBOutlet weak var shoppingCartView: ShoppingCartView!
     @IBOutlet weak var titleOfItem: UILabel!
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var itemPrice: UILabel!
@@ -25,10 +27,15 @@ class PaymentViewController: UIViewController {
     var addressToPay:String = ""
     var totalPrice:Double?
     var cartCounter: Int = 1
+    var cartSubView : ShoppingCartView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fillDetails()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        showShoppingCartView()
     }
     
     func fillDetails(){
@@ -46,6 +53,14 @@ class PaymentViewController: UIViewController {
         }
     }
     
+    func showShoppingCartView(){
+        if ShoppingCartModel.shoppingCartArray.isEmpty {
+            shoppingCartView.isHidden = true
+        }else{
+            shoppingCartView.isHidden = false
+        }
+    }
+    
     // BUTTON ACTIONS
     
     @IBAction func subtractItemAction(_ sender: Any) {
@@ -60,11 +75,25 @@ class PaymentViewController: UIViewController {
             cartCounter = cartCounter + 1
             shoppingCartCounterLabel.text = "\(cartCounter)"
         }
+        
+        
+        showShoppingCartView()
     }
     
     @IBAction func addToCartButtonPressed(_ sender: Any) {
         let shoppingCartItem = ShoppingItemModel(name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
         ShoppingCartModel.shoppingCartArray.append(shoppingCartItem)
+        
+        var totalPriceInCart:Double = 0.00
+        var totalItemsInCart:Int = 0
+        for i in 0..<ShoppingCartModel.shoppingCartArray.count {
+            totalPriceInCart = ShoppingCartModel.shoppingCartArray[i].price + totalPriceInCart
+            totalItemsInCart = ShoppingCartModel.shoppingCartArray[i].qty + totalItemsInCart
+        }
+        print(totalPriceInCart) // 136
+        shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+        shoppingCartView.totalQty.text = "\(totalItemsInCart)"
+        showShoppingCartView()
     }
     
     @IBAction func payButtonPressed(_ sender: Any) {

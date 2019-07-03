@@ -354,6 +354,7 @@
                         <outlet property="itemImageView" destination="gJA-1e-HVb" id="LSC-pm-G51"/>
                         <outlet property="itemPrice" destination="2te-cc-na3" id="Gu0-Fx-dyU"/>
                         <outlet property="shoppingCartCounterLabel" destination="Plp-TN-iqr" id="qfW-vR-GBi"/>
+                        <outlet property="shoppingCartView" destination="7Tx-0g-IrC" id="XrO-vr-o38"/>
                         <outlet property="titleOfItem" destination="0Yo-Ol-Szr" id="dfK-4E-kz6"/>
                     </connections>
                 </viewController>
