@@ -66,38 +66,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tom-Ft-D2o">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tom-Ft-D2o" customClass="ShoppingCartView" customModule="gobnb_ios" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="605" width="375" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clipboard-paste-button" translatesAutoresizingMaskIntoConstraints="NO" id="WOH-Kd-IDu">
-                                        <rect key="frame" x="29" y="16" width="25" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDh-KN-6yK">
-                                        <rect key="frame" x="38" y="23" width="8" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00 BNB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uk-G4-Fi7">
-                                        <rect key="frame" x="284" y="23" width="74" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2S-NK-T4N">
-                                        <rect key="frame" x="125" y="16" width="125" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <state key="normal" title="View Your Cart">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.72156862749999995" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -230,11 +202,18 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="shoppingCartView" destination="F2e-Em-mUM" id="GoB-AC-pcD"/>
                         <outlet property="tableView" destination="FAm-9x-eOO" id="76X-r8-KbH"/>
                         <segue destination="Sms-YB-rEs" kind="show" identifier="goToPayment" id="6wN-v9-lu6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gM-Ud-KiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="F2e-Em-mUM" customClass="ShoppingCartView" customModule="gobnb_ios" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="xUn-or-NlA"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="3440.8000000000002" y="821.73913043478262"/>
         </scene>
@@ -378,7 +357,7 @@
                         <outlet property="itemImageView" destination="gJA-1e-HVb" id="LSC-pm-G51"/>
                         <outlet property="itemPrice" destination="2te-cc-na3" id="Gu0-Fx-dyU"/>
                         <outlet property="shoppingCartCounterLabel" destination="Plp-TN-iqr" id="qfW-vR-GBi"/>
-                        <outlet property="shoppingCartView" destination="7Tx-0g-IrC" id="XrO-vr-o38"/>
+                        <outlet property="shoppingCartView" destination="7Tx-0g-IrC" id="HY1-na-nKs"/>
                         <outlet property="titleOfItem" destination="0Yo-Ol-Szr" id="dfK-4E-kz6"/>
                     </connections>
                 </viewController>
@@ -631,7 +610,6 @@
     </scenes>
     <resources>
         <image name="add-white" width="32" height="32"/>
-        <image name="clipboard-paste-button" width="32" height="32"/>
         <image name="poor" width="512" height="512"/>
         <image name="purse" width="21" height="21"/>
         <image name="scan" width="21" height="21"/>
@@ -639,7 +617,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="n6d-5N-eeE"/>
-        <segue reference="YL7-zI-8rm"/>
+        <segue reference="2Y6-e3-F22"/>
         <segue reference="eh2-2r-uBG"/>
     </inferredMetricsTieBreakers>
 </document>

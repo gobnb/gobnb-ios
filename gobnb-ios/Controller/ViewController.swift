@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var dealsArray = [[String]]()
     var dealAddress:String = ""
     
-    @IBOutlet weak var shoppingCartView: UIView!
+    @IBOutlet weak var shoppingCartView: ShoppingCartView!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +47,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //View cart subview at the bottom funcationality
         if ShoppingCartModel.shoppingCartArray.isEmpty {
             shoppingCartView.isHidden = true
         }else{
+            let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+            let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
+            shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+            shoppingCartView.totalQty.text = "\(totalItemsInCart)"
+            shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
             shoppingCartView.isHidden = false
+        }
+    }
+    
+    @objc func cartButtonTapped(_ sender: UIButton){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCartVC") as? UIViewController {
+            self.present(viewController, animated: true, completion: nil)
         }
     }
     

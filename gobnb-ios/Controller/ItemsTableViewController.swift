@@ -21,6 +21,7 @@ class ItemTableViewCell: UITableViewCell{
 class ItemsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var shoppingCartView: ShoppingCartView!
     
     var peopleAddress:String = ""
     var itemsArray = [[String]]()
@@ -32,10 +33,37 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         self.tableView.separatorStyle = .none
         tableView.rowHeight = 200
-        print(peopleAddress)
+        //add shopping cart subview
+        shoppingCartView.frame = CGRect(x: 0,
+                                     y: self.view.bounds.size.height - shoppingCartView.bounds.size.height,
+                                     width: self.view.bounds.size.width,
+                                     height: shoppingCartView.bounds.size.height)
+        
         let addressToQuery = "http://zerobillion.com/binancepay/getItems.php?address=\(peopleAddress)"
         fetchItems(url: addressToQuery)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.view.addSubview(shoppingCartView)
+        //View cart subview at the bottom funcationality
+        if ShoppingCartModel.shoppingCartArray.isEmpty {
+            shoppingCartView.isHidden = true
+        }else{
+            let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+            let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
+            shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+            shoppingCartView.totalQty.text = "\(totalItemsInCart)"
+            shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
+            shoppingCartView.isHidden = false
+        }
+    }
+    
+    @objc func cartButtonTapped(_ sender: UIButton){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCartVC") as? UIViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
     
     func fetchItems(url: String){
@@ -103,6 +131,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         itemArrayToPass = itemsArray[indexPath.item]
         itemArrayToPass.append(peopleAddress)
         performSegue(withIdentifier: "goToPayment", sender: self)
+        
         //navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -115,7 +144,10 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        //remove subview from navigation controller otherwise it will persist into next viewcontroller
+        shoppingCartView.removeFromSuperview()
+    }
     
     
 }

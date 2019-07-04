@@ -17,11 +17,11 @@ class PaymentViewController: UIViewController {
     let testnet = "https://testnet-explorer.binance.org/tx/"
     
     @IBOutlet weak var shoppingCartCounterLabel: UILabel!
-    
     @IBOutlet weak var shoppingCartView: ShoppingCartView!
     @IBOutlet weak var titleOfItem: UILabel!
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var itemPrice: UILabel!
+    
     
     var itemArray = [String]()
     var addressToPay:String = ""
@@ -33,8 +33,12 @@ class PaymentViewController: UIViewController {
         fillDetails()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         showShoppingCartView()
+        
+        
+        
     }
     
     func fillDetails(){
@@ -56,6 +60,11 @@ class PaymentViewController: UIViewController {
         if ShoppingCartModel.shoppingCartArray.isEmpty {
             shoppingCartView.isHidden = true
         }else{
+            let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+            let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
+            shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+            shoppingCartView.totalQty.text = "\(totalItemsInCart)"
+            shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
             shoppingCartView.isHidden = false
         }
     }
@@ -81,17 +90,22 @@ class PaymentViewController: UIViewController {
     
     @IBAction func addToCartButtonPressed(_ sender: Any) {
         let shoppingCartItem = ShoppingItemModel(name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
+        
         ShoppingCartModel.shoppingCartArray.append(shoppingCartItem)
         
         var totalPriceInCart:Double = 0.00
         var totalItemsInCart:Int = 0
         for i in 0..<ShoppingCartModel.shoppingCartArray.count {
-            totalPriceInCart = ShoppingCartModel.shoppingCartArray[i].price + totalPriceInCart
+            let oneItemIntoQty = ShoppingCartModel.shoppingCartArray[i].price * Double(ShoppingCartModel.shoppingCartArray[i].qty)
+            totalPriceInCart = oneItemIntoQty + totalPriceInCart
             totalItemsInCart = ShoppingCartModel.shoppingCartArray[i].qty + totalItemsInCart
         }
+        UserDefaults.standard.set(totalPriceInCart, forKey: "totalPriceInCart")
+        UserDefaults.standard.set(totalItemsInCart, forKey: "totalItemsInCart")
         shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
         shoppingCartView.totalQty.text = "\(totalItemsInCart)"
-        shoppingCartView.viewCartButton.addTarget(self, action: Selector("cartButtonTapped:"), for: .touchUpInside)
+        
+        shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
         showShoppingCartView()
     }
     
