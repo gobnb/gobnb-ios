@@ -7,21 +7,22 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 protocol CartItemTableViewCellDelegate {
-    func addButtonPressed(qty: String)
-    func subtractButtonPressed(qty: String)
+    func newItem()
 }
 
-class CartItemTableViewCell: UITableViewCell {
+class CartItemTableViewCell: SwipeTableViewCell {
     
     @IBOutlet weak var qtyLabel: UILabel!
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
     
     var idOfTheRecord : String = ""
-    
-    var delegate: CartItemTableViewCellDelegate?
+    var tableView: UITableView?
+    var indexPath: IndexPath?
+    var newDelegate: CartItemTableViewCellDelegate?
     @IBAction func subtractButtonDidPress(_ sender: Any) {
         let newQty = Int(qtyLabel.text!)! - 1
         if(newQty > 0){
@@ -40,8 +41,13 @@ class CartItemTableViewCell: UITableViewCell {
             }
             Helper().updateCartPriceAndQty() //update global cart user defaults
             
+        }else{
+            print("delete pressed")
+            print(indexPath)
+            //delegate?.tableView(tableView!, editActionsForRowAt: indexPath!, for: .right)
+            newDelegate?.newItem()
         }
-        //delegate?.subtractButtonPressed(qty: qtyLabel.text ?? "0")
+        
     }
     
     @IBAction func addButtonDidPress(_ sender: Any) {
@@ -62,13 +68,12 @@ class CartItemTableViewCell: UITableViewCell {
             }
             Helper().updateCartPriceAndQty() //update global cart user defaults
         }
-        //delegate?.addButtonPressed(qty: qtyLabel.text ?? "0")
     }
     
     
 }
 
-class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CartItemTableViewCellDelegate {
+class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, CartItemTableViewCellDelegate {
     
     
     @IBOutlet weak var itemsTableView: UITableView!
@@ -103,12 +108,14 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartItemCell", for: indexPath) as! CartItemTableViewCell
+        cell.delegate = self
+        cell.tableView = tableView
+        cell.indexPath = indexPath
         cell.idOfTheRecord = ShoppingCartModel.shoppingCartArray[indexPath.row].id
         cell.itemNameLabel.text = ShoppingCartModel.shoppingCartArray[indexPath.row].name
         cell.qtyLabel.text = "\(ShoppingCartModel.shoppingCartArray[indexPath.row].qty)"
         let updatedPriceAfterQty = "\(Double(ShoppingCartModel.shoppingCartArray[indexPath.row].qty) * ShoppingCartModel.shoppingCartArray[indexPath.row].price)"
         cell.itemPriceLabel.text = "\(updatedPriceAfterQty) BNB"
-        cell.delegate = self
         return cell
     }
     
@@ -116,21 +123,39 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func addButtonPressed(qty:String) {
-        let alertMessage = "\(qty) Add Pressed"
-        let message = "Let's watch it later"
+    // SwipeCell function
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
+            self.deleteItem(tableView: tableView, at: indexPath)
+        }
+        
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+        
+        return [deleteAction]
+    }
+    
+    func deleteItem (tableView: UITableView, at indexPath: IndexPath){
+        print ("delete Item")
+        let alertMessage = "Delete Item"
+        let message = "Do you really want to delete this item from the shopping cart?"
         let alert = UIAlertController(title: alertMessage, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in ShoppingCartModel.shoppingCartArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+            tableView.tableFooterView = UIView()
+            if ShoppingCartModel.shoppingCartArray.isEmpty {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
-    func subtractButtonPressed(qty:String) {
-        let alertMessage = "\(qty) Subtract Pressed"
-        let message = "Let's watch it later"
-        let alert = UIAlertController(title: alertMessage, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+    func newItem(){
+        print("new delete")
     }
-    
     
 }

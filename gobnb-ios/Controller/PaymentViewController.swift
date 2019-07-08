@@ -94,7 +94,6 @@ class PaymentViewController: UIViewController {
         let randomId = helper.randomString(length: 19)
         
         // First see if item already exists in the cart, if yes, lets just update it
-        
         var i = 0;
         var itemFound = 0;
         for var item in ShoppingCartModel.shoppingCartArray

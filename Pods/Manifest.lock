@@ -30,6 +30,7 @@ PODS:
   - SwiftKeychainWrapper (3.3.0)
   - SwiftProtobuf (1.5.0)
   - SwiftyJSON (4.3.0)
+  - SwipeCellKit (2.6.0)
   - XCGLogger (7.0.0):
     - XCGLogger/Core (= 7.0.0)
   - XCGLogger/Core (7.0.0):
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - BinanceChain (from `https://github.com/mh7821/SwiftBinanceChain.git`)
   - SVProgressHUD
   - SwiftKeychainWrapper
+  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -53,6 +55,7 @@ SPEC REPOS:
     - SwiftKeychainWrapper
     - SwiftProtobuf
     - SwiftyJSON
+    - SwipeCellKit
     - XCGLogger
 
 EXTERNAL SOURCES:
@@ -77,8 +80,9 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: ef5ad793bc0e08e24a5913f28345b8f7bc8e4123
   SwiftProtobuf: 241400280f912735c1e1b9fe675fdd2c6c4d42e2
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 007c33440c2ac94bf6480367b83a82e4ef43c827
+PODFILE CHECKSUM: 9c4fc082fcaf8b546f6b6d9fdac870beb1085c61
 
 COCOAPODS: 1.6.2

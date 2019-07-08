@@ -9,6 +9,7 @@ target 'gobnb-ios' do
   pod 'BinanceChain', :git => 'https://github.com/mh7821/SwiftBinanceChain.git'
   pod 'SVProgressHUD'
   pod 'SwiftKeychainWrapper'
+  pod 'SwipeCellKit'
 
   target 'gobnb-iosTests' do
     inherit! :search_paths
