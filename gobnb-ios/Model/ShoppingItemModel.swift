@@ -9,6 +9,7 @@
 import Foundation
 
 struct ShoppingItemModel {
+    var id: String = ""
     var name: String = ""
     var qty: Int = 0
     var price: Double = 0.00

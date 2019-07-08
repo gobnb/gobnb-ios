@@ -89,19 +89,18 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func addToCartButtonPressed(_ sender: Any) {
-        let shoppingCartItem = ShoppingItemModel(name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
+        //get and assign a random ID
+        let helper = Helper()
+        let randomId = helper.randomString(length: 19)
+        
+        //we are adding qty but storing individual price of item in the array
+        //later we just multiply the price with qty wherever we need it
+        let shoppingCartItem = ShoppingItemModel(id: randomId, name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
         
         ShoppingCartModel.shoppingCartArray.append(shoppingCartItem)
-        
-        var totalPriceInCart:Double = 0.00
-        var totalItemsInCart:Int = 0
-        for i in 0..<ShoppingCartModel.shoppingCartArray.count {
-            let oneItemIntoQty = ShoppingCartModel.shoppingCartArray[i].price * Double(ShoppingCartModel.shoppingCartArray[i].qty)
-            totalPriceInCart = oneItemIntoQty + totalPriceInCart
-            totalItemsInCart = ShoppingCartModel.shoppingCartArray[i].qty + totalItemsInCart
-        }
-        UserDefaults.standard.set(totalPriceInCart, forKey: "totalPriceInCart")
-        UserDefaults.standard.set(totalItemsInCart, forKey: "totalItemsInCart")
+        helper.updateCartPriceAndQty()
+        let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+        let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
         shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
         shoppingCartView.totalQty.text = "\(totalItemsInCart)"
         

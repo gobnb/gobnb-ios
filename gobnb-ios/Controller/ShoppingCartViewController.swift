@@ -8,18 +8,70 @@
 
 import UIKit
 
+protocol CartItemTableViewCellDelegate {
+    func addButtonPressed(qty: String)
+    func subtractButtonPressed(qty: String)
+}
+
 class CartItemTableViewCell: UITableViewCell {
     
     @IBOutlet weak var qtyLabel: UILabel!
     @IBOutlet weak var itemNameLabel: UILabel!
-    
     @IBOutlet weak var itemPriceLabel: UILabel!
+    
+    var idOfTheRecord : String = ""
+    
+    var delegate: CartItemTableViewCellDelegate?
+    @IBAction func subtractButtonDidPress(_ sender: Any) {
+        let newQty = Int(qtyLabel.text!)! - 1
+        if(newQty > 0){
+            qtyLabel.text = "\(newQty)"
+            
+            var i = 0;
+            for var item in ShoppingCartModel.shoppingCartArray
+            {
+                if item.id == idOfTheRecord {
+                    item.qty = item.qty - 1
+                    itemPriceLabel.text = "\(Double(item.qty) * item.price) BNB"
+                    ShoppingCartModel.shoppingCartArray[i] = item
+                    break
+                }
+                i = i+1;
+            }
+            Helper().updateCartPriceAndQty() //update global cart user defaults
+            
+        }
+        //delegate?.subtractButtonPressed(qty: qtyLabel.text ?? "0")
+    }
+    
+    @IBAction func addButtonDidPress(_ sender: Any) {
+        let newQty = Int(qtyLabel.text!)! + 1
+        if(newQty < 10){
+            qtyLabel.text = "\(newQty)"
+            
+            var i = 0;
+            for var item in ShoppingCartModel.shoppingCartArray
+            {
+                if item.id == idOfTheRecord {
+                    item.qty = item.qty + 1
+                    itemPriceLabel.text = "\(Double(item.qty) * item.price) BNB"
+                    ShoppingCartModel.shoppingCartArray[i] = item
+                    break
+                }
+                i = i+1;
+            }
+            Helper().updateCartPriceAndQty() //update global cart user defaults
+        }
+        //delegate?.addButtonPressed(qty: qtyLabel.text ?? "0")
+    }
+    
+    
 }
 
-class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CartItemTableViewCellDelegate {
+    
     
     @IBOutlet weak var itemsTableView: UITableView!
-    
     @IBOutlet weak var itemsTableViewHeightConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +103,34 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartItemCell", for: indexPath) as! CartItemTableViewCell
-        //cell.itemNameLabel.text = itemArray[indexPath.row]
+        cell.idOfTheRecord = ShoppingCartModel.shoppingCartArray[indexPath.row].id
         cell.itemNameLabel.text = ShoppingCartModel.shoppingCartArray[indexPath.row].name
         cell.qtyLabel.text = "\(ShoppingCartModel.shoppingCartArray[indexPath.row].qty)"
-        cell.itemPriceLabel.text = "\(ShoppingCartModel.shoppingCartArray[indexPath.row].price) BNB"
+        let updatedPriceAfterQty = "\(Double(ShoppingCartModel.shoppingCartArray[indexPath.row].qty) * ShoppingCartModel.shoppingCartArray[indexPath.row].price)"
+        cell.itemPriceLabel.text = "\(updatedPriceAfterQty) BNB"
+        cell.delegate = self
         return cell
     }
     
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func addButtonPressed(qty:String) {
+        let alertMessage = "\(qty) Add Pressed"
+        let message = "Let's watch it later"
+        let alert = UIAlertController(title: alertMessage, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func subtractButtonPressed(qty:String) {
+        let alertMessage = "\(qty) Subtract Pressed"
+        let message = "Let's watch it later"
+        let alert = UIAlertController(title: alertMessage, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
 }
