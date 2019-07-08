@@ -93,11 +93,28 @@ class PaymentViewController: UIViewController {
         let helper = Helper()
         let randomId = helper.randomString(length: 19)
         
-        //we are adding qty but storing individual price of item in the array
-        //later we just multiply the price with qty wherever we need it
-        let shoppingCartItem = ShoppingItemModel(id: randomId, name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
+        // First see if item already exists in the cart, if yes, lets just update it
         
-        ShoppingCartModel.shoppingCartArray.append(shoppingCartItem)
+        var i = 0;
+        var itemFound = 0;
+        for var item in ShoppingCartModel.shoppingCartArray
+        {
+            if item.name == titleOfItem.text! {
+                item.qty = item.qty + cartCounter
+                ShoppingCartModel.shoppingCartArray[i] = item
+                itemFound = 1
+                break
+            }
+            i = i+1;
+        }
+        
+        if itemFound == 0 {
+            //we are adding qty but storing individual price of item in the array
+            //later we just multiply the price with qty wherever we need it
+            let shoppingCartItem = ShoppingItemModel(id: randomId, name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
+            ShoppingCartModel.shoppingCartArray.append(shoppingCartItem)
+        }
+        
         helper.updateCartPriceAndQty()
         let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
         let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
