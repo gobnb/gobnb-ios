@@ -10,7 +10,7 @@ import UIKit
 import SwipeCellKit
 
 protocol CartItemTableViewCellDelegate {
-    func newItem()
+    func showDeleteButtonOnSwipe(tableView: UITableView, at indexPath: IndexPath)
 }
 
 class CartItemTableViewCell: SwipeTableViewCell {
@@ -22,7 +22,7 @@ class CartItemTableViewCell: SwipeTableViewCell {
     var idOfTheRecord : String = ""
     var tableView: UITableView?
     var indexPath: IndexPath?
-    var newDelegate: CartItemTableViewCellDelegate?
+    var cartItemDelegate: CartItemTableViewCellDelegate?
     @IBAction func subtractButtonDidPress(_ sender: Any) {
         let newQty = Int(qtyLabel.text!)! - 1
         if(newQty > 0){
@@ -42,10 +42,7 @@ class CartItemTableViewCell: SwipeTableViewCell {
             Helper().updateCartPriceAndQty() //update global cart user defaults
             
         }else{
-            print("delete pressed")
-            print(indexPath)
-            //delegate?.tableView(tableView!, editActionsForRowAt: indexPath!, for: .right)
-            newDelegate?.newItem()
+            cartItemDelegate?.showDeleteButtonOnSwipe(tableView: tableView!, at: indexPath!)
         }
         
     }
@@ -109,6 +106,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartItemCell", for: indexPath) as! CartItemTableViewCell
         cell.delegate = self
+        cell.cartItemDelegate = self
         cell.tableView = tableView
         cell.indexPath = indexPath
         cell.idOfTheRecord = ShoppingCartModel.shoppingCartArray[indexPath.row].id
@@ -126,7 +124,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     // SwipeCell function
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-        
+
         let deleteAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
             self.deleteItem(tableView: tableView, at: indexPath)
         }
@@ -150,12 +148,15 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
                 self.dismiss(animated: true, completion: nil)
             }
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in let cell = tableView.cellForRow(at: indexPath) as! CartItemTableViewCell
+            cell.hideSwipe(animated: true)
+        }))
         present(alert, animated: true, completion: nil)
     }
     
-    func newItem(){
-        print("new delete")
+    func showDeleteButtonOnSwipe(tableView: UITableView, at indexPath: IndexPath){
+        let cell = tableView.cellForRow(at: indexPath) as! CartItemTableViewCell
+        cell.showSwipe(orientation: .right, animated: true)
     }
     
 }
