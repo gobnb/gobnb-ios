@@ -11,6 +11,7 @@ import SwipeCellKit
 
 protocol CartItemTableViewCellDelegate {
     func showDeleteButtonOnSwipe(tableView: UITableView, at indexPath: IndexPath)
+    func qtyChanged()
 }
 
 class CartItemTableViewCell: SwipeTableViewCell {
@@ -40,7 +41,7 @@ class CartItemTableViewCell: SwipeTableViewCell {
                 i = i+1;
             }
             Helper().updateCartPriceAndQty() //update global cart user defaults
-            
+            cartItemDelegate?.qtyChanged()
         }else{
             cartItemDelegate?.showDeleteButtonOnSwipe(tableView: tableView!, at: indexPath!)
         }
@@ -64,6 +65,7 @@ class CartItemTableViewCell: SwipeTableViewCell {
                 i = i+1;
             }
             Helper().updateCartPriceAndQty() //update global cart user defaults
+            cartItemDelegate?.qtyChanged()
         }
     }
     
@@ -73,13 +75,17 @@ class CartItemTableViewCell: SwipeTableViewCell {
 class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, CartItemTableViewCellDelegate {
     
     
+    
+    
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet weak var itemsTableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var shoppingCartView: ShoppingCartView!
     override func viewDidLoad() {
         super.viewDidLoad()
         itemsTableView.dataSource = self
         itemsTableView.delegate = self
-        
+        itemsTableView.rowHeight = UITableView.automaticDimension
+        itemsTableView.estimatedRowHeight = 65.0
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,8 +96,25 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         itemsTableView.frame = CGRect(x: itemsTableView.frame.origin.x, y: itemsTableView.frame.origin.y, width: itemsTableView.frame.size.width, height: itemsTableView.contentSize.height)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        updateCartValues()
+    }
 
+    func updateCartValues(){
+        let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+        let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
+        shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+        shoppingCartView.totalQty.text = "\(totalItemsInCart)"
+        shoppingCartView.viewCartButton.setTitle("Place Your Order", for: .normal)
+        shoppingCartView.viewCartButton.addTarget(self, action: Selector(("placeOrderButtonTapped:")), for: .touchUpInside)
+    }
     
+    @objc func placeOrderButtonTapped(_ sender: UIButton){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "OrderProgressVC") as? UIViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
     
     @IBAction func dismissButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -159,4 +182,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         cell.showSwipe(orientation: .right, animated: true)
     }
     
+    func qtyChanged(){
+        updateCartValues()
+    }
 }

@@ -299,6 +299,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i3r-hC-ISk" customClass="ShoppingCartView" customModule="gobnb_ios" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="605" width="375" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -314,11 +319,70 @@
                     <connections>
                         <outlet property="itemsTableView" destination="G3l-RZ-9hd" id="LAM-rm-KsJ"/>
                         <outlet property="itemsTableViewHeightConstraint" destination="Tb7-oN-2ty" id="4T6-iZ-7Ph"/>
+                        <outlet property="shoppingCartView" destination="i3r-hC-ISk" id="SnZ-j7-MoZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qi5-Xg-Qop" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2133.5999999999999" y="984.55772113943033"/>
+        </scene>
+        <!--Order Progress View Controller-->
+        <scene sceneID="VCE-ei-F8j">
+            <objects>
+                <viewController storyboardIdentifier="OrderProgressVC" id="RTi-hF-7VC" customClass="OrderProgressViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Nv-tA-h2k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NI4-E8-Aub">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cutting-board" translatesAutoresizingMaskIntoConstraints="NO" id="8Mn-is-ueN">
+                                        <rect key="frame" x="-462" y="44" width="837" height="635"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hDC-mw-LVW">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <items>
+                                            <navigationItem title="Payment" id="dD7-4i-8dR">
+                                                <barButtonItem key="leftBarButtonItem" systemItem="stop" id="pbX-tK-aRz">
+                                                    <connections>
+                                                        <action selector="closeButtonPressed:" destination="RTi-hF-7VC" id="FxF-vh-D7p"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="evA-DO-Mou" customClass="ShoppingCartView" customModule="gobnb_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="585" width="375" height="62"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdX-c4-xHj" customClass="CountdownLabel" customModule="CountdownLabel">
+                                        <rect key="frame" x="47" y="172" width="129" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.72156862749999995" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="nRn-cr-iVD"/>
+                    </view>
+                    <connections>
+                        <outlet property="countdown" destination="kdX-c4-xHj" id="nMF-8o-l1F"/>
+                        <outlet property="shoppingCartView" destination="evA-DO-Mou" id="Lk2-dr-Ujd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4YC-ny-6qi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2954.4000000000001" y="1615.1424287856073"/>
         </scene>
         <!--Payment View Controller-->
         <scene sceneID="Pfn-dE-ppl">
@@ -689,6 +753,7 @@
     </scenes>
     <resources>
         <image name="add-white" width="32" height="32"/>
+        <image name="cutting-board" width="6144" height="4069"/>
         <image name="poor" width="512" height="512"/>
         <image name="purse" width="21" height="21"/>
         <image name="scan" width="21" height="21"/>

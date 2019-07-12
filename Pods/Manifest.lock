@@ -16,6 +16,7 @@ PODS:
   - BinanceChain/Libraries (1.0.0-beta)
   - BinanceChain/Protobuf (1.0.0-beta)
   - BinanceChain/Util (1.0.0-beta)
+  - CountdownLabel (4.0.1)
   - CryptoSwift (0.15.0)
   - HDWalletKit (0.2.8):
     - CryptoSwift (~> 0.12)
@@ -38,6 +39,7 @@ PODS:
 
 DEPENDENCIES:
   - BinanceChain (from `https://github.com/mh7821/SwiftBinanceChain.git`)
+  - CountdownLabel
   - SVProgressHUD
   - SwiftKeychainWrapper
   - SwipeCellKit
@@ -45,6 +47,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - CountdownLabel
     - CryptoSwift
     - HDWalletKit
     - ObjcExceptionBridging
@@ -70,6 +73,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   BinanceChain: 0fafd2d808e5be8c80fdc46d0e33a9df1c0c54e7
+  CountdownLabel: c9975e3f329140b5e7d1f45cd63b1300badd1712
   CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
   HDWalletKit: f0268857289221d4d6c2041d43ee78f1e84fc8e5
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
@@ -83,6 +87,6 @@ SPEC CHECKSUMS:
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 9c4fc082fcaf8b546f6b6d9fdac870beb1085c61
+PODFILE CHECKSUM: eead411f2d3053e961cb78f32cdccacab494d073
 
 COCOAPODS: 1.6.2
