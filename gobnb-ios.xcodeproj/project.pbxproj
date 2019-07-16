@@ -147,13 +147,13 @@
 		A312C55322CCDF2900813510 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */,
-				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
-				A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */,
 				A347334A22912CED00D7F8B0 /* StartViewController.swift */,
 				A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */,
-				A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */,
 				A3726A8E228F801B0032717B /* FeedViewController.swift */,
+				A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */,
+				A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */,
+				A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */,
+				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
 				A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */,
 				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
 			);
