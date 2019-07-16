@@ -12,14 +12,14 @@
 		45071992C603E498DC296DC1 /* Pods_gobnb_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26ACF454BF3A18125BE11F1 /* Pods_gobnb_iosUITests.framework */; };
 		A312C55522CCDF7E00813510 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */; };
 		A3171D0E22CE01E5006B3416 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3171D0D22CE01E5006B3416 /* Helper.swift */; };
-		A347334922910A5300D7F8B0 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334822910A5300D7F8B0 /* PaymentViewController.swift */; };
+		A347334922910A5300D7F8B0 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */; };
 		A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334A22912CED00D7F8B0 /* StartViewController.swift */; };
 		A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */; };
 		A34CA0FB22CA36D200FE1D8D /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */; };
 		A34CA0FD22CA374000FE1D8D /* ShoppingCartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */; };
-		A358D95D22D8B4A3008EBDC5 /* OrderInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A358D95C22D8B4A3008EBDC5 /* OrderInProgressViewController.swift */; };
+		A358D95D22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */; };
 		A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8C228F801B0032717B /* AppDelegate.swift */; };
-		A3726A8F228F801B0032717B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8E228F801B0032717B /* ViewController.swift */; };
+		A3726A8F228F801B0032717B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8E228F801B0032717B /* FeedViewController.swift */; };
 		A3726A92228F801B0032717B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3726A90228F801B0032717B /* Main.storyboard */; };
 		A3726A94228F801D0032717B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3726A93228F801D0032717B /* Assets.xcassets */; };
 		A3726A97228F801D0032717B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3726A95228F801D0032717B /* LaunchScreen.storyboard */; };
@@ -64,15 +64,15 @@
 		9BD780BE652EBDD61F09ED29 /* Pods-BinancePay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePay.release.xcconfig"; path = "Target Support Files/Pods-BinancePay/Pods-BinancePay.release.xcconfig"; sourceTree = "<group>"; };
 		A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		A3171D0D22CE01E5006B3416 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		A347334822910A5300D7F8B0 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		A347334A22912CED00D7F8B0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScanViewController.swift; sourceTree = "<group>"; };
 		A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
 		A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartModel.swift; sourceTree = "<group>"; };
-		A358D95C22D8B4A3008EBDC5 /* OrderInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInProgressViewController.swift; sourceTree = "<group>"; };
+		A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProgressAndPaymentViewController.swift; sourceTree = "<group>"; };
 		A3726A89228F801B0032717B /* gobnb-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gobnb-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3726A8C228F801B0032717B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A3726A8E228F801B0032717B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A3726A8E228F801B0032717B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A3726A91228F801B0032717B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3726A93228F801D0032717B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3726A96228F801D0032717B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -147,15 +147,15 @@
 		A312C55322CCDF2900813510 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A347334822910A5300D7F8B0 /* PaymentViewController.swift */,
+				A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */,
 				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
 				A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */,
 				A347334A22912CED00D7F8B0 /* StartViewController.swift */,
 				A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */,
 				A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */,
-				A3726A8E228F801B0032717B /* ViewController.swift */,
+				A3726A8E228F801B0032717B /* FeedViewController.swift */,
 				A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */,
-				A358D95C22D8B4A3008EBDC5 /* OrderInProgressViewController.swift */,
+				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -400,6 +400,7 @@
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
@@ -418,6 +419,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
@@ -505,11 +507,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3726A8F228F801B0032717B /* ViewController.swift in Sources */,
+				A3726A8F228F801B0032717B /* FeedViewController.swift in Sources */,
 				A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */,
 				A3171D0E22CE01E5006B3416 /* Helper.swift in Sources */,
 				A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */,
-				A347334922910A5300D7F8B0 /* PaymentViewController.swift in Sources */,
+				A347334922910A5300D7F8B0 /* ItemDetailViewController.swift in Sources */,
 				A39F071022CB834700C01D32 /* ShoppingCartView.swift in Sources */,
 				A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */,
 				A34CA0FD22CA374000FE1D8D /* ShoppingCartModel.swift in Sources */,
@@ -518,7 +520,7 @@
 				A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */,
 				A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */,
 				A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */,
-				A358D95D22D8B4A3008EBDC5 /* OrderInProgressViewController.swift in Sources */,
+				A358D95D22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift in Sources */,
 				A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */,
 				A39FADDA22C6446A00BA1FFF /* Obfuscator.swift in Sources */,
 			);

@@ -137,9 +137,9 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if segue.destination is PaymentViewController
+        if segue.destination is ItemDetailViewController
         {
-            let vc = segue.destination as? PaymentViewController
+            let vc = segue.destination as? ItemDetailViewController
             vc?.itemArray = itemArrayToPass
         }
     }

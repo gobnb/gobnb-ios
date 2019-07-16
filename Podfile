@@ -11,6 +11,7 @@ target 'gobnb-ios' do
   pod 'SwiftKeychainWrapper'
   pod 'SwipeCellKit'
   pod 'CountdownLabel'
+  pod 'SideMenu', '~> 6.0.0'
 
   target 'gobnb-iosTests' do
     inherit! :search_paths

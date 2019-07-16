@@ -20,7 +20,7 @@ class DealsTableViewCell: UITableViewCell {
     
 }
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let testnet = "https://testnet-explorer.binance.org/tx/"
     let binance = BinanceChain(endpoint: .testnet)

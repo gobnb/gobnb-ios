@@ -13,7 +13,7 @@ import SwiftyJSON
 import SVProgressHUD
 import SwiftKeychainWrapper
 
-class PaymentViewController: UIViewController {
+class ItemDetailViewController: UIViewController {
     let testnet = "https://testnet-explorer.binance.org/tx/"
     
     @IBOutlet weak var shoppingCartCounterLabel: UILabel!

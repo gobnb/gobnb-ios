@@ -13,7 +13,7 @@
         <!--GoBNB-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="FeedViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -326,10 +326,10 @@
             </objects>
             <point key="canvasLocation" x="2133.5999999999999" y="984.55772113943033"/>
         </scene>
-        <!--Order Progress View Controller-->
+        <!--Order Progress And Payment View Controller-->
         <scene sceneID="VCE-ei-F8j">
             <objects>
-                <viewController storyboardIdentifier="OrderProgressVC" id="RTi-hF-7VC" customClass="OrderProgressViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderProgressVC" id="RTi-hF-7VC" customClass="OrderProgressAndPaymentViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Nv-tA-h2k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,10 +384,10 @@
             </objects>
             <point key="canvasLocation" x="2954.4000000000001" y="1615.1424287856073"/>
         </scene>
-        <!--Payment View Controller-->
+        <!--Item Detail View Controller-->
         <scene sceneID="Pfn-dE-ppl">
             <objects>
-                <viewController id="Sms-YB-rEs" customClass="PaymentViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Sms-YB-rEs" customClass="ItemDetailViewController" customModule="gobnb_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pMU-za-dyJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -760,8 +760,9 @@
         <image name="subtract-white" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="yak-gp-IbF"/>
         <segue reference="n6d-5N-eeE"/>
         <segue reference="2Y6-e3-F22"/>
-        <segue reference="eh2-2r-uBG"/>
+        <segue reference="XfM-aK-Qe1"/>
     </inferredMetricsTieBreakers>
 </document>

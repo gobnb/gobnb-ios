@@ -12,7 +12,7 @@ import SVProgressHUD
 import BinanceChain
 import SwiftKeychainWrapper
 
-class OrderProgressViewController : UIViewController {
+class OrderProgressAndPaymentViewController : UIViewController {
     
     @IBOutlet weak var countdown: CountdownLabel!
     @IBOutlet weak var shoppingCartView: ShoppingCartView!
