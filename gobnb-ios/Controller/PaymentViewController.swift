@@ -91,6 +91,28 @@ class PaymentViewController: UIViewController {
     @IBAction func addToCartButtonPressed(_ sender: Any) {
         //get and assign a random ID
         let helper = Helper()
+        
+        //first check if the user has an existing cart from another restaurant
+        if helper.isKeyPresentInUserDefaults(key: "peopleAddress"){
+            let oldPeopleAddress = UserDefaults.standard.string(forKey: "peopleAddress") ?? ""
+            if oldPeopleAddress != addressToPay {
+                helper.emptyTheCart() //empty the cart by resetting all userdefaults and shoppingcartmodel array
+                UserDefaults.standard.set(addressToPay, forKey: "peopleAddress")
+                let alertTitle = NSLocalizedString("Changing Cart", comment: "")
+                let alertMessage = NSLocalizedString("You have changed restaurant/café! We have dropped the previous cart and created a new one for you!", comment: "")
+                let okButtonText = NSLocalizedString("OK", comment: "")
+                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: okButtonText, style: .default, handler: nil))
+                present(alert, animated: true)
+            }
+        }else{
+            //the key doesn't exist, add a new one
+            UserDefaults.standard.set(addressToPay, forKey: "peopleAddress")
+        }
+        
+        
+        //lets add this item in the cart now
         let randomId = helper.randomString(length: 19)
         
         // First see if item already exists in the cart, if yes, lets just update it
