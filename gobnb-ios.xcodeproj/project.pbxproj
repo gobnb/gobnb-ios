@@ -12,6 +12,7 @@
 		45071992C603E498DC296DC1 /* Pods_gobnb_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26ACF454BF3A18125BE11F1 /* Pods_gobnb_iosUITests.framework */; };
 		A312C55522CCDF7E00813510 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */; };
 		A3171D0E22CE01E5006B3416 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3171D0D22CE01E5006B3416 /* Helper.swift */; };
+		A320932422DF323B00BF2C27 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A320932322DF323B00BF2C27 /* SideMenuViewController.swift */; };
 		A347334922910A5300D7F8B0 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */; };
 		A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334A22912CED00D7F8B0 /* StartViewController.swift */; };
 		A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */; };
@@ -64,6 +65,7 @@
 		9BD780BE652EBDD61F09ED29 /* Pods-BinancePay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePay.release.xcconfig"; path = "Target Support Files/Pods-BinancePay/Pods-BinancePay.release.xcconfig"; sourceTree = "<group>"; };
 		A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		A3171D0D22CE01E5006B3416 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		A320932322DF323B00BF2C27 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		A347334A22912CED00D7F8B0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScanViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
 				A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */,
 				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
+				A320932322DF323B00BF2C27 /* SideMenuViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */,
 				A3171D0E22CE01E5006B3416 /* Helper.swift in Sources */,
 				A3C613AB22B12621000BDA99 /* ItemsTableViewController.swift in Sources */,
+				A320932422DF323B00BF2C27 /* SideMenuViewController.swift in Sources */,
 				A347334922910A5300D7F8B0 /* ItemDetailViewController.swift in Sources */,
 				A39F071022CB834700C01D32 /* ShoppingCartView.swift in Sources */,
 				A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */,

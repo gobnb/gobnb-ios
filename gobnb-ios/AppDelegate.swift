@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftKeychainWrapper
+import SideMenu
 
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,10 @@ import SwiftKeychainWrapper
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let menu = storyboard.instantiateViewController(withIdentifier: "LeftMenuNavigationController") as! UISideMenuNavigationController
+        menu.statusBarEndAlpha = 0
         
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
         
