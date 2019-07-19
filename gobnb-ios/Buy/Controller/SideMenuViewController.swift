@@ -17,6 +17,8 @@ class SideMenuViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 65.0
     }
     
     override func viewDidLayoutSubviews() {
@@ -25,6 +27,15 @@ class SideMenuViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "sellSideNav"
+        {
+            print("sellSideNav")
+            UserDefaults.standard.set("sellSideNav", forKey: "StartSideVC")
+        }
     }
 
     

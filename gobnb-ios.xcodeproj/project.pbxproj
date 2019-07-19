@@ -19,6 +19,7 @@
 		A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */; };
 		A34CA0FB22CA36D200FE1D8D /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */; };
 		A34CA0FD22CA374000FE1D8D /* ShoppingCartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */; };
+		A34F5A6922E1CA6200CC350D /* SellItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */; };
 		A358D95D22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */; };
 		A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8C228F801B0032717B /* AppDelegate.swift */; };
 		A3726A8F228F801B0032717B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8E228F801B0032717B /* FeedViewController.swift */; };
@@ -73,6 +74,7 @@
 		A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScanViewController.swift; sourceTree = "<group>"; };
 		A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
 		A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartModel.swift; sourceTree = "<group>"; };
+		A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellItemsViewController.swift; sourceTree = "<group>"; };
 		A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProgressAndPaymentViewController.swift; sourceTree = "<group>"; };
 		A3726A89228F801B0032717B /* gobnb-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gobnb-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3726A8C228F801B0032717B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -161,7 +163,6 @@
 				A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */,
 				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
 				A320932322DF323B00BF2C27 /* SideMenuViewController.swift */,
-				A320932522DF4F1000BF2C27 /* SellSideMenuViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,6 +174,33 @@
 				A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A34F5A6522E1BC4500CC350D /* Buy */ = {
+			isa = PBXGroup;
+			children = (
+				A34CA0F722CA334F00FE1D8D /* Model */,
+				A39F070C22CB819C00C01D32 /* View */,
+				A312C55322CCDF2900813510 /* Controller */,
+			);
+			path = Buy;
+			sourceTree = "<group>";
+		};
+		A34F5A6622E1BC7700CC350D /* Sell */ = {
+			isa = PBXGroup;
+			children = (
+				A34F5A6722E1BC7F00CC350D /* Controller */,
+			);
+			path = Sell;
+			sourceTree = "<group>";
+		};
+		A34F5A6722E1BC7F00CC350D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A320932522DF4F1000BF2C27 /* SellSideMenuViewController.swift */,
+				A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		A3726A80228F801B0032717B = {
@@ -200,9 +228,8 @@
 		A3726A8B228F801B0032717B /* gobnb-ios */ = {
 			isa = PBXGroup;
 			children = (
-				A39F070C22CB819C00C01D32 /* View */,
-				A34CA0F722CA334F00FE1D8D /* Model */,
-				A312C55322CCDF2900813510 /* Controller */,
+				A34F5A6522E1BC4500CC350D /* Buy */,
+				A34F5A6622E1BC7700CC350D /* Sell */,
 				A3726A8C228F801B0032717B /* AppDelegate.swift */,
 				A3726A90228F801B0032717B /* Main.storyboard */,
 				A3726A93228F801D0032717B /* Assets.xcassets */,
@@ -527,6 +554,7 @@
 				A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */,
 				A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */,
 				A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */,
+				A34F5A6922E1CA6200CC350D /* SellItemsViewController.swift in Sources */,
 				A320932622DF4F1000BF2C27 /* SellSideMenuViewController.swift in Sources */,
 				A358D95D22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift in Sources */,
 				A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */,

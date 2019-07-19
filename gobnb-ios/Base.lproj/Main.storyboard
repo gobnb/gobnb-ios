@@ -401,7 +401,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ajl-YR-5wv">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJA-1e-HVb">
                                         <rect key="frame" x="0.0" y="134" width="375" height="469"/>
@@ -715,11 +715,12 @@
                         <outlet property="textAreaButtonBottomConstraint" destination="g0Y-ve-s4o" id="Fz8-Jx-Oir"/>
                         <outlet property="textAreaOutlet" destination="uvR-qF-eDI" id="lBj-qx-OpV"/>
                         <segue destination="VgT-k4-vZb" kind="show" identifier="goToScan" id="jQ8-dy-MAS"/>
+                        <segue destination="5ZX-Hw-dlc" kind="show" identifier="goToSellSide" id="e5W-Y6-RB9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gN-Oh-EAM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-290" y="-933"/>
+            <point key="canvasLocation" x="-39" y="-1825"/>
         </scene>
         <!--Wallet Scan View Controller-->
         <scene sceneID="YbT-kP-eyw">
@@ -761,7 +762,7 @@
         <!--Side Menu Navigation Controller-->
         <scene sceneID="kr2-wb-nTS">
             <objects>
-                <navigationController storyboardIdentifier="LeftMenuNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="fim-E7-ba5" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BuyLeftMenuNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="fim-E7-ba5" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -837,7 +838,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="5ZX-Hw-dlc" kind="show" id="XP5-3f-8KR"/>
+                                            <segue destination="5ZX-Hw-dlc" kind="show" identifier="sellSideNav" id="XP5-3f-8KR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -917,7 +918,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="VgT-k4-vZb" kind="show" id="o1F-VC-Qf1"/>
+                                            <segue destination="VgT-k4-vZb" kind="show" identifier="buySideNav" id="o1F-VC-Qf1"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -943,6 +944,9 @@
                         <viewLayoutGuide key="safeArea" id="iBl-UT-EtA"/>
                     </view>
                     <navigationItem key="navigationItem" id="tEs-pI-yCX"/>
+                    <connections>
+                        <outlet property="tableView" destination="NXd-Bb-waJ" id="Hzz-l7-La5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6B-KK-GU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -951,7 +955,7 @@
         <!--Navigation Controller-->
         <scene sceneID="HLo-7k-iSX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5ZX-Hw-dlc" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SellSideNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5ZX-Hw-dlc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JJT-ef-oRO">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -969,7 +973,7 @@
         <!--Side Menu Navigation Controller-->
         <scene sceneID="xF7-s0-nh9">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="f1G-JH-MgA" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SellLeftMenuNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="f1G-JH-MgA" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -979,6 +983,9 @@
                     <nil name="viewControllers"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="statusBarEndAlpha">
+                            <integer key="value" value="-2"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="4o3-6m-9rg" kind="relationship" relationship="rootViewController" id="8aZ-qJ-XUH"/>
@@ -999,8 +1006,9 @@
         <image name="subtract-white" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="o1F-VC-Qf1"/>
+        <segue reference="e5W-Y6-RB9"/>
+        <segue reference="jQ8-dy-MAS"/>
         <segue reference="2Y6-e3-F22"/>
-        <segue reference="XfM-aK-Qe1"/>
+        <segue reference="eh2-2r-uBG"/>
     </inferredMetricsTieBreakers>
 </document>

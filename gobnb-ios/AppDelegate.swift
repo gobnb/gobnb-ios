@@ -20,19 +20,31 @@ import SideMenu
         // Override point for customization after application launch.
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menu = storyboard.instantiateViewController(withIdentifier: "LeftMenuNavigationController") as! UISideMenuNavigationController
-        menu.statusBarEndAlpha = 0
+        let buyMenu = storyboard.instantiateViewController(withIdentifier: "BuyLeftMenuNavigationController") as! UISideMenuNavigationController
+        buyMenu.statusBarEndAlpha = 0
+        
+//        let sellMenu = storyboard.instantiateViewController(withIdentifier: "SellLeftMenuNavigationController") as! UISideMenuNavigationController
+//        sellMenu.statusBarEndAlpha = 0
         
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
         
         let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-        
+        //check if wallet key exists, also which side of nav user was before, buy or sell?
         let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
         if walletKey != nil {
-            
-            let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
-            
-            self.window?.rootViewController = vc2
+            let startSideVC = UserDefaults.standard.string(forKey: "StartSideVC")
+            if startSideVC != nil {
+                if startSideVC == "sellSideNav" {
+                    let vc2 = sb.instantiateViewController(withIdentifier: "SellSideNavigationViewController")
+                    self.window?.rootViewController = vc2
+                }else{
+                    let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
+                    self.window?.rootViewController = vc2
+                }
+            }else{
+                let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
+                self.window?.rootViewController = vc2
+            }
         }else {
             let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
             self.window?.rootViewController = vc1
