@@ -20,6 +20,7 @@
 		A34CA0FB22CA36D200FE1D8D /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */; };
 		A34CA0FD22CA374000FE1D8D /* ShoppingCartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */; };
 		A34F5A6922E1CA6200CC350D /* SellItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */; };
+		A34F5A6B22E1F77A00CC350D /* YourStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34F5A6A22E1F77900CC350D /* YourStoreViewController.swift */; };
 		A358D95D22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */; };
 		A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8C228F801B0032717B /* AppDelegate.swift */; };
 		A3726A8F228F801B0032717B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726A8E228F801B0032717B /* FeedViewController.swift */; };
@@ -75,6 +76,7 @@
 		A34CA0FA22CA36D200FE1D8D /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
 		A34CA0FC22CA374000FE1D8D /* ShoppingCartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartModel.swift; sourceTree = "<group>"; };
 		A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellItemsViewController.swift; sourceTree = "<group>"; };
+		A34F5A6A22E1F77900CC350D /* YourStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourStoreViewController.swift; sourceTree = "<group>"; };
 		A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProgressAndPaymentViewController.swift; sourceTree = "<group>"; };
 		A3726A89228F801B0032717B /* gobnb-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gobnb-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3726A8C228F801B0032717B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			children = (
 				A320932522DF4F1000BF2C27 /* SellSideMenuViewController.swift */,
 				A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */,
+				A34F5A6A22E1F77900CC350D /* YourStoreViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */,
 				A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */,
 				A34F5A6922E1CA6200CC350D /* SellItemsViewController.swift in Sources */,
+				A34F5A6B22E1F77A00CC350D /* YourStoreViewController.swift in Sources */,
 				A320932622DF4F1000BF2C27 /* SellSideMenuViewController.swift in Sources */,
 				A358D95D22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift in Sources */,
 				A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */,

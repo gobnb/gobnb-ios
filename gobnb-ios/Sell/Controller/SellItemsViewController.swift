@@ -10,13 +10,16 @@ import UIKit
 
 class SellItemsViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var setupShopAlertView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tableView.separatorStyle = .none
+        tableView.backgroundView = setupShopAlertView
     }
     
-
     
 
 }

@@ -127,7 +127,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(itemsArray[indexPath.item])
+        //print(itemsArray[indexPath.item])
         itemArrayToPass = itemsArray[indexPath.item]
         itemArrayToPass.append(peopleAddress)
         performSegue(withIdentifier: "goToPayment", sender: self)

@@ -55,5 +55,13 @@ class SellSideMenuViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell!
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let itemAtThePath = navArray[indexPath.item]
+        
+        if itemAtThePath == "Your Store" {
+            performSegue(withIdentifier: "goToStore", sender: self)
+        }
+    }
 
 }
