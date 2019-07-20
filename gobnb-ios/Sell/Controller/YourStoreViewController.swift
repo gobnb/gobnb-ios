@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CropViewController
 
-class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var pickedImage: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -58,7 +59,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.allowsEditing = true
+            imagePicker.allowsEditing = false
             imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         }
@@ -73,10 +74,24 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     //MARK:-- ImagePicker delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let userPickedImage = info[.originalImage] as? UIImage {
-            //pickedImage.contentMode = .scaleToFill
-            pickedImage.image = userPickedImage
+            dismiss(animated: true, completion: nil)
+            //we need the image in 15:8 ratio so cropping and restricting image to this ratio
+            let cropViewController = CropViewController(image: userPickedImage)
+            cropViewController.delegate = self
+            cropViewController.aspectRatioLockEnabled = true
+            cropViewController.aspectRatioPickerButtonHidden = true
+            cropViewController.aspectRatioLockDimensionSwapEnabled = true
+            cropViewController.resetButtonHidden = true
+            cropViewController.rotateButtonsHidden = true
+            cropViewController.customAspectRatio = CGSize(width: 15.0, height: 8.0)
+            self.present(cropViewController, animated: true, completion: nil)
         }
-        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        // 'image' is the newly cropped version of the original image
+        pickedImage.image = image
+        cropViewController.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {

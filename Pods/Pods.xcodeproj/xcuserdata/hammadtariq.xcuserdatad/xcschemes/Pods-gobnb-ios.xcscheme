@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F098A707B4C2913D0243829FB381C1E1"
+               BlueprintIdentifier = "E9F5EDFC7949B5E9F2F4529754BDEA11"
                BuildableName = "Pods_gobnb_ios.framework"
                BlueprintName = "Pods-gobnb-ios"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F098A707B4C2913D0243829FB381C1E1"
+            BlueprintIdentifier = "E9F5EDFC7949B5E9F2F4529754BDEA11"
             BuildableName = "Pods_gobnb_ios.framework"
             BlueprintName = "Pods-gobnb-ios"
             ReferencedContainer = "container:Pods.xcodeproj">
