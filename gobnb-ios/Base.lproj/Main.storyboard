@@ -1011,6 +1011,7 @@
                         <outlet property="baseCurrencyPicker" destination="OjD-fA-Mnf" id="mGC-vq-etL"/>
                         <outlet property="descriptionTextArea" destination="uRj-G3-d74" id="RF6-JQ-CRf"/>
                         <outlet property="nameTextField" destination="gI6-9P-TOY" id="qqC-I9-g74"/>
+                        <outlet property="pickedImage" destination="n7f-Is-rCO" id="MUr-L7-0gi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yIb-tF-HPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
