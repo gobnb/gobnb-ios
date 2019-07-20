@@ -10,7 +10,8 @@ import UIKit
 import CropViewController
 
 class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
-
+    @IBOutlet weak var addEditPictureOutlet: UIButton!
+    
     @IBOutlet weak var pickedImage: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextArea: UITextView!
@@ -90,6 +91,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         // 'image' is the newly cropped version of the original image
+        addEditPictureOutlet.setTitle("edit picture", for: .normal)
         pickedImage.image = image
         cropViewController.dismiss(animated: true, completion: nil)
     }
