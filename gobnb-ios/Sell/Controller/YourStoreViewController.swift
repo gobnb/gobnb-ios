@@ -100,15 +100,25 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
-        print("buttontapped")
-        if let imageData = pickedImage.image?.jpeg(.lowest) {
-            print(imageData.count)
-            //let data = UIImageJPEGRepresentation(pickedImage.image!, 1.0)
-            //let data = pickedImage.image?.pngData()
-            //let parameters = [String : Any]
-            if(imageData.count > 1){
-            let parameters = ["fName" : "hammad", "lName": "tariq"]
-            requestWith(url: "http://zerobillion.com/binancepay/insertStore.php", imageData: imageData, parameters: parameters)
+        
+        if pickedImage.image == nil || nameTextField.text == "" || descriptionTextArea.text.isEmpty {
+            let alertTitle = NSLocalizedString("Error", comment: "")
+            let alertMessage = NSLocalizedString("All input fields are required!", comment: "")
+            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }else{
+            let helper = Helper()
+            let fileName = helper.randomString(length: 30)
+            if let imageData = pickedImage.image?.jpeg(.lowest) {
+                print(imageData.count)
+                //let data = UIImageJPEGRepresentation(pickedImage.image!, 1.0)
+                //let data = pickedImage.image?.pngData()
+                //let parameters = [String : Any]
+                if(imageData.count > 1){
+                let parameters = ["fName" : "hammad", "lName": "tariq"]
+                requestWith(url: "http://zerobillion.com/binancepay/insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
+                }
             }
         }
         
@@ -129,7 +139,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     //MARK:-- Upload Functions
     
-    func requestWith(url: String, imageData: Data?, parameters: [String : Any], onCompletion: ((JSON?) -> Void)? = nil, onError: ((Error?) -> Void)? = nil){
+    func requestWith(url: String, imageData: Data?, parameters: [String : Any], fileName: String, onCompletion: ((JSON?) -> Void)? = nil, onError: ((Error?) -> Void)? = nil){
         
         print("inside requestwith")
         //let url = "http://google.com" /* your API url */
@@ -146,7 +156,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             }
             
             if let data = imageData{
-                multipartFormData.append(data, withName: "fileToUpload", fileName: "fileToUpload1223345.png", mimeType: "image/png")
+                multipartFormData.append(data, withName: "fileToUpload", fileName: "\(fileName).png", mimeType: "image/png")
             }
             
         }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
