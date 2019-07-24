@@ -11,6 +11,8 @@ import CropViewController
 import Alamofire
 import SwiftyJSON
 import SVProgressHUD
+import SwiftKeychainWrapper
+import BinanceChain
 
 class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var addEditPictureOutlet: UIButton!
@@ -19,11 +21,22 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextArea: UITextView!
     @IBOutlet weak var baseCurrencyPicker: UIPickerView!
+    @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
     let supportedCurrencies = ["BNB", "USDSB"]
     override func viewDidLoad() {
         super.viewDidLoad()
         baseCurrencyPicker.delegate = self
         baseCurrencyPicker.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     @IBAction func addEditPictureButtonTapped(_ sender: Any) {
@@ -112,11 +125,21 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             let fileName = helper.randomString(length: 30)
             if let imageData = pickedImage.image?.jpeg(.lowest) {
                 print(imageData.count)
+                var walletAddress = ""
                 //let data = UIImageJPEGRepresentation(pickedImage.image!, 1.0)
                 //let data = pickedImage.image?.pngData()
                 //let parameters = [String : Any]
                 if(imageData.count > 1){
-                let parameters = ["fName" : "hammad", "lName": "tariq"]
+                    let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
+                    if walletKey != nil {
+                        let wallet = Wallet(mnemonic: walletKey!, endpoint: .testnet)
+                        wallet.synchronise() { (error) in
+                            walletAddress = wallet.account
+                        }
+                    }
+                    let uuid = "Benson & Hedges takes you to the darkest corner of the world".sha256()
+                    let name = nameTextField.text
+                    let parameters = ["name" : name!, "desc": descriptionTextArea.text!, "address": walletAddress, "uuid": uuid] as [String : Any]
                 requestWith(url: "http://zerobillion.com/binancepay/insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
                 }
             }
@@ -192,6 +215,52 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                 SVProgressHUD.dismiss()
             }
         }
+    }
+    
+    
+    //Mark:- Keyboard Functions
+    
+    //Called when 'return' key is pressed. Return false to keep the keyboard visible.
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        return true
+    }
+    
+    // Called when the user clicks on the view (outside of UITextField).
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        keyboardWillHide()
+    }
+    
+    @objc func keyboardWillShow( notification: Notification) {
+        print("keyboard is showing")
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let newHeight: CGFloat
+            let duration:TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+            if #available(iOS 11.0, *) {
+                newHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+            } else {
+                newHeight = keyboardFrame.cgRectValue.height
+            }
+            let keyboardHeight = newHeight  + 10 // **10 is bottom margin of View**  and **this newHeight will be keyboard height**
+            print(keyboardHeight)
+            UIView.animate(withDuration: duration,
+                           delay: TimeInterval(0),
+                           options: animationCurve,
+                           animations: {
+                            //self.textAreaOutlet.frame.origin.y = keyboardHeight
+                            self.textAreaButtonBottomConstraint.constant = keyboardHeight
+                            //self.view.textAreaBottomConstraint = keyboardHeight
+                            self.view.layoutIfNeeded() },
+                           completion: nil)
+        }
+    }
+    
+    func keyboardWillHide(){
+        print("keyboard hidden")
+        self.textAreaButtonBottomConstraint.constant = 125 //hard-code resetting to original constant value
     }
     
 }

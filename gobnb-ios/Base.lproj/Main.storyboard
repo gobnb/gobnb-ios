@@ -938,20 +938,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="camera-large" translatesAutoresizingMaskIntoConstraints="NO" id="n7f-Is-rCO">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera-large" translatesAutoresizingMaskIntoConstraints="NO" id="n7f-Is-rCO">
                                 <rect key="frame" x="0.0" y="64" width="375" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gI6-9P-TOY">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gI6-9P-TOY">
                                 <rect key="frame" x="16" y="300" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uRj-G3-d74">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uRj-G3-d74">
                                 <rect key="frame" x="16" y="366" width="343" height="102"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -975,16 +972,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Store Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQt-kd-62b">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Store Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQt-kd-62b">
                                 <rect key="frame" x="16" y="272" width="91" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Store Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yp2-lQ-Tae">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Store Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yp2-lQ-Tae">
                                 <rect key="frame" x="16" y="338" width="132" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1007,6 +1002,20 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uRj-G3-d74" firstAttribute="top" secondItem="Yp2-lQ-Tae" secondAttribute="bottom" constant="8" id="2S0-Ud-qJ3"/>
+                            <constraint firstItem="83R-pk-Lp7" firstAttribute="bottom" secondItem="uRj-G3-d74" secondAttribute="bottom" constant="199" id="Ai2-yf-cJN"/>
+                            <constraint firstItem="gI6-9P-TOY" firstAttribute="leading" secondItem="83R-pk-Lp7" secondAttribute="leading" constant="16" id="CZz-rK-N7c"/>
+                            <constraint firstItem="Yp2-lQ-Tae" firstAttribute="top" secondItem="gI6-9P-TOY" secondAttribute="bottom" constant="8" id="HCm-Lx-WJl"/>
+                            <constraint firstItem="83R-pk-Lp7" firstAttribute="trailing" secondItem="gI6-9P-TOY" secondAttribute="trailing" constant="16" id="QCP-Y7-6GF"/>
+                            <constraint firstItem="83R-pk-Lp7" firstAttribute="trailing" secondItem="uRj-G3-d74" secondAttribute="trailing" constant="16" id="Qqt-dQ-Oy4"/>
+                            <constraint firstItem="n7f-Is-rCO" firstAttribute="top" secondItem="83R-pk-Lp7" secondAttribute="top" id="S4f-Qr-Osk"/>
+                            <constraint firstItem="n7f-Is-rCO" firstAttribute="trailing" secondItem="83R-pk-Lp7" secondAttribute="trailing" id="TNa-Lw-che"/>
+                            <constraint firstItem="uRj-G3-d74" firstAttribute="leading" secondItem="83R-pk-Lp7" secondAttribute="leading" constant="16" id="hVb-j2-xls"/>
+                            <constraint firstItem="gI6-9P-TOY" firstAttribute="top" secondItem="LQt-kd-62b" secondAttribute="bottom" constant="8" id="jN0-KM-k1L"/>
+                            <constraint firstItem="n7f-Is-rCO" firstAttribute="leading" secondItem="83R-pk-Lp7" secondAttribute="leading" id="q4k-4P-9Us"/>
+                            <constraint firstItem="LQt-kd-62b" firstAttribute="top" secondItem="n7f-Is-rCO" secondAttribute="bottom" constant="8" id="qVe-2B-JVg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="83R-pk-Lp7"/>
                     </view>
                     <navigationItem key="navigationItem" title="Your Store" id="RSo-7T-ln9"/>
@@ -1016,6 +1025,7 @@
                         <outlet property="descriptionTextArea" destination="uRj-G3-d74" id="RF6-JQ-CRf"/>
                         <outlet property="nameTextField" destination="gI6-9P-TOY" id="qqC-I9-g74"/>
                         <outlet property="pickedImage" destination="n7f-Is-rCO" id="MUr-L7-0gi"/>
+                        <outlet property="textAreaButtonBottomConstraint" destination="Ai2-yf-cJN" id="2aV-0K-AZZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yIb-tF-HPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
