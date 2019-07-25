@@ -30,6 +30,9 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
         super.viewDidLoad()
         baseCurrencyPicker.delegate = self
         baseCurrencyPicker.dataSource = self
+        nameTextField.autocapitalizationType = .sentences
+        let addressToQuery = "http://zerobillion.com/binancepay/getStore.php?uuid=c35ba7f9da5e6cb895802a9a36b22dc80aca529a5e7479f4e4ae3519dc7f98c3&address=tbnb1yqyppmev2m4z96r4svwtjq8eqp653pt6elq33r"
+        fetchStoreInformation(url: addressToQuery)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +94,23 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
         }
     }
     
+    //Fetch store information - if it exists on the server
+    func fetchStoreInformation(url: String){
+        Alamofire.request(url, method: .get)
+            .responseJSON { response in
+                if response.result.isSuccess {
+                    let resultJSON : JSON = JSON(response.result.value!)
+                    
+                    for result in resultJSON{
+                        var indiResult = [String]()
+                        print(result)
+                        
+                    }
+                    
+                }
+        }
+    }
+    
     //MARK:-- ImagePicker delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let userPickedImage = info[.originalImage] as? UIImage {
@@ -124,6 +144,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true)
         }else{
+            SVProgressHUD.show()
             let helper = Helper()
             let fileName = helper.randomString(length: 30)
             if let imageData = pickedImage.image?.jpeg(.lowest) {
@@ -168,9 +189,6 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     func requestWith(url: String, imageData: Data?, parameters: [String : Any], fileName: String, onCompletion: ((JSON?) -> Void)? = nil, onError: ((Error?) -> Void)? = nil){
         
-        print("inside requestwith")
-        //let url = "http://google.com" /* your API url */
-        SVProgressHUD.show()
         
         let headers: HTTPHeaders = [
             /* "Authorization": "your_access_token",  in case you need authorization header */
@@ -198,6 +216,12 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                             print(data[0])
                             if(data[0] != "File Uploaded"){
                                 print("File could not be uploaded")
+                            }else{
+                                let alertTitle = NSLocalizedString("Success", comment: "")
+                                let alertMessage = NSLocalizedString("We have successfully saved your store information!", comment: "")
+                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                                self.present(alert, animated: true)
                             }
                         }
                         catch{
