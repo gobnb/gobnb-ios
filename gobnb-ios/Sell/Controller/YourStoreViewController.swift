@@ -21,7 +21,10 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextArea: UITextView!
     @IBOutlet weak var baseCurrencyPicker: UIPickerView!
+    
+    
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
+    
     let supportedCurrencies = ["BNB", "USDSB"]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,12 +138,13 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         let wallet = Wallet(mnemonic: walletKey!, endpoint: .testnet)
                         wallet.synchronise() { (error) in
                             walletAddress = wallet.account
+                            let uuid = "Benson & Hedges takes you to the darkest corner of the world".sha256()
+                            let name = self.nameTextField.text
+                            let parameters = ["name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": self.supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)] ] as [String : Any]
+                            self.requestWith(url: "http://zerobillion.com/binancepay/insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
                         }
                     }
-                    let uuid = "Benson & Hedges takes you to the darkest corner of the world".sha256()
-                    let name = nameTextField.text
-                    let parameters = ["name" : name!, "desc": descriptionTextArea.text!, "address": walletAddress, "uuid": uuid] as [String : Any]
-                requestWith(url: "http://zerobillion.com/binancepay/insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
+                    
                 }
             }
         }
@@ -244,14 +248,14 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             } else {
                 newHeight = keyboardFrame.cgRectValue.height
             }
-            let keyboardHeight = newHeight  + 10 // **10 is bottom margin of View**  and **this newHeight will be keyboard height**
+            let keyboardHeight = newHeight  + 50 // **10 is bottom margin of View**  and **this newHeight will be keyboard height**
             print(keyboardHeight)
             UIView.animate(withDuration: duration,
                            delay: TimeInterval(0),
                            options: animationCurve,
                            animations: {
                             //self.textAreaOutlet.frame.origin.y = keyboardHeight
-                            self.textAreaButtonBottomConstraint.constant = keyboardHeight
+                            self.textAreaButtonBottomConstraint.constant = 10
                             //self.view.textAreaBottomConstraint = keyboardHeight
                             self.view.layoutIfNeeded() },
                            completion: nil)
@@ -260,7 +264,16 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     func keyboardWillHide(){
         print("keyboard hidden")
-        self.textAreaButtonBottomConstraint.constant = 125 //hard-code resetting to original constant value
+        
+        UIView.animate(withDuration: 0.2,
+                       delay: TimeInterval(0),
+                       options: UIView.AnimationOptions(rawValue: 1),
+                       animations: {
+                        //self.textAreaOutlet.frame.origin.y = keyboardHeight
+                        self.textAreaButtonBottomConstraint.constant = 208
+                        //self.view.textAreaBottomConstraint = keyboardHeight
+                        self.view.layoutIfNeeded() },
+                       completion: nil)
     }
     
 }
