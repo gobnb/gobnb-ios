@@ -15,17 +15,20 @@ import SwiftKeychainWrapper
 import BinanceChain
 
 class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
-    @IBOutlet weak var addEditPictureOutlet: UIButton!
     
+    @IBOutlet weak var addEditPictureOutlet: UIButton!
     @IBOutlet weak var pickedImage: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextArea: UITextView!
     @IBOutlet weak var baseCurrencyPicker: UIPickerView!
-    
-    
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
     
     let supportedCurrencies = ["BNB", "USDSB"]
+    //There is no 0 in the backend table. However, this variable gets the val of existing store record id if there is one
+    var existingStoreRecordId: String = "0"
+    //flag to let backend know if uploaded image should be kept or discarded (if its changed)
+    var imageChanged = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         baseCurrencyPicker.delegate = self
@@ -105,31 +108,37 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                     for result in resultJSON{
                         
                         print(result.1)
-                        let imageURL = Constants.backendServerURLBase+Constants.imageBaseFolder+result.1["image"].string!
-                        self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
-                        self.nameTextField.text = result.1["name"].string ?? ""
-                        self.descriptionTextArea.text = result.1["description"].string ?? ""
-                        
-                        //this can be later be shifted in indices and supported currencies can have their own table in the backend-db
-                        let savedBaseCurrency = result.1["basecurrency"].string ?? ""
-                        var currencyID = 0
-                        if savedBaseCurrency == "BNB"{
-                            currencyID = 0
-                        }else if savedBaseCurrency == "USDSB" {
-                            currencyID = 1
-                        }
-                        self.baseCurrencyPicker.selectRow(currencyID, inComponent: 0, animated: true)
-                        
-                        //pull the image from the URL
-                        Alamofire.request(imageURL).response { response in
-                            if let data = response.data {
-                                let image = UIImage(data: data)
-                                self.pickedImage.image = image
-                                SVProgressHUD.dismiss()
-                                //cell.thumbnailImage.image = image
-                            } else {
-                                print("Data is nil. I don't know what to do :(")
+                        if(result.1 != "No record"){
+                            let imageURL = Constants.backendServerURLBase+Constants.imageBaseFolder+result.1["image"].string!
+                            self.existingStoreRecordId = result.1["id"].string ?? "0"
+                            print(self.existingStoreRecordId)
+                            self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
+                            self.nameTextField.text = result.1["name"].string ?? ""
+                            self.descriptionTextArea.text = result.1["description"].string ?? ""
+
+                            //this can be later be shifted in indices and supported currencies can have their own table in the backend-db
+                            let savedBaseCurrency = result.1["basecurrency"].string ?? ""
+                            var currencyID = 0
+                            if savedBaseCurrency == "BNB"{
+                                currencyID = 0
+                            }else if savedBaseCurrency == "USDSB" {
+                                currencyID = 1
                             }
+                            self.baseCurrencyPicker.selectRow(currencyID, inComponent: 0, animated: true)
+
+                            //pull the image from the URL
+                            Alamofire.request(imageURL).response { response in
+                                if let data = response.data {
+                                    let image = UIImage(data: data)
+                                    self.pickedImage.image = image
+                                    SVProgressHUD.dismiss()
+                                    //cell.thumbnailImage.image = image
+                                } else {
+                                    print("Data is nil. I don't know what to do :(")
+                                }
+                            }
+                        }else{
+                            SVProgressHUD.dismiss()
                         }
                         
                     }
@@ -159,12 +168,17 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
         // 'image' is the newly cropped version of the original image
         addEditPictureOutlet.setTitle("edit picture", for: .normal)
         pickedImage.image = image
+        imageChanged = 1
         cropViewController.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
-        
-        if pickedImage.image == nil || nameTextField.text == "" || descriptionTextArea.text.isEmpty {
+        var imageDataCount = 0
+        //first check selected images data count, if its 7795, that means user is using default image, discourage that
+        if let imageData = pickedImage.image?.jpeg(.lowest) {
+            imageDataCount = imageData.count
+        }
+        if pickedImage.image == nil || imageDataCount == 7795 || imageDataCount < 200 || nameTextField.text == "" || descriptionTextArea.text.isEmpty {
             let alertTitle = NSLocalizedString("Error", comment: "")
             let alertMessage = NSLocalizedString("All input fields are required!", comment: "")
             let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
@@ -175,25 +189,21 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             let helper = Helper()
             let fileName = helper.randomString(length: 30)
             if let imageData = pickedImage.image?.jpeg(.lowest) {
-                print(imageData.count)
+                
                 var walletAddress = ""
-                //let data = UIImageJPEGRepresentation(pickedImage.image!, 1.0)
-                //let data = pickedImage.image?.pngData()
-                //let parameters = [String : Any]
-                if(imageData.count > 1){
-                    let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
-                    if walletKey != nil {
-                        let wallet = Wallet(mnemonic: walletKey!, endpoint: .testnet)
-                        wallet.synchronise() { (error) in
-                            walletAddress = wallet.account
-                            let uuid = "Benson & Hedges takes you to the darkest corner of the world".sha256()
-                            let name = self.nameTextField.text
-                            let parameters = ["name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": self.supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)] ] as [String : Any]
-                            self.requestWith(url: "http://zerobillion.com/binancepay/insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
-                        }
+                let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
+                if walletKey != nil {
+                    let wallet = Wallet(mnemonic: walletKey!, endpoint: .testnet)
+                    wallet.synchronise() { (error) in
+                        walletAddress = wallet.account
+                        let uuid = Constants.basicUUID.sha256()
+                        let name = self.nameTextField.text
+                        let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": self.supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)], "imageChanged": self.imageChanged] as [String : Any]
+                        self.requestWith(url: "\(Constants.backendServerURLBase)insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
                     }
-                    
                 }
+                    
+                
             }
         }
         
@@ -235,14 +245,17 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
-                    print("Succesfully uploaded")
                     print(response)
                     if let json = response.data {
                         do{
                             let data = try JSON(data: json)
                             print(data[0])
-                            if(data[0] != "File Uploaded"){
-                                print("File could not be uploaded")
+                            if(data[0] != "Inserted Record"){
+                                let alertTitle = NSLocalizedString("Error", comment: "")
+                                let alertMessage = NSLocalizedString("Could not save changes, please try again!", comment: "")
+                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                                self.present(alert, animated: true)
                             }else{
                                 let alertTitle = NSLocalizedString("Success", comment: "")
                                 let alertMessage = NSLocalizedString("We have successfully saved your store information!", comment: "")
@@ -252,6 +265,11 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                             }
                         }
                         catch{
+                            let alertTitle = NSLocalizedString("Error", comment: "")
+                            let alertMessage = NSLocalizedString("Could not save changes, please try again!", comment: "")
+                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                            self.present(alert, animated: true)
                             print("JSON Error")
                         }
                         

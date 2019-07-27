@@ -16,4 +16,5 @@ struct Constants {
     static let imageBaseFolder = "/images/storeImages/"
     
     static let testnetURL = "https://testnet-explorer.binance.org/tx/"
+    static let basicUUID = "Benson & Hedges takes you to the darkest corner of the world"
 }
