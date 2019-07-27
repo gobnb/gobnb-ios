@@ -96,14 +96,41 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     //Fetch store information - if it exists on the server
     func fetchStoreInformation(url: String){
+        SVProgressHUD.show()
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {
                     let resultJSON : JSON = JSON(response.result.value!)
                     
                     for result in resultJSON{
-                        var indiResult = [String]()
-                        print(result)
+                        
+                        print(result.1)
+                        let imageURL = Constants.backendServerURLBase+Constants.imageBaseFolder+result.1["image"].string!
+                        self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
+                        self.nameTextField.text = result.1["name"].string ?? ""
+                        self.descriptionTextArea.text = result.1["description"].string ?? ""
+                        
+                        //this can be later be shifted in indices and supported currencies can have their own table in the backend-db
+                        let savedBaseCurrency = result.1["basecurrency"].string ?? ""
+                        var currencyID = 0
+                        if savedBaseCurrency == "BNB"{
+                            currencyID = 0
+                        }else if savedBaseCurrency == "USDSB" {
+                            currencyID = 1
+                        }
+                        self.baseCurrencyPicker.selectRow(currencyID, inComponent: 0, animated: true)
+                        
+                        //pull the image from the URL
+                        Alamofire.request(imageURL).response { response in
+                            if let data = response.data {
+                                let image = UIImage(data: data)
+                                self.pickedImage.image = image
+                                SVProgressHUD.dismiss()
+                                //cell.thumbnailImage.image = image
+                            } else {
+                                print("Data is nil. I don't know what to do :(")
+                            }
+                        }
                         
                     }
                     
