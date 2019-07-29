@@ -14,6 +14,7 @@
 		A3171D0E22CE01E5006B3416 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3171D0D22CE01E5006B3416 /* Helper.swift */; };
 		A320932422DF323B00BF2C27 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A320932322DF323B00BF2C27 /* SideMenuViewController.swift */; };
 		A320932622DF4F1000BF2C27 /* SellSideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A320932522DF4F1000BF2C27 /* SellSideMenuViewController.swift */; };
+		A3222DEC22EF096F009A1E42 /* AddEditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3222DEB22EF096F009A1E42 /* AddEditItemViewController.swift */; };
 		A347334922910A5300D7F8B0 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */; };
 		A347334B22912CED00D7F8B0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334A22912CED00D7F8B0 /* StartViewController.swift */; };
 		A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */; };
@@ -70,6 +71,7 @@
 		A3171D0D22CE01E5006B3416 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		A320932322DF323B00BF2C27 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		A320932522DF4F1000BF2C27 /* SellSideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellSideMenuViewController.swift; sourceTree = "<group>"; };
+		A3222DEB22EF096F009A1E42 /* AddEditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditItemViewController.swift; sourceTree = "<group>"; };
 		A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		A347334A22912CED00D7F8B0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		A347334C2291344B00D7F8B0 /* WalletScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScanViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				A320932522DF4F1000BF2C27 /* SellSideMenuViewController.swift */,
 				A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */,
 				A34F5A6A22E1F77900CC350D /* YourStoreViewController.swift */,
+				A3222DEB22EF096F009A1E42 /* AddEditItemViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				A34F5A6922E1CA6200CC350D /* SellItemsViewController.swift in Sources */,
 				A34F5A6B22E1F77A00CC350D /* YourStoreViewController.swift in Sources */,
 				A320932622DF4F1000BF2C27 /* SellSideMenuViewController.swift in Sources */,
+				A3222DEC22EF096F009A1E42 /* AddEditItemViewController.swift in Sources */,
 				A358D95D22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift in Sources */,
 				A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */,
 				A39FADDA22C6446A00BA1FFF /* Obfuscator.swift in Sources */,

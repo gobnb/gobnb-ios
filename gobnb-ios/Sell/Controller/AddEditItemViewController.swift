@@ -1,8 +1,8 @@
 //
-//  YourStoreViewController.swift
+//  AddEditItemViewController.swift
 //  gobnb-ios
 //
-//  Created by Hammad Tariq on 19/07/2019.
+//  Created by Hammad Tariq on 29/07/2019.
 //  Copyright © 2019 Hammad Tariq. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ import SVProgressHUD
 import SwiftKeychainWrapper
 import BinanceChain
 
-class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
+class AddEditItemViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var addEditPictureOutlet: UIButton!
     @IBOutlet weak var pickedImage: UIImageView!
@@ -118,7 +118,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                             self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
                             self.nameTextField.text = result.1["name"].string ?? ""
                             self.descriptionTextArea.text = result.1["description"].string ?? ""
-
+                            
                             //this can be later be shifted in indices and supported currencies can have their own table in the backend-db
                             let savedBaseCurrency = result.1["basecurrency"].string ?? ""
                             var currencyID = 0
@@ -128,7 +128,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 currencyID = 1
                             }
                             self.baseCurrencyPicker.selectRow(currencyID, inComponent: 0, animated: true)
-
+                            
                             //pull the image from the URL
                             Alamofire.request(imageURL).response { response in
                                 if let data = response.data {
@@ -197,11 +197,11 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                 requestWith(url: "\(Constants.backendServerURLBase)insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
             }
             
-                    
-                
+            
+            
         }
     }
-        
+    
     
     
     //PickerView functions
@@ -269,7 +269,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         }
                         
                     }
-                   
+                    
                     SVProgressHUD.dismiss()
                     if let err = response.error{
                         onError?(err)
@@ -341,19 +341,5 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     }
     
 }
-extension UIImage {
-    enum JPEGQuality: CGFloat {
-        case lowest  = 0
-        case low     = 0.25
-        case medium  = 0.5
-        case high    = 0.75
-        case highest = 1
-    }
-    
-    /// Returns the data for the specified image in JPEG format.
-    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
-    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
-    func jpeg(_ jpegQuality: JPEGQuality) -> Data? {
-        return jpegData(compressionQuality: jpegQuality.rawValue)
-    }
-}
+
+
