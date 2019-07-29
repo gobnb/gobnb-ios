@@ -14,13 +14,12 @@ import SVProgressHUD
 import SwiftKeychainWrapper
 import BinanceChain
 
-class AddEditItemViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
+class AddEditItemViewController: UIViewController, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var addEditPictureOutlet: UIButton!
     @IBOutlet weak var pickedImage: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextArea: UITextView!
-    @IBOutlet weak var baseCurrencyPicker: UIPickerView!
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
     
     let supportedCurrencies = ["BNB", "USDSB"]
@@ -32,8 +31,7 @@ class AddEditItemViewController: UIViewController, UIPickerViewDataSource, UIPic
     var uuid = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        baseCurrencyPicker.delegate = self
-        baseCurrencyPicker.dataSource = self
+        
         nameTextField.autocapitalizationType = .sentences
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         uuid = Constants.basicUUID.sha256()
@@ -127,7 +125,6 @@ class AddEditItemViewController: UIViewController, UIPickerViewDataSource, UIPic
                             }else if savedBaseCurrency == "USDSB" {
                                 currencyID = 1
                             }
-                            self.baseCurrencyPicker.selectRow(currencyID, inComponent: 0, animated: true)
                             
                             //pull the image from the URL
                             Alamofire.request(imageURL).response { response in
@@ -193,7 +190,7 @@ class AddEditItemViewController: UIViewController, UIPickerViewDataSource, UIPic
             let fileName = helper.randomString(length: 30)
             if let imageData = pickedImage.image?.jpeg(.lowest) {
                 let name = self.nameTextField.text
-                let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": self.supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)], "imageChanged": self.imageChanged] as [String : Any]
+                let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "imageChanged": self.imageChanged] as [String : Any]
                 requestWith(url: "\(Constants.backendServerURLBase)insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
             }
             
@@ -202,20 +199,6 @@ class AddEditItemViewController: UIViewController, UIPickerViewDataSource, UIPic
         }
     }
     
-    
-    
-    //PickerView functions
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return supportedCurrencies.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return supportedCurrencies[row]
-    }
     
     //MARK:-- Upload Functions
     
