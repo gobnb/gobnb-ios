@@ -8,6 +8,8 @@
 
 import UIKit
 import SwiftKeychainWrapper
+import BinanceChain
+import SVProgressHUD
 
 class StartViewController: UIViewController {
 
@@ -17,10 +19,7 @@ class StartViewController: UIViewController {
     @IBOutlet weak var textAreaOutlet: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        /textAreaOutlet.delegate = self
         print("start")
-        //checkWallet()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,26 +30,40 @@ class StartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
-        checkWallet()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
-    
-    func checkWallet(){
-        let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
-        if((walletKey) != nil){
-            performSegue(withIdentifier: "goToScan", sender: nil)
-        }
-    }
 
     @IBAction func submitPressed(_ sender: Any) {
-        print(textAreaOutlet.text as! String)
+        SVProgressHUD.show()
         let saveSuccessful: Bool = KeychainWrapper.standard.set(textAreaOutlet.text, forKey: "walletKey")
         if saveSuccessful {
-            performSegue(withIdentifier: "goToFeed", sender: self)
+            let wallet = Wallet(mnemonic: textAreaOutlet.text, endpoint: .testnet)
+            wallet.synchronise() { (error) in
+                let walletAddress = wallet.account
+                let binance = BinanceChain()
+                // Get account metadata for an address
+                binance.account(address: walletAddress) { (response) in
+                    print(response.account.publicKey)
+                    if(response.account.accountNumber == 0){
+                        SVProgressHUD.dismiss()
+                        KeychainWrapper.standard.removeObject(forKey: "walletKey")
+                        print("account is invalid")
+                        let alertTitle = NSLocalizedString("Error", comment: "")
+                        let alertMessage = NSLocalizedString("Could not find Binance Chain account. Please try again with correct mnemonic key!", comment: "")
+                        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                        self.present(alert, animated: true)
+                    }else{
+                        SVProgressHUD.dismiss()
+                        KeychainWrapper.standard.set(walletAddress, forKey: "walletKey")
+                        self.performSegue(withIdentifier: "goToScan", sender: self)
+                    }
+                }
+            }
         }else {
             print("error")
         }
@@ -74,7 +87,6 @@ class StartViewController: UIViewController {
     
     
     @objc func keyboardWillShow( notification: Notification) {
-        print("keyboard is showing")
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let newHeight: CGFloat
             let duration:TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
@@ -104,8 +116,6 @@ class StartViewController: UIViewController {
         print("keyboard hidden")
         self.textAreaButtonBottomConstraint.constant = 125 //hard-code resetting to original constant value
     }
-    
-
     
 }
 

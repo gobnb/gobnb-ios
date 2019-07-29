@@ -678,7 +678,6 @@
                                         </state>
                                         <connections>
                                             <action selector="submitPressed:" destination="SKZ-Sz-sc9" eventType="touchUpInside" id="f9I-Ph-VH9"/>
-                                            <segue destination="VgT-k4-vZb" kind="show" identifier="goToFeed" id="n6d-5N-eeE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1169,7 +1168,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="e5W-Y6-RB9"/>
         <segue reference="InF-pf-m7b"/>
-        <segue reference="o1F-VC-Qf1"/>
+        <segue reference="jQ8-dy-MAS"/>
         <segue reference="2Y6-e3-F22"/>
         <segue reference="eh2-2r-uBG"/>
     </inferredMetricsTieBreakers>

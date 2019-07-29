@@ -9,6 +9,8 @@
 import AVFoundation
 import UIKit
 import SwiftKeychainWrapper
+import BinanceChain
+import SVProgressHUD
 
 class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
@@ -93,14 +95,41 @@ class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjects
     }
     
     func found(code: String) {
-        print(code)
+        SVProgressHUD.show()
         self.scannedCode = code
         
         let saveSuccessful: Bool = KeychainWrapper.standard.set(code, forKey: "walletKey")
         if saveSuccessful {
-            performSegue(withIdentifier: "goToScanAfterWallet", sender: self)
+            let wallet = Wallet(mnemonic: code, endpoint: .testnet)
+            wallet.synchronise() { (error) in
+                let walletAddress = wallet.account
+                let binance = BinanceChain()
+                // Get account metadata for an address
+                binance.account(address: walletAddress) { (response) in
+                    print(response.account.publicKey)
+                    if(response.account.accountNumber == 0){
+                        SVProgressHUD.dismiss()
+                        print("account is invalid")
+                        let alertTitle = NSLocalizedString("Error", comment: "")
+                        let alertMessage = NSLocalizedString("Could not find Binance Chain account. Please try again with correct mnemonic key!", comment: "")
+                        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {_ in self.invalidCode()}))
+                        self.present(alert, animated: true)
+                    }else{
+                        SVProgressHUD.dismiss()
+                        KeychainWrapper.standard.set(walletAddress, forKey: "walletKey")
+                        self.performSegue(withIdentifier: "goToScanAfterWallet", sender: self)
+                    }
+                }
+            }
+            
         }else {
             print("error")
+            let alertTitle = NSLocalizedString("Error", comment: "")
+            let alertMessage = NSLocalizedString("Error in saving the information. Please try again!", comment: "")
+            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
         }
     }
     
@@ -110,6 +139,15 @@ class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjects
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+    
+    func invalidCode(){
+        let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
+        if removeSuccessful {
+            let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+            self.present(vc1, animated: true, completion: nil)
+        }
     }
     
 
