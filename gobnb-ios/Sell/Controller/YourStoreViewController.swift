@@ -23,7 +23,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var baseCurrencyPicker: UIPickerView!
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
     
-    let supportedCurrencies = ["BNB", "USDSB"]
+    var supportedCurrencies = [[String]]()
     //There is no 0 in the backend table. However, this variable gets the val of existing store record id if there is one
     var existingStoreRecordId: String = "0"
     //flag to let backend know if uploaded image should be kept or discarded (if its changed)
@@ -39,11 +39,14 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
         uuid = Constants.basicUUID.sha256()
         let addressToQuery = "\(Constants.backendServerURLBase)getStore.php?uuid=\(uuid)&address=\(walletAddress)"
         fetchStoreInformation(url: addressToQuery)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
+        let fetchCurrenciesURL = "\(Constants.backendServerURLBase)getCurrencies.php?uuid=\(uuid)"
+        fetchSupportedCurrencies(url: fetchCurrenciesURL)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,6 +103,32 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
         }
     }
     
+    //Fetch currencies information
+    func fetchSupportedCurrencies(url: String){
+        SVProgressHUD.show()
+        Alamofire.request(url, method: .get)
+            .responseJSON { response in
+                if response.result.isSuccess {
+                    let resultJSON : JSON = JSON(response.result.value!)
+                    for result in resultJSON{
+                        
+                        print(result.1)
+                        if(result.1 != "No record"){
+                            print("record")
+                            var indiResult = [String]()
+                            indiResult.append(result.1["currency_id"].string ?? "")
+                            indiResult.append(result.1["currency_symbol"].string ?? "")
+                            self.supportedCurrencies.append(indiResult)
+                            self.baseCurrencyPicker.reloadAllComponents()
+                        }else{
+                            SVProgressHUD.dismiss()
+                        }
+                        
+                    }
+                    
+                }
+        }
+    }
     //Fetch store information - if it exists on the server
     func fetchStoreInformation(url: String){
         SVProgressHUD.show()
@@ -191,9 +220,17 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             SVProgressHUD.show()
             let helper = Helper()
             let fileName = helper.randomString(length: 30)
+            let baseCurrencyPicked = supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)]
+            var baseCurrencyPickedId = ""
+            for currency in supportedCurrencies {
+                print(currency[1])
+                if currency[1] == baseCurrencyPicked[1] {
+                    baseCurrencyPickedId = currency[0]
+                }
+            }
             if let imageData = pickedImage.image?.jpeg(.lowest) {
                 let name = self.nameTextField.text
-                let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": self.supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)], "imageChanged": self.imageChanged] as [String : Any]
+                let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": baseCurrencyPickedId, "imageChanged": self.imageChanged] as [String : Any]
                 requestWith(url: "\(Constants.backendServerURLBase)insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
             }
             
@@ -214,8 +251,10 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return supportedCurrencies[row]
+        return supportedCurrencies[row][1]
     }
+    
+    
     
     //MARK:-- Upload Functions
     

@@ -74,7 +74,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                     
                     for result in resultJSON{
                         var indiResult = [String]()
-                        print(result.1["item_name"])
+                        //print(result.1["item_name"])
                         indiResult.append(result.1["item_name"].string ?? "");
                         indiResult.append(result.1["item_description"].string ?? "");
                         indiResult.append(result.1["item_image"].string ?? "");
