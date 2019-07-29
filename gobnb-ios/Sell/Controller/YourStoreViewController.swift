@@ -28,13 +28,16 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     var existingStoreRecordId: String = "0"
     //flag to let backend know if uploaded image should be kept or discarded (if its changed)
     var imageChanged = 0
-    
+    var walletAddress = ""
+    var uuid = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         baseCurrencyPicker.delegate = self
         baseCurrencyPicker.dataSource = self
         nameTextField.autocapitalizationType = .sentences
-        let addressToQuery = "http://zerobillion.com/binancepay/getStore.php?uuid=c35ba7f9da5e6cb895802a9a36b22dc80aca529a5e7479f4e4ae3519dc7f98c3&address=tbnb1yqyppmev2m4z96r4svwtjq8eqp653pt6elq33r"
+        walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
+        uuid = Constants.basicUUID.sha256()
+        let addressToQuery = "\(Constants.backendServerURLBase)getStore.php?uuid=\(uuid)&address=\(walletAddress)"
         fetchStoreInformation(url: addressToQuery)
     }
     
@@ -189,25 +192,17 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             let helper = Helper()
             let fileName = helper.randomString(length: 30)
             if let imageData = pickedImage.image?.jpeg(.lowest) {
-                
-                var walletAddress = ""
-                let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
-                if walletKey != nil {
-                    let wallet = Wallet(mnemonic: walletKey!, endpoint: .testnet)
-                    wallet.synchronise() { (error) in
-                        walletAddress = wallet.account
-                        let uuid = Constants.basicUUID.sha256()
-                        let name = self.nameTextField.text
-                        let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": self.supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)], "imageChanged": self.imageChanged] as [String : Any]
-                        self.requestWith(url: "\(Constants.backendServerURLBase)insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
-                    }
-                }
+                let name = self.nameTextField.text
+                let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": self.supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)], "imageChanged": self.imageChanged] as [String : Any]
+                requestWith(url: "\(Constants.backendServerURLBase)insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
+            }
+            
                     
                 
-            }
         }
-        
     }
+        
+    
     
     //PickerView functions
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

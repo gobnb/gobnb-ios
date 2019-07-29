@@ -117,7 +117,7 @@ class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjects
                         self.present(alert, animated: true)
                     }else{
                         SVProgressHUD.dismiss()
-                        KeychainWrapper.standard.set(walletAddress, forKey: "walletKey")
+                        KeychainWrapper.standard.set(walletAddress, forKey: "walletAddress")
                         self.performSegue(withIdentifier: "goToScanAfterWallet", sender: self)
                     }
                 }
