@@ -279,11 +279,9 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
-                    print(response)
                     if let json = response.data {
                         do{
                             let data = try JSON(data: json)
-                            print(data[0])
                             if(data[0] != "Inserted Record"){
                                 let alertTitle = NSLocalizedString("Error", comment: "")
                                 let alertMessage = NSLocalizedString("Could not save changes, please try again!", comment: "")

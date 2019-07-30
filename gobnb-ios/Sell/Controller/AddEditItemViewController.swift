@@ -20,8 +20,10 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var pickedImage: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextArea: UITextView!
+    @IBOutlet weak var itemPriceTextField: UITextField!
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var baseCurrencyLabel: UILabel!
     let supportedCurrencies = ["BNB", "USDSB"]
     //There is no 0 in the backend table. However, this variable gets the val of existing store record id if there is one
     var existingStoreRecordId: String = "0"
@@ -42,6 +44,8 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
+        let fetchBaseCurrencyURL = "\(Constants.backendServerURLBase)getBaseCurrency.php?uuid=\(uuid)&address=\(walletAddress)"
+        fetchSupportedBaseCurrency(url: fetchBaseCurrencyURL)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,6 +99,27 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
             let alert  = UIAlertController(title: "Warning", message: "You don't have permission to access gallery.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    //Fetch store base currency
+    func fetchSupportedBaseCurrency(url: String){
+        SVProgressHUD.show()
+        Alamofire.request(url, method: .get)
+            .responseJSON { response in
+                if response.result.isSuccess {
+                    let resultJSON : JSON = JSON(response.result.value!)
+                    for result in resultJSON{
+                        if(result.1 != "No record"){
+                            SVProgressHUD.dismiss()
+                            self.baseCurrencyLabel.text = result.1["currency_symbol"].string ?? ""
+                        }else{
+                            SVProgressHUD.dismiss()
+                        }
+                        
+                    }
+                    
+                }
         }
     }
     
