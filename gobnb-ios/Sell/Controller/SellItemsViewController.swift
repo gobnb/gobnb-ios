@@ -32,7 +32,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        //tableView.backgroundView = setupShopAlertView
+        tableView.backgroundView = setupShopAlertView
         
         uuid = Constants.basicUUID.sha256()
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
@@ -59,6 +59,8 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                     self.tableView.reloadData()
                 }else{
+                    let alert = Helper.presentAlert(title: "Error", description: "Could not load items from the remote server. Please try again later!", buttonText: "Close")
+                    self.present(alert, animated: true)
                     print("error in response")
                 }
         }

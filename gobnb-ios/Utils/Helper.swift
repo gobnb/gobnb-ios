@@ -36,4 +36,12 @@ class Helper {
     func isKeyPresentInUserDefaults(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil
     }
+    
+    static func presentAlert(title: String, description: String, buttonText: String) -> UIAlertController{
+        let alertTitle = NSLocalizedString(title, comment: "")
+        let alertMessage = NSLocalizedString(description, comment: "")
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonText, style: .cancel, handler: nil))
+        return alert
+    }
 }

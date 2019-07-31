@@ -121,11 +121,17 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                             self.supportedCurrencies.append(indiResult)
                             self.baseCurrencyPicker.reloadAllComponents()
                         }else{
+                            let alert = Helper.presentAlert(title: "Error", description: "Could not load supported currencies from the remote server. Please try again later!", buttonText: "Close")
+                            self.present(alert, animated: true)
                             SVProgressHUD.dismiss()
                         }
                         
                     }
                     
+                }else{
+                    SVProgressHUD.dismiss()
+                    let alert = Helper.presentAlert(title: "Error", description: "Could not load supported currencies from the remote server. Please try again later!", buttonText: "Close")
+                    self.present(alert, animated: true)
                 }
         }
     }
@@ -175,6 +181,10 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         
                     }
                     
+                }else{
+                    SVProgressHUD.dismiss()
+                    let alert = Helper.presentAlert(title: "Error", description: "Could not connect to the remote server. Please try again later!", buttonText: "Close")
+                    self.present(alert, animated: true)
                 }
         }
     }
@@ -211,10 +221,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             imageDataCount = imageData.count
         }
         if pickedImage.image == nil || imageDataCount == 7795 || imageDataCount < 200 || nameTextField.text == "" || descriptionTextArea.text.isEmpty {
-            let alertTitle = NSLocalizedString("Error", comment: "")
-            let alertMessage = NSLocalizedString("All input fields are required!", comment: "")
-            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            let alert = Helper.presentAlert(title: "Error", description: "All input fields are required!", buttonText: "OK")
             self.present(alert, animated: true)
         }else{
             SVProgressHUD.show()
@@ -283,24 +290,16 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         do{
                             let data = try JSON(data: json)
                             if(data[0] != "Inserted Record"){
-                                let alertTitle = NSLocalizedString("Error", comment: "")
-                                let alertMessage = NSLocalizedString("Could not save changes, please try again!", comment: "")
-                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                                let alert = Helper.presentAlert(title: "Error", description: "Could not save changes, please try again!", buttonText: "Close")
                                 self.present(alert, animated: true)
+                                
                             }else{
-                                let alertTitle = NSLocalizedString("Success", comment: "")
-                                let alertMessage = NSLocalizedString("We have successfully saved your store information!", comment: "")
-                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                                let alert = Helper.presentAlert(title: "Success", description: "We have successfully saved your store information!", buttonText: "OK")
                                 self.present(alert, animated: true)
                             }
                         }
                         catch{
-                            let alertTitle = NSLocalizedString("Error", comment: "")
-                            let alertMessage = NSLocalizedString("Could not save changes, please try again!", comment: "")
-                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                            let alert = Helper.presentAlert(title: "Error", description: "Could not save changes, please try again!", buttonText: "Close")
                             self.present(alert, animated: true)
                             print("JSON Error")
                         }
@@ -317,6 +316,8 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             case .failure(let error):
                 print("Error in upload: \(error.localizedDescription)")
                 onError?(error)
+                let alert = Helper.presentAlert(title: "Error", description: "Could not connect to the remote server. Please try again later!", buttonText: "Close")
+                self.present(alert, animated: true)
                 SVProgressHUD.dismiss()
             }
         }
