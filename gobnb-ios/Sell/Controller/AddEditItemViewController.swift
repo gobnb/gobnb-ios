@@ -26,7 +26,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var baseCurrencyLabel: UILabel!
     let supportedCurrencies = ["BNB", "USDSB"]
     //There is no 0 in the backend table. However, this variable gets the val of existing store record id if there is one
-    var existingStoreRecordId: String = "0"
+    var existingItemRecordId: String = "0"
     //flag to let backend know if uploaded image should be kept or discarded (if its changed)
     var imageChanged = 0
     var walletAddress = ""
@@ -35,10 +35,11 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
         super.viewDidLoad()
         
         nameTextField.autocapitalizationType = .sentences
+        itemPriceTextField.keyboardType = UIKeyboardType.decimalPad
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         uuid = Constants.basicUUID.sha256()
         let addressToQuery = "\(Constants.backendServerURLBase)getStore.php?uuid=\(uuid)&address=\(walletAddress)"
-        fetchStoreInformation(url: addressToQuery)
+        //fetchStoreInformation(url: addressToQuery)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,53 +125,53 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     //Fetch store information - if it exists on the server
-    func fetchStoreInformation(url: String){
-        SVProgressHUD.show()
-        Alamofire.request(url, method: .get)
-            .responseJSON { response in
-                if response.result.isSuccess {
-                    let resultJSON : JSON = JSON(response.result.value!)
-                    
-                    for result in resultJSON{
-                        
-                        //print(result.1)
-                        if(result.1 != "No record"){
-                            let imageURL = Constants.backendServerURLBase+Constants.imageBaseFolder+result.1["image"].string!
-                            self.existingStoreRecordId = result.1["id"].string ?? "0"
-                            print(self.existingStoreRecordId)
-                            self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
-                            self.nameTextField.text = result.1["name"].string ?? ""
-                            self.descriptionTextArea.text = result.1["description"].string ?? ""
-                            
-                            //this can be later be shifted in indices and supported currencies can have their own table in the backend-db
-                            let savedBaseCurrency = result.1["basecurrency"].string ?? ""
-                            var currencyID = 0
-                            if savedBaseCurrency == "BNB"{
-                                currencyID = 0
-                            }else if savedBaseCurrency == "USDSB" {
-                                currencyID = 1
-                            }
-                            
-                            //pull the image from the URL
-                            Alamofire.request(imageURL).response { response in
-                                if let data = response.data {
-                                    let image = UIImage(data: data)
-                                    self.pickedImage.image = image
-                                    SVProgressHUD.dismiss()
-                                    //cell.thumbnailImage.image = image
-                                } else {
-                                    print("Data is nil. I don't know what to do :(")
-                                }
-                            }
-                        }else{
-                            SVProgressHUD.dismiss()
-                        }
-                        
-                    }
-                    
-                }
-        }
-    }
+//    func fetchStoreInformation(url: String){
+//        SVProgressHUD.show()
+//        Alamofire.request(url, method: .get)
+//            .responseJSON { response in
+//                if response.result.isSuccess {
+//                    let resultJSON : JSON = JSON(response.result.value!)
+//
+//                    for result in resultJSON{
+//
+//                        //print(result.1)
+//                        if(result.1 != "No record"){
+//                            let imageURL = Constants.backendServerURLBase+Constants.imageBaseFolder+result.1["image"].string!
+//                            self.existingItemRecordId = result.1["id"].string ?? "0"
+//                            print(self.existingItemRecordId)
+//                            self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
+//                            self.nameTextField.text = result.1["name"].string ?? ""
+//                            self.descriptionTextArea.text = result.1["description"].string ?? ""
+//
+//                            //this can be later be shifted in indices and supported currencies can have their own table in the backend-db
+//                            let savedBaseCurrency = result.1["basecurrency"].string ?? ""
+//                            var currencyID = 0
+//                            if savedBaseCurrency == "BNB"{
+//                                currencyID = 0
+//                            }else if savedBaseCurrency == "USDSB" {
+//                                currencyID = 1
+//                            }
+//
+//                            //pull the image from the URL
+//                            Alamofire.request(imageURL).response { response in
+//                                if let data = response.data {
+//                                    let image = UIImage(data: data)
+//                                    self.pickedImage.image = image
+//                                    SVProgressHUD.dismiss()
+//                                    //cell.thumbnailImage.image = image
+//                                } else {
+//                                    print("Data is nil. I don't know what to do :(")
+//                                }
+//                            }
+//                        }else{
+//                            SVProgressHUD.dismiss()
+//                        }
+//
+//                    }
+//
+//                }
+//        }
+//    }
     
     //MARK:-- ImagePicker delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -204,10 +205,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
             imageDataCount = imageData.count
         }
         if pickedImage.image == nil || imageDataCount == 7795 || imageDataCount < 200 || nameTextField.text == "" || descriptionTextArea.text.isEmpty {
-            let alertTitle = NSLocalizedString("Error", comment: "")
-            let alertMessage = NSLocalizedString("All input fields are required!", comment: "")
-            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            let alert = Helper.presentAlert(title: "Error", description: "All input fields are required!", buttonText: "OK")
             self.present(alert, animated: true)
         }else{
             SVProgressHUD.show()
@@ -215,11 +213,9 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
             let fileName = helper.randomString(length: 30)
             if let imageData = pickedImage.image?.jpeg(.lowest) {
                 let name = self.nameTextField.text
-                let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "imageChanged": self.imageChanged] as [String : Any]
-                requestWith(url: "\(Constants.backendServerURLBase)insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
+                let parameters = ["existingItemRecordId": self.existingItemRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "price": self.itemPriceTextField.text, "uuid": uuid, "imageChanged": self.imageChanged] as [String : Any]
+                requestWith(url: "\(Constants.backendServerURLBase)insertItem.php", imageData: imageData, parameters: parameters, fileName: fileName)
             }
-            
-            
             
         }
     }
@@ -248,30 +244,22 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
-                    print(response)
                     if let json = response.data {
                         do{
                             let data = try JSON(data: json)
-                            print(data[0])
+                            print("printing data")
+                            print(data)
                             if(data[0] != "Inserted Record"){
-                                let alertTitle = NSLocalizedString("Error", comment: "")
-                                let alertMessage = NSLocalizedString("Could not save changes, please try again!", comment: "")
-                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                                let alert = Helper.presentAlert(title: "Error", description: "Could not save changes, please try again!", buttonText: "Close")
                                 self.present(alert, animated: true)
+                                
                             }else{
-                                let alertTitle = NSLocalizedString("Success", comment: "")
-                                let alertMessage = NSLocalizedString("We have successfully saved your store information!", comment: "")
-                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                                let alert = Helper.presentAlert(title: "Success", description: "We have successfully saved your store information!", buttonText: "OK")
                                 self.present(alert, animated: true)
                             }
                         }
                         catch{
-                            let alertTitle = NSLocalizedString("Error", comment: "")
-                            let alertMessage = NSLocalizedString("Could not save changes, please try again!", comment: "")
-                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                            let alert = Helper.presentAlert(title: "Error", description: "Could not save changes, please try again!", buttonText: "Close")
                             self.present(alert, animated: true)
                             print("JSON Error")
                         }
@@ -288,6 +276,8 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
             case .failure(let error):
                 print("Error in upload: \(error.localizedDescription)")
                 onError?(error)
+                let alert = Helper.presentAlert(title: "Error", description: "Could not connect to the remote server. Please try again later!", buttonText: "Close")
+                self.present(alert, animated: true)
                 SVProgressHUD.dismiss()
             }
         }
@@ -308,7 +298,6 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @objc func keyboardWillShow( notification: Notification) {
-        print("keyboard is showing")
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let newHeight: CGFloat
             let duration:TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
@@ -335,8 +324,6 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func keyboardWillHide(){
-        print("keyboard hidden")
-        
         UIView.animate(withDuration: 0.2,
                        delay: TimeInterval(0),
                        options: UIView.AnimationOptions(rawValue: 1),

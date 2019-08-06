@@ -32,7 +32,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.backgroundView = setupShopAlertView
+        //tableView.backgroundView = setupShopAlertView
         
         uuid = Constants.basicUUID.sha256()
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!

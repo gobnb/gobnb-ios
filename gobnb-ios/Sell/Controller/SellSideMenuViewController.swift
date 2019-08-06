@@ -58,9 +58,12 @@ class SellSideMenuViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let itemAtThePath = navArray[indexPath.item]
-        
         if itemAtThePath == "Your Store" {
-            performSegue(withIdentifier: "goToStore", sender: self)
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "YourStoreVC") as? UIViewController {
+                let navigationController = UINavigationController(rootViewController: viewController)
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
         }
     }
 
