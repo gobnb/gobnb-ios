@@ -199,6 +199,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
+        keyboardWillHide()
         var imageDataCount = 0
         //first check selected images data count, if its 7795, that means user is using default image, discourage that
         if let imageData = pickedImage.image?.jpeg(.lowest) {
