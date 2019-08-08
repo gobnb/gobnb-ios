@@ -249,13 +249,18 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
                     if let json = response.data {
                         do{
                             let data = try JSON(data: json)
-//                            print("printing data")
-//                            print(data)
+                            print("printing data")
+                            print(data)
                             if(data[0] != "Inserted Record"){
                                 let alert = Helper.presentAlert(title: "Error", description: "Could not save changes, please try again!", buttonText: "Close")
                                 self.present(alert, animated: true)
                                 
                             }else{
+//                                print("data count")
+//                                print(data.count)
+                                if (data.count > 1) {
+                                    self.existingItemRecordId = data[1].stringValue
+                                }
                                 let alert = Helper.presentAlert(title: "Success", description: "We have successfully saved item information!", buttonText: "OK")
                                 self.present(alert, animated: true)
                             }
