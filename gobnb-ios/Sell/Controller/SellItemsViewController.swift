@@ -85,7 +85,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         cell.cellItemDescription.sizeToFit()
         //cell.itemPrice.sizeToFit()
         cell.backgroundColor = UIColor(red:1.00, green:0.92, blue:0.65, alpha:1.0)
-        Alamofire.request(items[2]).response { response in
+        Alamofire.request(Constants.backendServerURLBase + Constants.itemsImageBaseFolder + items[2] ).response { response in
             if let data = response.data {
                 let image = UIImage(data: data)
                 cell.cellItemImage.image = image

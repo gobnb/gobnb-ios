@@ -215,7 +215,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
             let fileName = helper.randomString(length: 30)
             if let imageData = pickedImage.image?.jpeg(.lowest) {
                 let name = self.nameTextField.text
-                let parameters = ["existingItemRecordId": self.existingItemRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "price": self.itemPriceTextField.text, "uuid": uuid, "imageChanged": self.imageChanged] as [String : Any]
+                let parameters = ["existingItemRecordId": self.existingItemRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "price": self.itemPriceTextField.text ?? "0.00", "uuid": uuid, "imageChanged": self.imageChanged] as [String : Any]
                 requestWith(url: "\(Constants.backendServerURLBase)insertItem.php", imageData: imageData, parameters: parameters, fileName: fileName)
             }
             
@@ -260,6 +260,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
 //                                print(data.count)
                                 if (data.count > 1) {
                                     self.existingItemRecordId = data[1].stringValue
+                                    self.title = "Edit Item"
                                 }
                                 let alert = Helper.presentAlert(title: "Success", description: "We have successfully saved item information!", buttonText: "OK")
                                 self.present(alert, animated: true)

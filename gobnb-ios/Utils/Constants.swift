@@ -14,6 +14,7 @@ struct Constants {
     
     static let backendServerURLBase : String = "http://zerobillion.com/binancepay/"
     static let imageBaseFolder = "/images/storeImages/"
+    static let itemsImageBaseFolder = "/images/itemImages/"
     
     static let testnetURL = "https://testnet-explorer.binance.org/tx/"
     static let basicUUID = "Benson & Hedges takes you to the darkest corner of the world"
