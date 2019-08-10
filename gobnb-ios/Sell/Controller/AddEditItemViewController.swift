@@ -24,7 +24,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var baseCurrencyLabel: UILabel!
-    let supportedCurrencies = ["BNB", "USDSB"]
+    
     //There is no 0 in the backend table. However, this variable gets the val of existing store record id if there is one
     var existingItemRecordId: String = "0"
     //flag to let backend know if uploaded image should be kept or discarded (if its changed)
