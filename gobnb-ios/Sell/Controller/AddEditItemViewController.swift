@@ -38,8 +38,11 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
         itemPriceTextField.keyboardType = UIKeyboardType.decimalPad
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         uuid = Constants.basicUUID.sha256()
-        let addressToQuery = "\(Constants.backendServerURLBase)getStore.php?uuid=\(uuid)&address=\(walletAddress)"
-        //fetchStoreInformation(url: addressToQuery)
+        
+        if (existingItemRecordId != "0") {
+            let itemToQuery = "\(Constants.backendServerURLBase)getItem.php?uuid=\(uuid)&item=\(existingItemRecordId)"
+            fetchItemInformation(url: itemToQuery)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,53 +128,43 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     //Fetch store information - if it exists on the server
-//    func fetchStoreInformation(url: String){
-//        SVProgressHUD.show()
-//        Alamofire.request(url, method: .get)
-//            .responseJSON { response in
-//                if response.result.isSuccess {
-//                    let resultJSON : JSON = JSON(response.result.value!)
-//
-//                    for result in resultJSON{
-//
-//                        //print(result.1)
-//                        if(result.1 != "No record"){
-//                            let imageURL = Constants.backendServerURLBase+Constants.imageBaseFolder+result.1["image"].string!
-//                            self.existingItemRecordId = result.1["id"].string ?? "0"
-//                            print(self.existingItemRecordId)
-//                            self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
-//                            self.nameTextField.text = result.1["name"].string ?? ""
-//                            self.descriptionTextArea.text = result.1["description"].string ?? ""
-//
-//                            //this can be later be shifted in indices and supported currencies can have their own table in the backend-db
-//                            let savedBaseCurrency = result.1["basecurrency"].string ?? ""
-//                            var currencyID = 0
-//                            if savedBaseCurrency == "BNB"{
-//                                currencyID = 0
-//                            }else if savedBaseCurrency == "USDSB" {
-//                                currencyID = 1
-//                            }
-//
-//                            //pull the image from the URL
-//                            Alamofire.request(imageURL).response { response in
-//                                if let data = response.data {
-//                                    let image = UIImage(data: data)
-//                                    self.pickedImage.image = image
-//                                    SVProgressHUD.dismiss()
-//                                    //cell.thumbnailImage.image = image
-//                                } else {
-//                                    print("Data is nil. I don't know what to do :(")
-//                                }
-//                            }
-//                        }else{
-//                            SVProgressHUD.dismiss()
-//                        }
-//
-//                    }
-//
-//                }
-//        }
-//    }
+    func fetchItemInformation(url: String){
+        SVProgressHUD.show()
+        Alamofire.request(url, method: .get)
+            .responseJSON { response in
+                if response.result.isSuccess {
+                    let resultJSON : JSON = JSON(response.result.value!)
+
+                    for result in resultJSON{
+                        
+                        if(result.1 != "No record"){
+                            let imageURL = Constants.backendServerURLBase+Constants.itemsImageBaseFolder+result.1["item_image"].string!
+                            //self.existingItemRecordId = result.1["item_id"].string ?? "0"
+                            self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
+                            self.title = "Edit Item"
+                            self.nameTextField.text = result.1["item_name"].string ?? ""
+                            self.descriptionTextArea.text = result.1["item_description"].string ?? ""
+                            self.itemPriceTextField.text = result.1["price"].string ?? ""
+
+                            //pull the image from the URL
+                            Alamofire.request(imageURL).response { response in
+                                if let data = response.data {
+                                    let image = UIImage(data: data)
+                                    self.pickedImage.image = image
+                                    SVProgressHUD.dismiss()
+                                } else {
+                                    print("Data is nil. I don't know what to do :(")
+                                }
+                            }
+                        }else{
+                            SVProgressHUD.dismiss()
+                        }
+
+                    }
+
+                }
+        }
+    }
     
     //MARK:-- ImagePicker delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

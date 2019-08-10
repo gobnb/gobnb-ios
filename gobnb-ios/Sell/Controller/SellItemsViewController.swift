@@ -25,13 +25,15 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet var setupShopAlertView: UIView!
     
     var itemsArray = [[String]]()
+    var existingItemRecordId: String = "0"
     var uuid = ""
     var walletAddress = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .none
+        //tableView.separatorStyle = .none
+        tableView.tableFooterView = UIView()
         //tableView.backgroundView = setupShopAlertView
         
         let refreshControl = UIRefreshControl()
@@ -59,10 +61,11 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
                     for result in resultJSON{
                         var indiResult = [String]()
                         print(result.1)
-                        indiResult.append(result.1["item_name"].string ?? "");
-                        indiResult.append(result.1["item_description"].string ?? "");
-                        indiResult.append(result.1["item_image"].string ?? "");
-                        indiResult.append(result.1["price"].string ?? "");
+                        indiResult.append(result.1["item_name"].string ?? "")
+                        indiResult.append(result.1["item_description"].string ?? "")
+                        indiResult.append(result.1["item_image"].string ?? "")
+                        indiResult.append(result.1["price"].string ?? "")
+                        indiResult.append(result.1["item_id"].string ?? "")
                         self.itemsArray.append(indiResult);
                     }
                     self.tableView.reloadData()
@@ -96,6 +99,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
 //        cell.cellItemDescription.sizeToFit()
 //        //cell.itemPrice.sizeToFit()
 //        //cell.backgroundColor = UIColor(red:1.00, green:0.92, blue:0.65, alpha:1.0)
+        
         Alamofire.request(Constants.backendServerURLBase + Constants.itemsImageBaseFolder + items[2] ).response { response in
             if let data = response.data {
                 let image = UIImage(data: data)
@@ -107,6 +111,24 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //print(itemsArray[indexPath.item])
+        existingItemRecordId = itemsArray[indexPath.item][4]
+        //itemArrayToPass.append(peopleAddress)
+        performSegue(withIdentifier: "goToAddEditItem", sender: self)
+        
+        //navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is AddEditItemViewController
+        {
+            let vc = segue.destination as? AddEditItemViewController
+            vc?.existingItemRecordId = existingItemRecordId
+        }
     }
     
 
