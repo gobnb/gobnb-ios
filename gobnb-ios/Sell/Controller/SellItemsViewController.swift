@@ -65,17 +65,21 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
                     let resultJSON : JSON = JSON(response.result.value!)
                     self.itemsArray.removeAll()
                     SVProgressHUD.dismiss()
-                    for result in resultJSON{
-                        var indiResult = [String]()
-                        print(result.1)
-                        indiResult.append(result.1["item_name"].string ?? "")
-                        indiResult.append(result.1["item_description"].string ?? "")
-                        indiResult.append(result.1["item_image"].string ?? "")
-                        indiResult.append(result.1["price"].string ?? "")
-                        indiResult.append(result.1["item_id"].string ?? "")
-                        self.itemsArray.append(indiResult);
+    
+                    if(resultJSON[0] != "No record"){
+                        for result in resultJSON{
+                            var indiResult = [String]()
+                            indiResult.append(result.1["item_name"].string ?? "")
+                            indiResult.append(result.1["item_description"].string ?? "")
+                            indiResult.append(result.1["item_image"].string ?? "")
+                            indiResult.append(result.1["price"].string ?? "")
+                            indiResult.append(result.1["item_id"].string ?? "")
+                            self.itemsArray.append(indiResult);
+                        }
+                        self.tableView.reloadData()
+                    }else{
+                        print ("no record")
                     }
-                    self.tableView.reloadData()
                     self.tableView.refreshControl?.endRefreshing()
                 }else{
                     SVProgressHUD.dismiss()
