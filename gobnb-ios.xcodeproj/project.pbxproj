@@ -32,6 +32,7 @@
 		A3726AAD228F801E0032717B /* BinancePayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726AAC228F801E0032717B /* BinancePayUITests.swift */; };
 		A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EC22908930006DB2F9 /* WalletViewController.swift */; };
 		A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */; };
+		A389C3C823003A090000DC78 /* SellPaymentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A389C3C723003A090000DC78 /* SellPaymentsViewController.swift */; };
 		A39F070E22CB81B300C01D32 /* ShoppingCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39F070D22CB81B300C01D32 /* ShoppingCartView.xib */; };
 		A39F071022CB834700C01D32 /* ShoppingCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F070F22CB834700C01D32 /* ShoppingCartView.swift */; };
 		A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39FADD522C642CE00BA1FFF /* Constants.swift */; };
@@ -95,6 +96,7 @@
 		A3726AAE228F801E0032717B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A37BD5EC22908930006DB2F9 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		A389C3C723003A090000DC78 /* SellPaymentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellPaymentsViewController.swift; sourceTree = "<group>"; };
 		A39F070D22CB81B300C01D32 /* ShoppingCartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartView.xib; sourceTree = "<group>"; };
 		A39F070F22CB834700C01D32 /* ShoppingCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartView.swift; sourceTree = "<group>"; };
 		A39FADD522C642CE00BA1FFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */,
 				A34F5A6A22E1F77900CC350D /* YourStoreViewController.swift */,
 				A3222DEB22EF096F009A1E42 /* AddEditItemViewController.swift */,
+				A389C3C723003A090000DC78 /* SellPaymentsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-gobnb-ios/Pods-gobnb-ios-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CountdownLabel/CountdownLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
@@ -455,6 +459,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountdownLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CropViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
@@ -562,6 +567,7 @@
 				A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */,
 				A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */,
 				A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */,
+				A389C3C823003A090000DC78 /* SellPaymentsViewController.swift in Sources */,
 				A34F5A6922E1CA6200CC350D /* SellItemsViewController.swift in Sources */,
 				A34F5A6B22E1F77A00CC350D /* YourStoreViewController.swift in Sources */,
 				A320932622DF4F1000BF2C27 /* SellSideMenuViewController.swift in Sources */,

@@ -16,6 +16,9 @@ PODS:
   - BinanceChain/Libraries (1.0.0-beta)
   - BinanceChain/Protobuf (1.0.0-beta)
   - BinanceChain/Util (1.0.0-beta)
+  - Charts (3.3.0):
+    - Charts/Core (= 3.3.0)
+  - Charts/Core (3.3.0)
   - CountdownLabel (4.0.1)
   - CropViewController (2.5.1)
   - CryptoSwift (0.15.0)
@@ -41,6 +44,7 @@ PODS:
 
 DEPENDENCIES:
   - BinanceChain (from `https://github.com/mh7821/SwiftBinanceChain.git`)
+  - Charts
   - CountdownLabel
   - CropViewController
   - SideMenu (~> 6.0.0)
@@ -51,6 +55,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Charts
     - CountdownLabel
     - CropViewController
     - CryptoSwift
@@ -79,6 +84,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   BinanceChain: 0fafd2d808e5be8c80fdc46d0e33a9df1c0c54e7
+  Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
   CountdownLabel: c9975e3f329140b5e7d1f45cd63b1300badd1712
   CropViewController: 10ba7af75e302f2db7eb913f8aa1156f95cfe88e
   CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
@@ -95,6 +101,6 @@ SPEC CHECKSUMS:
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: c516f88a40259e63d6b51cce3fc2e493b18ad087
+PODFILE CHECKSUM: 296c1ccfc5ccc1392a3be8fe24a8d89971afdbd3
 
 COCOAPODS: 1.6.2
