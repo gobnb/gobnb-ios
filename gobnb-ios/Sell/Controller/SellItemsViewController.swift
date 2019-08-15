@@ -25,6 +25,8 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var setupShopAlertView: UIView!
     
+    @IBOutlet weak var alertViewButton: UIButton!
+    @IBOutlet weak var alertViewMessage: UILabel!
     var itemsArray = [[String]]()
     var existingItemRecordId: String = "0"
     var uuid = ""
@@ -36,7 +38,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.rowHeight = 100
         //tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
-        //tableView.backgroundView = setupShopAlertView
+        
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(refreshTableView), for: .valueChanged)
@@ -65,20 +67,27 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
                     let resultJSON : JSON = JSON(response.result.value!)
                     self.itemsArray.removeAll()
                     SVProgressHUD.dismiss()
-    
-                    if(resultJSON[0] != "No record"){
-                        for result in resultJSON{
-                            var indiResult = [String]()
-                            indiResult.append(result.1["item_name"].string ?? "")
-                            indiResult.append(result.1["item_description"].string ?? "")
-                            indiResult.append(result.1["item_image"].string ?? "")
-                            indiResult.append(result.1["price"].string ?? "")
-                            indiResult.append(result.1["item_id"].string ?? "")
-                            self.itemsArray.append(indiResult);
-                        }
-                        self.tableView.reloadData()
+                    if (resultJSON[0] == "No store record"){
+                        self.tableView.backgroundView = self.setupShopAlertView
                     }else{
-                        print ("no record")
+                        if(resultJSON[0] != "No items record"){
+                            for result in resultJSON{
+                                var indiResult = [String]()
+                                indiResult.append(result.1["item_name"].string ?? "")
+                                indiResult.append(result.1["item_description"].string ?? "")
+                                indiResult.append(result.1["item_image"].string ?? "")
+                                indiResult.append(result.1["price"].string ?? "")
+                                indiResult.append(result.1["item_id"].string ?? "")
+                                self.itemsArray.append(indiResult);
+                            }
+                            self.tableView.reloadData()
+                        }else{
+                            self.alertViewButton.setTitle("Add Item", for: .normal)
+                            self.alertViewButton.removeTarget(nil, action: nil, for: .allEvents)
+                            self.alertViewButton.addTarget(self, action: #selector(self.alertViewAddItemButtonAction), for: .touchUpInside)
+                            self.alertViewMessage.text = "You don't have any items!"
+                            self.tableView.backgroundView = self.setupShopAlertView
+                        }
                     }
                     self.tableView.refreshControl?.endRefreshing()
                 }else{
@@ -148,6 +157,10 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
             let vc = segue.destination as? AddEditItemViewController
             vc?.existingItemRecordId = existingItemRecordId
         }
+    }
+    
+    @objc func alertViewAddItemButtonAction (){
+        performSegue(withIdentifier: "goToAddEditItem", sender: self)
     }
     
 

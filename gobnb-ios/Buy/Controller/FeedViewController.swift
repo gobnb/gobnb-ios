@@ -11,7 +11,7 @@ import BinanceChain
 import Alamofire
 import SwiftyJSON
 
-class DealsTableViewCell: UITableViewCell {
+class peopleTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var placeImage: UIImageView!
@@ -24,7 +24,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     let testnet = "https://testnet-explorer.binance.org/tx/"
     let binance = BinanceChain(endpoint: .testnet)
-    var dealsArray = [[String]]()
+    var peopleArray = [[String]]()
     var dealAddress:String = ""
     
     @IBOutlet weak var shoppingCartView: ShoppingCartView!
@@ -36,7 +36,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.separatorStyle = .none
         tableView.rowHeight = 200
         
-        fetchDeals(url: Obfuscator().reveal(key: Constants.backendServerURL))
+        fetchPeople(url: Obfuscator().reveal(key: Constants.backendServerURL))
         
         //testTransaction();
         //testBinance();
@@ -67,7 +67,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func fetchDeals(url: String){
+    func fetchPeople(url: String){
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {
@@ -76,11 +76,11 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     for result in resultJSON{
                         var indiResult = [String]()
                         //print(result.1["place"])
-                        indiResult.append(result.1["place"].string ?? "");
+                        indiResult.append(result.1["name"].string ?? "");
                         indiResult.append(result.1["description"].string ?? "");
                         indiResult.append(result.1["image"].string ?? "");
                         indiResult.append(result.1["address"].string ?? "");
-                        self.dealsArray.append(indiResult);
+                        self.peopleArray.append(indiResult);
                     }
                     self.tableView.reloadData()
                 }
@@ -88,20 +88,22 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dealsArray.count
+        return peopleArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "resultsCellMain", for: indexPath) as! DealsTableViewCell
-        var deals = dealsArray[indexPath.item]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resultsCellMain", for: indexPath) as! peopleTableViewCell
+        var people = peopleArray[indexPath.item]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.placeLabel.text = deals[0]
-        cell.descriptionLabel.text = NSLocalizedString("\(deals[1])", comment: "")
+        cell.placeLabel.text = people[0]
+        cell.descriptionLabel.text = NSLocalizedString("\(people[1])", comment: "")
         cell.placeLabel.sizeToFit()
         cell.descriptionLabel.sizeToFit()
         cell.backgroundColor = UIColor(red:1.00, green:0.92, blue:0.65, alpha:1.0)
-        Alamofire.request(deals[2]).response { response in
+        print(Constants.backendServerURLBase + Constants.imageBaseFolder + people[2])
+        Alamofire.request(Constants.backendServerURLBase + Constants.imageBaseFolder + people[2]).response { response in
             if let data = response.data {
+                print(data)
                 let image = UIImage(data: data)
                 cell.placeImage.image = image
                 //cell.thumbnailImage.image = image
@@ -113,8 +115,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(dealsArray[indexPath.item])
-        let deal = dealsArray[indexPath.item]
+        print(peopleArray[indexPath.item])
+        let deal = peopleArray[indexPath.item]
         dealAddress = deal[3]
         performSegue(withIdentifier: "goToItems", sender: self)
         //navigationController?.pushViewController(vc, animated: true)

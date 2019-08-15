@@ -94,6 +94,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     func found(code: String) {
         self.scannedCode = code
+        print(code)
         performSegue(withIdentifier: "goToResults", sender: self)
     }
     

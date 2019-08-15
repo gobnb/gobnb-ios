@@ -50,7 +50,7 @@ class OrderProgressAndPaymentViewController : UIViewController {
                 
                 print("wallet.init", wallet, error)
                 // Create a new transfer
-                let msgTransfer = Message.transfer(symbol: "BNB", amount: self.totalPriceInCart, to: self.addressToPay, wallet: wallet)
+                let msgTransfer = Message.transfer(symbol: "BNB", amount: self.totalPriceInCart, to: "tbnb1yqyppmev2m4z96r4svwtjq8eqp653pt6elq33r", wallet: wallet)
                 
                 //let msg = Message.newOrder(symbol: "BNB_BTC.B-918", orderType: .limit, side: .buy, price: 100, quantity: 1, timeInForce: .goodTillExpire, wallet: wallet)
                 

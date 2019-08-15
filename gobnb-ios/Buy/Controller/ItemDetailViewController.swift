@@ -46,7 +46,7 @@ class ItemDetailViewController: UIViewController {
         itemPrice.text = "\(itemArray[3]) BNB"
         addressToPay = itemArray[4]
         totalPrice = Double(itemArray[3])
-        Alamofire.request(itemArray[2]).response { response in
+        Alamofire.request(Constants.backendServerURLBase + Constants.itemsImageBaseFolder + itemArray[2] ).response { response in
             if let data = response.data {
                 let image = UIImage(data: data)
                 self.itemImageView.image = image
