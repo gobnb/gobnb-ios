@@ -34,7 +34,7 @@ class CartItemTableViewCell: SwipeTableViewCell {
             {
                 if item.id == idOfTheRecord {
                     item.qty = item.qty - 1
-                    itemPriceLabel.text = "\(Double(item.qty) * item.price) BNB"
+                    itemPriceLabel.text = "\(Double(item.qty) * item.price) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
                     ShoppingCartModel.shoppingCartArray[i] = item
                     break
                 }
@@ -58,7 +58,7 @@ class CartItemTableViewCell: SwipeTableViewCell {
             {
                 if item.id == idOfTheRecord {
                     item.qty = item.qty + 1
-                    itemPriceLabel.text = "\(Double(item.qty) * item.price) BNB"
+                    itemPriceLabel.text = "\(Double(item.qty) * item.price) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
                     ShoppingCartModel.shoppingCartArray[i] = item
                     break
                 }
@@ -103,7 +103,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     func updateCartValues(){
         let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
         let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-        shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+        shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         shoppingCartView.totalQty.text = "\(totalItemsInCart)"
         shoppingCartView.viewCartButton.setTitle("Place Your Order", for: .normal)
         shoppingCartView.viewCartButton.addTarget(self, action: Selector(("placeOrderButtonTapped:")), for: .touchUpInside)
@@ -136,7 +136,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         cell.itemNameLabel.text = ShoppingCartModel.shoppingCartArray[indexPath.row].name
         cell.qtyLabel.text = "\(ShoppingCartModel.shoppingCartArray[indexPath.row].qty)"
         let updatedPriceAfterQty = "\(Double(ShoppingCartModel.shoppingCartArray[indexPath.row].qty) * ShoppingCartModel.shoppingCartArray[indexPath.row].price)"
-        cell.itemPriceLabel.text = "\(updatedPriceAfterQty) BNB"
+        cell.itemPriceLabel.text = "\(updatedPriceAfterQty) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         return cell
     }
     

@@ -15,7 +15,7 @@ class ItemTableViewCell: UITableViewCell{
     @IBOutlet weak var itemTitle: UILabel!
     @IBOutlet weak var itemDescription: UILabel!
     @IBOutlet weak var itemImage: UIImageView!
-    
+    @IBOutlet weak var itemPriceCurrency: UILabel!
 }
 
 class ItemsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -26,6 +26,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
     var peopleAddress:String = ""
     var itemsArray = [[String]]()
     var itemArrayToPass = [String]()
+    var uuid = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +39,10 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                                      y: self.view.bounds.size.height - shoppingCartView.bounds.size.height,
                                      width: self.view.bounds.size.width,
                                      height: shoppingCartView.bounds.size.height)
-        
-        let addressToQuery = "http://zerobillion.com/binancepay/getItems.php?address=\(peopleAddress)"
+        uuid = Constants.basicUUID.sha256()
+        let fetchBaseCurrencyURL = "\(Constants.backendServerURLBase)getBaseCurrency.php?uuid=\(uuid)&address=\(peopleAddress)"
+        fetchSupportedBaseCurrency(url: fetchBaseCurrencyURL)
+        let addressToQuery = "\(Constants.backendServerURLBase)getItems.php?address=\(peopleAddress)&uuid=\(uuid)"
         fetchItems(url: addressToQuery)
         
     }
@@ -52,7 +55,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         }else{
             let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
             let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-            shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+            shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
             shoppingCartView.totalQty.text = "\(totalItemsInCart)"
             shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
             shoppingCartView.isHidden = false
@@ -74,15 +77,34 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                     
                     for result in resultJSON{
                         var indiResult = [String]()
-                        //print(result.1["item_name"])
                         indiResult.append(result.1["item_name"].string ?? "");
                         indiResult.append(result.1["item_description"].string ?? "");
                         indiResult.append(result.1["item_image"].string ?? "");
                         indiResult.append(result.1["price"].string ?? "");
                         self.itemsArray.append(indiResult);
                     }
-                    print(self.itemsArray)
                     self.tableView.reloadData()
+                }
+        }
+    }
+    
+    //Fetch store base currency
+    func fetchSupportedBaseCurrency(url: String){
+        SVProgressHUD.show()
+        Alamofire.request(url, method: .get)
+            .responseJSON { response in
+                if response.result.isSuccess {
+                    let resultJSON : JSON = JSON(response.result.value!)
+                    for result in resultJSON{
+                        if(result.1 != "No record"){
+                            SVProgressHUD.dismiss()
+                            UserDefaults.standard.set(result.1["currency_symbol"].string ?? "", forKey: "storeBaseCurrency")
+                        }else{
+                            SVProgressHUD.dismiss()
+                        }
+                        
+                    }
+                    
                 }
         }
     }
@@ -108,6 +130,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         cell.itemPrice.text = "\(items[3])"
         cell.itemTitle.sizeToFit()
         cell.itemDescription.sizeToFit()
+        cell.itemPriceCurrency.text = UserDefaults.standard.string(forKey: "storeBaseCurrency")
         //cell.itemPrice.sizeToFit()
         cell.backgroundColor = UIColor(red:1.00, green:0.92, blue:0.65, alpha:1.0)
         Alamofire.request(Constants.backendServerURLBase + Constants.itemsImageBaseFolder + items[2] ).response { response in

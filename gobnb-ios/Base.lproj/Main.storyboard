@@ -172,8 +172,8 @@
                                             <rect key="frame" x="327" y="119" width="48" height="81"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BNB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgQ-Y1-YX0">
-                                                    <rect key="frame" x="16" y="41" width="17" height="10"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgQ-Y1-YX0">
+                                                    <rect key="frame" x="4" y="41" width="42" height="10"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="8"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -200,6 +200,7 @@
                                     <outlet property="itemDescription" destination="B9Y-qV-nqn" id="EuT-D7-iCt"/>
                                     <outlet property="itemImage" destination="iGW-qW-ung" id="TzJ-0I-J4u"/>
                                     <outlet property="itemPrice" destination="Iqz-IY-5BO" id="3MI-e6-o3A"/>
+                                    <outlet property="itemPriceCurrency" destination="MgQ-Y1-YX0" id="z1Z-T5-BWn"/>
                                     <outlet property="itemTitle" destination="Ora-4d-jKu" id="iLK-tT-Fsi"/>
                                 </connections>
                             </tableViewCell>
@@ -223,7 +224,7 @@
                     <viewLayoutGuide key="safeArea" id="xUn-or-NlA"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1714" y="959"/>
+            <point key="canvasLocation" x="1712.8" y="958.4707646176912"/>
         </scene>
         <!--Shopping Cart View Controller-->
         <scene sceneID="BLs-4I-HIT">
@@ -277,8 +278,8 @@
                                                         <action selector="addButtonDidPress:" destination="nJT-j2-UM6" eventType="touchUpInside" id="jfp-dg-EU5"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00 BNB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paU-Q9-ekr">
-                                                    <rect key="frame" x="295" y="22" width="65" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00 ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paU-Q9-ekr">
+                                                    <rect key="frame" x="272" y="22" width="93" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -332,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qi5-Xg-Qop" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3250" y="57"/>
+            <point key="canvasLocation" x="3248.8000000000002" y="56.221889055472268"/>
         </scene>
         <!--Order Progress And Payment View Controller-->
         <scene sceneID="VCE-ei-F8j">
@@ -415,8 +416,8 @@
                                                 <rect key="frame" x="25" y="-34" width="94" height="100"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00 BNB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2te-cc-na3">
-                                                        <rect key="frame" x="12" y="79" width="70" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00 ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2te-cc-na3">
+                                                        <rect key="frame" x="3" y="79" width="87" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -514,7 +515,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAw-PP-fdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2706" y="958"/>
+            <point key="canvasLocation" x="2704.8000000000002" y="957.57121439280365"/>
         </scene>
         <!--Your Wallet-->
         <scene sceneID="KLi-KI-kPa">

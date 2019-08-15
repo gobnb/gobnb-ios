@@ -36,14 +36,11 @@ class ItemDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         showShoppingCartView()
-        
-        
-        
     }
     
     func fillDetails(){
         titleOfItem.text = itemArray[0]
-        itemPrice.text = "\(itemArray[3]) BNB"
+        itemPrice.text = "\(itemArray[3]) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         addressToPay = itemArray[4]
         totalPrice = Double(itemArray[3])
         Alamofire.request(Constants.backendServerURLBase + Constants.itemsImageBaseFolder + itemArray[2] ).response { response in
@@ -62,7 +59,7 @@ class ItemDetailViewController: UIViewController {
         }else{
             let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
             let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-            shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+            shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
             shoppingCartView.totalQty.text = "\(totalItemsInCart)"
             shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
             shoppingCartView.isHidden = false
@@ -164,14 +161,18 @@ class ItemDetailViewController: UIViewController {
                 print("wallet.init", wallet, error)
                 // Create a new transfer
                 let amount : Double = self.totalPrice ?? 0.00
-                let msgTransfer = Message.transfer(symbol: "BNB", amount: amount, to: self.addressToPay, wallet: wallet)
+                let currencySymbol = UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? ""
+                let msgTransfer = Message.transfer(symbol: currencySymbol, amount: amount, to: self.addressToPay, wallet: wallet)
                 
                 //let msg = Message.newOrder(symbol: "BNB_BTC.B-918", orderType: .limit, side: .buy, price: 100, quantity: 1, timeInForce: .goodTillExpire, wallet: wallet)
                 
                 // Broadcast the message
                 binance.broadcast(message: msgTransfer, sync: true) { (response) in
                     SVProgressHUD.dismiss()
-                    if let error = response.error { return print(error) }
+                    if let error = response.error {
+                        let alert = Helper.presentAlert(title: "Error", description: "Could not process payment. Please check if you have enough \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "") tokens in your wallet!", buttonText: "Close")
+                        self.present(alert, animated: true)
+                        return print(error) }
                     let alertTitle = NSLocalizedString("Success", comment: "")
                     let alertMessage = NSLocalizedString("Your Transaction has been complete!", comment: "")
                     let okButtonText = NSLocalizedString("View Transaction", comment: "")

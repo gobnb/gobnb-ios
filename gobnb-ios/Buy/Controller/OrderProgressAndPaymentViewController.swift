@@ -29,7 +29,7 @@ class OrderProgressAndPaymentViewController : UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
         totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-        shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+        shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         shoppingCartView.totalQty.text = "\(totalItemsInCart)"
         shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
         shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
@@ -49,15 +49,20 @@ class OrderProgressAndPaymentViewController : UIViewController {
             wallet.synchronise() { (error) in
                 
                 print("wallet.init", wallet, error)
+                let currencySymbol = UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? ""
                 // Create a new transfer
-                let msgTransfer = Message.transfer(symbol: "BNB", amount: self.totalPriceInCart, to: "tbnb1yqyppmev2m4z96r4svwtjq8eqp653pt6elq33r", wallet: wallet)
+                let msgTransfer = Message.transfer(symbol: currencySymbol, amount: self.totalPriceInCart, to: self.addressToPay, wallet: wallet)
                 
                 //let msg = Message.newOrder(symbol: "BNB_BTC.B-918", orderType: .limit, side: .buy, price: 100, quantity: 1, timeInForce: .goodTillExpire, wallet: wallet)
                 
                 // Broadcast the message
                 binance.broadcast(message: msgTransfer, sync: true) { (response) in
                     SVProgressHUD.dismiss()
-                    if let error = response.error { return print(error) }
+                    if let error = response.error {
+                        let alert = Helper.presentAlert(title: "Error", description: "Could not process payment. Please check if you have enough \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "") tokens in your wallet!", buttonText: "Close")
+                        self.present(alert, animated: true)
+                        return print(error)
+                    }
                     let alertTitle = NSLocalizedString("Success", comment: "")
                     let alertMessage = NSLocalizedString("Your Transaction has been complete!", comment: "")
                     let okButtonText = NSLocalizedString("View Transaction", comment: "")
