@@ -79,7 +79,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        print("captured")
         captureSession.stopRunning()
         
         if let metadataObject = metadataObjects.first {
@@ -94,7 +93,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     func found(code: String) {
         self.scannedCode = code
-        print(code)
         performSegue(withIdentifier: "goToResults", sender: self)
     }
     

@@ -149,7 +149,6 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         if(result.1 != "No record"){
                             let imageURL = Constants.backendServerURLBase+Constants.imageBaseFolder+result.1["image"].string!
                             self.existingStoreRecordId = result.1["id"].string ?? "0"
-                            print(self.existingStoreRecordId)
                             self.addEditPictureOutlet.setTitle("edit picture", for: .normal)
                             self.nameTextField.text = result.1["name"].string ?? ""
                             self.descriptionTextArea.text = result.1["description"].string ?? ""
@@ -230,7 +229,6 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             let baseCurrencyPicked = supportedCurrencies[self.baseCurrencyPicker.selectedRow(inComponent: 0)]
             var baseCurrencyPickedId = ""
             for currency in supportedCurrencies {
-                print(currency[1])
                 if currency[1] == baseCurrencyPicked[1] {
                     baseCurrencyPickedId = currency[0]
                 }

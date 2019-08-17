@@ -27,6 +27,7 @@ class ItemDetailViewController: UIViewController {
     var addressToPay:String = ""
     var totalPrice:Double?
     var cartCounter: Int = 1
+    var item_id = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +42,9 @@ class ItemDetailViewController: UIViewController {
     func fillDetails(){
         titleOfItem.text = itemArray[0]
         itemPrice.text = "\(itemArray[3]) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
-        addressToPay = itemArray[4]
+        addressToPay = itemArray[5]
         totalPrice = Double(itemArray[3])
+        item_id = itemArray[4]
         Alamofire.request(Constants.backendServerURLBase + Constants.itemsImageBaseFolder + itemArray[2] ).response { response in
             if let data = response.data {
                 let image = UIImage(data: data)
@@ -129,14 +131,14 @@ class ItemDetailViewController: UIViewController {
         if itemFound == 0 {
             //we are adding qty but storing individual price of item in the array
             //later we just multiply the price with qty wherever we need it
-            let shoppingCartItem = ShoppingItemModel(id: randomId, name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
+            let shoppingCartItem = ShoppingItemModel(id: randomId, item_id: item_id, name: titleOfItem.text!, qty: cartCounter, price: totalPrice ?? 0.00)
             ShoppingCartModel.shoppingCartArray.append(shoppingCartItem)
         }
         
         helper.updateCartPriceAndQty()
         let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
         let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-        shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+        shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         shoppingCartView.totalQty.text = "\(totalItemsInCart)"
         
         shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)

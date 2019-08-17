@@ -81,6 +81,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                         indiResult.append(result.1["item_description"].string ?? "");
                         indiResult.append(result.1["item_image"].string ?? "");
                         indiResult.append(result.1["price"].string ?? "");
+                        indiResult.append(result.1["item_id"].string ?? "");
                         self.itemsArray.append(indiResult);
                     }
                     self.tableView.reloadData()
@@ -98,6 +99,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                     for result in resultJSON{
                         if(result.1 != "No record"){
                             SVProgressHUD.dismiss()
+                            UserDefaults.standard.set(result.1["currency_id"].string ?? "", forKey: "storeBaseCurrencyId")
                             UserDefaults.standard.set(result.1["currency_symbol"].string ?? "", forKey: "storeBaseCurrency")
                         }else{
                             SVProgressHUD.dismiss()

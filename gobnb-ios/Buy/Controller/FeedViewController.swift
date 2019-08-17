@@ -25,7 +25,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let testnet = "https://testnet-explorer.binance.org/tx/"
     let binance = BinanceChain(endpoint: .testnet)
     var peopleArray = [[String]]()
-    var dealAddress:String = ""
+    var peopleAddress:String = ""
     
     @IBOutlet weak var shoppingCartView: ShoppingCartView!
     @IBOutlet weak var tableView: UITableView!
@@ -53,7 +53,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }else{
             let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
             let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-            shoppingCartView.totalPrice.text = "\(totalPriceInCart) BNB"
+            shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
             shoppingCartView.totalQty.text = "\(totalItemsInCart)"
             shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
             shoppingCartView.isHidden = false
@@ -116,8 +116,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(peopleArray[indexPath.item])
-        let deal = peopleArray[indexPath.item]
-        dealAddress = deal[3]
+        let tappedItem = peopleArray[indexPath.item]
+        peopleAddress = tappedItem[3]
         performSegue(withIdentifier: "goToItems", sender: self)
         //navigationController?.pushViewController(vc, animated: true)
     }
@@ -127,7 +127,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.destination is ItemsTableViewController
         {
             let vc = segue.destination as? ItemsTableViewController
-            vc?.peopleAddress = dealAddress
+            vc?.peopleAddress = peopleAddress
         }
     }
     

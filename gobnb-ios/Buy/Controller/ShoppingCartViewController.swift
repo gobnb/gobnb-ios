@@ -8,6 +8,10 @@
 
 import UIKit
 import SwipeCellKit
+import SVProgressHUD
+import Alamofire
+import SwiftyJSON
+import SwiftKeychainWrapper
 
 protocol CartItemTableViewCellDelegate {
     func showDeleteButtonOnSwipe(tableView: UITableView, at indexPath: IndexPath)
@@ -68,14 +72,9 @@ class CartItemTableViewCell: SwipeTableViewCell {
             cartItemDelegate?.qtyChanged()
         }
     }
-    
-    
 }
 
 class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, CartItemTableViewCellDelegate {
-    
-    
-    
     
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet weak var itemsTableViewHeightConstraint: NSLayoutConstraint!
@@ -110,9 +109,36 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @objc func placeOrderButtonTapped(_ sender: UIButton){
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "OrderProgressVC") as? UIViewController {
-            self.present(viewController, animated: true, completion: nil)
+        
+        var cartItems = [String]()
+        for item in ShoppingCartModel.shoppingCartArray
+        {
+            cartItems.append(item.item_id)
+        }
+        let urlToPost = "\(Constants.backendServerURLBase)insertOrder.php"
+        let addressToPay = UserDefaults.standard.string(forKey: "peopleAddress") ?? ""
+        let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
+        let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+        let currency_id = UserDefaults.standard.string(forKey: "storeBaseCurrencyId") ?? ""
+        let uuid = Constants.basicUUID.sha256()
+        let parameters = ["address_to_pay": addressToPay, "order_address" : walletAddress, "total": "\(totalPriceInCart)", "currency_id": currency_id, "uuid": uuid, "cart_items": cartItems] as [String : Any]
+        
+        SVProgressHUD.show()
+        Alamofire.request(urlToPost, method: .post, parameters: parameters, headers: nil).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                SVProgressHUD.dismiss()
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "OrderProgressVC") as? UIViewController {
+                    self.present(viewController, animated: true, completion: nil)
+                }
+                break
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                let alert = Helper.presentAlert(title: "Error", description: "Could not place order, please try again later!", buttonText: "OK")
+                self.present(alert, animated: true)
+            }
         }
     }
     
