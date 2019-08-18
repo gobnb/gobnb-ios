@@ -10,6 +10,7 @@
 		2683DE28586C7EFC519DC325 /* Pods_gobnb_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720D861A0523EAFCFCEAB53 /* Pods_gobnb_iosTests.framework */; };
 		43F851FE39159C306570116C /* Pods_gobnb_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14865D3F1064FE0C1E1C4E85 /* Pods_gobnb_ios.framework */; };
 		45071992C603E498DC296DC1 /* Pods_gobnb_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26ACF454BF3A18125BE11F1 /* Pods_gobnb_iosUITests.framework */; };
+		A3093ECC23088C21006EF4C4 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3093ECB23088C21006EF4C4 /* OrdersViewController.swift */; };
 		A312C55522CCDF7E00813510 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */; };
 		A3171D0E22CE01E5006B3416 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3171D0D22CE01E5006B3416 /* Helper.swift */; };
 		A320932422DF323B00BF2C27 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A320932322DF323B00BF2C27 /* SideMenuViewController.swift */; };
@@ -68,6 +69,7 @@
 		85DDF36EEBD0895CC3C84780 /* Pods-gobnb-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-iosTests.debug.xcconfig"; path = "Target Support Files/Pods-gobnb-iosTests/Pods-gobnb-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		94F0ED9FC0AEF4A443525E5B /* Pods-BinancePayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePayUITests.release.xcconfig"; path = "Target Support Files/Pods-BinancePayUITests/Pods-BinancePayUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9BD780BE652EBDD61F09ED29 /* Pods-BinancePay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePay.release.xcconfig"; path = "Target Support Files/Pods-BinancePay/Pods-BinancePay.release.xcconfig"; sourceTree = "<group>"; };
+		A3093ECB23088C21006EF4C4 /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		A3171D0D22CE01E5006B3416 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		A320932322DF323B00BF2C27 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */,
 				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
 				A320932322DF323B00BF2C27 /* SideMenuViewController.swift */,
+				A3093ECB23088C21006EF4C4 /* OrdersViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				A320932422DF323B00BF2C27 /* SideMenuViewController.swift in Sources */,
 				A347334922910A5300D7F8B0 /* ItemDetailViewController.swift in Sources */,
 				A39F071022CB834700C01D32 /* ShoppingCartView.swift in Sources */,
+				A3093ECC23088C21006EF4C4 /* OrdersViewController.swift in Sources */,
 				A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */,
 				A34CA0FD22CA374000FE1D8D /* ShoppingCartModel.swift in Sources */,
 				A34CA0FB22CA36D200FE1D8D /* ShoppingItemModel.swift in Sources */,
