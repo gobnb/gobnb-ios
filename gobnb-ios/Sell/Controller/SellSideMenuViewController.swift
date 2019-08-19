@@ -11,7 +11,7 @@ import UIKit
 class SellSideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    let navArray = ["Your Store", "Customer Orders", "Payments", "Help"]
+    let navArray = ["Your Store", "Your Sell Orders", "Customer Orders", "Payments", "Help"]
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -70,6 +70,13 @@ class SellSideMenuViewController: UIViewController, UITableViewDelegate, UITable
                 _ = UINavigationController(rootViewController: viewController)
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
+        }else if itemAtThePath == "Your Sell Orders" {
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "YourOrdersVC") as? OrdersTableViewController {
+                viewController.ordersViewType = "sell"
+                present(viewController, animated: true, completion: nil)
+            }
+            
         }
     }
 

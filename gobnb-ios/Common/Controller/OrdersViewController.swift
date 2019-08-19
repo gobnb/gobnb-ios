@@ -10,12 +10,14 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
+import SVProgressHUD
 
 class OrdersTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet var alertView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topNavigation: UINavigationItem!
-    var walletAddress = ""
+    var ordersViewType = "" //passed while calling this vc from menu
     var ordersArray = [[String]]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +25,19 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 100
-        topNavigation.title = "Your Buy Orders"
+        if (ordersViewType == "sell"){
+            topNavigation.title = "Your Sell Orders"
+        }else {
+            topNavigation.title = "Your Buy Orders"
+        }
         let uuid = Constants.basicUUID.sha256()
         let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
-        let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=buy"
+        let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)"
         fetchOrders(url: addressToQuery)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        SVProgressHUD.show()
     }
     
     
@@ -36,17 +46,25 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
             .responseJSON { response in
                 if response.result.isSuccess {
                     let resultJSON : JSON = JSON(response.result.value!)
-                    
-                    for result in resultJSON{
-                        var indiResult = [String]()
-                        indiResult.append(result.1["order_id"].string ?? "");
-                        indiResult.append(result.1["order_total"].string ?? "");
-                        indiResult.append(result.1["order_currency"].string ?? "");
-                        indiResult.append(result.1["order_time"].string ?? "");
-                        self.ordersArray.append(indiResult);
+                    if(resultJSON[0] != "No orders"){
+                        for result in resultJSON{
+                            var indiResult = [String]()
+                            indiResult.append(result.1["order_id"].string ?? "");
+                            indiResult.append(result.1["order_total"].string ?? "");
+                            indiResult.append(result.1["order_currency"].string ?? "");
+                            indiResult.append(result.1["payment_done"].string ?? "");
+                            indiResult.append(result.1["order_time"].string ?? "");
+                            self.ordersArray.append(indiResult);
+                            SVProgressHUD.dismiss()
+                            self.tableView.reloadData()
+                        }
+                    }else{
+                        SVProgressHUD.dismiss()
+                        self.tableView.backgroundView = self.alertView
                     }
-                    print(self.ordersArray)
-                    self.tableView.reloadData()
+                    
+                }else{
+                    SVProgressHUD.dismiss()
                 }
         }
     }
@@ -60,8 +78,12 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         let cell = tableView.dequeueReusableCell(withIdentifier: "ordersCell", for: indexPath)
         var order = ordersArray[indexPath.item]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.textLabel?.text = "\(order[1]) \(order[2])"
-        let date = Date(timeIntervalSince1970: Double(order[3]) as! TimeInterval)
+        if (order[3] == "0"){
+            cell.textLabel?.text = "\(order[1]) \(order[2]) (Unpaid)"
+        }else{
+            cell.textLabel?.text = "\(order[1]) \(order[2])"
+        }
+        let date = Date(timeIntervalSince1970: Double(order[4]) as! TimeInterval)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
         dateFormatter.locale = NSLocale.current
@@ -74,6 +96,12 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
             cell.detailTextLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }else{
             cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
+        
+        if (order[3] == "0"){
+            cell.backgroundColor = #colorLiteral(red: 0.8823529412, green: 0.4392156863, blue: 0.3333333333, alpha: 1)
+            cell.textLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            cell.detailTextLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
         return cell
     }

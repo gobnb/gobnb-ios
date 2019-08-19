@@ -171,6 +171,21 @@
 				A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */,
 				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
 				A320932322DF323B00BF2C27 /* SideMenuViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A3214B97230AF20B00C2E3C7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A3214B98230AF22000C2E3C7 /* Controller */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		A3214B98230AF22000C2E3C7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				A3093ECB23088C21006EF4C4 /* OrdersViewController.swift */,
 			);
 			path = Controller;
@@ -240,6 +255,7 @@
 		A3726A8B228F801B0032717B /* gobnb-ios */ = {
 			isa = PBXGroup;
 			children = (
+				A3214B97230AF20B00C2E3C7 /* Common */,
 				A34F5A6522E1BC4500CC350D /* Buy */,
 				A34F5A6622E1BC7700CC350D /* Sell */,
 				A3726A8C228F801B0032717B /* AppDelegate.swift */,

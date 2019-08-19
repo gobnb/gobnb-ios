@@ -12,7 +12,7 @@ import SideMenu
 class SideMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    let navArray = ["Your Orders", "Payments", "Settings", "Help"]
+    let navArray = ["Your Buy Orders", "Payments", "Settings", "Help"]
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -60,10 +60,10 @@ class SideMenuViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let itemAtThePath = navArray[indexPath.item]
-        if itemAtThePath == "Your Orders" {
-            print("your orders")
+        if itemAtThePath == "Your Buy Orders" {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "YourOrdersVC") as? UIViewController {
+            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "YourOrdersVC") as? OrdersTableViewController {
+                viewController.ordersViewType = "buy"
                 present(viewController, animated: true, completion: nil)
             }
             
