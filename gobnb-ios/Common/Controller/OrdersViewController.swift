@@ -32,7 +32,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         }
         let uuid = Constants.basicUUID.sha256()
         let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
-        let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)"
+        let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=OrderList"
         fetchOrders(url: addressToQuery)
     }
     
@@ -104,6 +104,16 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
             cell.detailTextLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let orderId = ordersArray[indexPath.item][0]
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "OrderProgressVC") as? OrderProgressAndPaymentViewController {
+            viewController.ordersViewType = ordersViewType
+            viewController.orderId = orderId
+            present(viewController, animated: true, completion: nil)
+        }
     }
 
     @IBAction func dismissButtonPressed(_ sender: Any) {

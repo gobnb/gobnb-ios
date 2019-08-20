@@ -110,10 +110,13 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     
     @objc func placeOrderButtonTapped(_ sender: UIButton){
         
-        var cartItems = [String]()
+        var cartItems = [[String]]()
         for item in ShoppingCartModel.shoppingCartArray
         {
-            cartItems.append(item.item_id)
+            var itemArr = [String]()
+            itemArr.append(item.item_id)
+            itemArr.append("\(item.qty)")
+            cartItems.append(itemArr)
         }
         let urlToPost = "\(Constants.backendServerURLBase)insertOrder.php"
         let addressToPay = UserDefaults.standard.string(forKey: "peopleAddress") ?? ""
@@ -128,6 +131,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
             response in
             switch response.result {
             case .success:
+                print(response)
                 SVProgressHUD.dismiss()
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "OrderProgressVC") as? UIViewController {
@@ -135,6 +139,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
                 }
                 break
             case .failure( _):
+                
                 SVProgressHUD.dismiss()
                 let alert = Helper.presentAlert(title: "Error", description: "Could not place order, please try again later!", buttonText: "OK")
                 self.present(alert, animated: true)
@@ -185,7 +190,6 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func deleteItem (tableView: UITableView, at indexPath: IndexPath){
-        print ("delete Item")
         let alertMessage = "Delete Item"
         let message = "Do you really want to delete this item from the shopping cart?"
         let alert = UIAlertController(title: alertMessage, message: message, preferredStyle: .alert)

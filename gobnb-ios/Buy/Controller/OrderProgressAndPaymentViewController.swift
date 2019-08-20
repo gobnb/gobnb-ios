@@ -26,10 +26,13 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var countdown: CountdownLabel!
     @IBOutlet weak var shoppingCartView: ShoppingCartView!
+    
+    var ordersViewType = "" //passed while calling this from OrdersViewController
+    var orderId = "" //if coming from "Your Buy Orders" or "Your Sell Orders", this will have a value
     var totalPriceInCart : Double = 0.00
     var totalItemsInCart : Int = 0
     var addressToPay:String = ""
-    var ordersArray = [[String]]()
+    var ordersArray = [ShoppingItemModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +43,17 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
         tableView.estimatedRowHeight = 65.0
         countdown.setCountDownTime(minutes: 60*30)
         countdown.start()
-        let uuid = Constants.basicUUID.sha256()
-        let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
-        let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=buy"
-        fetchOrders(url: addressToQuery)
+        
+        if(orderId != ""){
+            //if the user is coming from "Your Buy Order" or "Your Sell Order" we will need to do a server round-trip with the orderId
+            let uuid = Constants.basicUUID.sha256()
+            let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
+            let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=buy"
+            fetchOrders(url: addressToQuery)
+        }else{
+            ordersArray = ShoppingCartModel.shoppingCartArray //re-using cart item instead of doing a server query if the user is just coming from the shopping cart
         }
+    }
     
     func fetchOrders(url: String){
         Alamofire.request(url, method: .get)
@@ -59,7 +68,9 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                             indiResult.append(result.1["order_currency"].string ?? "");
                             indiResult.append(result.1["payment_done"].string ?? "");
                             indiResult.append(result.1["order_time"].string ?? "");
-                            self.ordersArray.append(indiResult);
+                            //self.ordersArray.append(indiResult);
+                            let orderItem = ShoppingItemModel(id:result.1["order_id"].string ?? "", item_id: result.1["order_id"].string ?? "", name: result.1["order_total"].string ?? "", qty: result.1["payment_done"].int ?? 0, price: result.1["payment_done"].double ?? 0.00)
+                            self.ordersArray.append(orderItem)
                             SVProgressHUD.dismiss()
                             self.tableView.reloadData()
                         }
@@ -86,15 +97,15 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     //MARK:- TableView Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ShoppingCartModel.shoppingCartArray.count
+        return ordersArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentItemsCell", for: indexPath) as! PaymentItemTableViewCell
         //var order = ordersArray[indexPath.item]
-        cell.itemLabel?.text = ShoppingCartModel.shoppingCartArray[indexPath.row].name
-        cell.itemQty.text = "\(ShoppingCartModel.shoppingCartArray[indexPath.row].qty)"
-        let updatedPriceAfterQty = "\(Double(ShoppingCartModel.shoppingCartArray[indexPath.row].qty) * ShoppingCartModel.shoppingCartArray[indexPath.row].price)"
+        cell.itemLabel?.text = ordersArray[indexPath.row].name
+        cell.itemQty.text = "\(ordersArray[indexPath.row].qty)"
+        let updatedPriceAfterQty = "\(Double(ordersArray[indexPath.row].qty) * ordersArray[indexPath.row].price)"
         cell.itemPrice.text = "\(updatedPriceAfterQty) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         if (indexPath.row % 2 == 0){
