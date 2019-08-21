@@ -169,7 +169,6 @@
 				A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */,
 				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
 				A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */,
-				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
 				A320932322DF323B00BF2C27 /* SideMenuViewController.swift */,
 			);
 			path = Controller;
@@ -187,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				A3093ECB23088C21006EF4C4 /* OrdersViewController.swift */,
+				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

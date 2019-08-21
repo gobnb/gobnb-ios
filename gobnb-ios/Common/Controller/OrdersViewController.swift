@@ -32,7 +32,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         }
         let uuid = Constants.basicUUID.sha256()
         let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
-        let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=OrderList"
+        let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=orderList"
         fetchOrders(url: addressToQuery)
     }
     
@@ -49,15 +49,15 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
                     if(resultJSON[0] != "No orders"){
                         for result in resultJSON{
                             var indiResult = [String]()
-                            indiResult.append(result.1["order_id"].string ?? "");
-                            indiResult.append(result.1["order_total"].string ?? "");
-                            indiResult.append(result.1["order_currency"].string ?? "");
-                            indiResult.append(result.1["payment_done"].string ?? "");
-                            indiResult.append(result.1["order_time"].string ?? "");
-                            self.ordersArray.append(indiResult);
-                            SVProgressHUD.dismiss()
-                            self.tableView.reloadData()
+                            indiResult.append(result.1["order_id"].string ?? "")
+                            indiResult.append(result.1["order_total"].string ?? "")
+                            indiResult.append(result.1["order_currency"].string ?? "")
+                            indiResult.append(result.1["payment_done"].string ?? "")
+                            indiResult.append(result.1["order_time"].string ?? "")
+                            self.ordersArray.append(indiResult)
                         }
+                        SVProgressHUD.dismiss()
+                        self.tableView.reloadData()
                     }else{
                         SVProgressHUD.dismiss()
                         self.tableView.backgroundView = self.alertView

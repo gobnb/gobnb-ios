@@ -48,7 +48,7 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
             //if the user is coming from "Your Buy Order" or "Your Sell Order" we will need to do a server round-trip with the orderId
             let uuid = Constants.basicUUID.sha256()
             let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
-            let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=buy"
+            let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=orderDetails&orderId=\(orderId)"
             fetchOrders(url: addressToQuery)
         }else{
             ordersArray = ShoppingCartModel.shoppingCartArray //re-using cart item instead of doing a server query if the user is just coming from the shopping cart
@@ -62,6 +62,12 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                     let resultJSON : JSON = JSON(response.result.value!)
                     if(resultJSON[0] != "No orders"){
                         for result in resultJSON{
+                            print(result)
+                            for item in result.1 {
+                                print(item.1["item_qty"].intValue)
+                                let orderItem = ShoppingItemModel(id:item.1["item_id"].string ?? "", item_id: item.1["item_id"].string ?? "", name: item.1["item_name"].string ?? "", qty: item.1["item_qty"].intValue, price: item.1["item_price"].doubleValue )
+                                self.ordersArray.append(orderItem)
+                            }
                             var indiResult = [String]()
                             indiResult.append(result.1["order_id"].string ?? "");
                             indiResult.append(result.1["order_total"].string ?? "");
@@ -69,8 +75,8 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                             indiResult.append(result.1["payment_done"].string ?? "");
                             indiResult.append(result.1["order_time"].string ?? "");
                             //self.ordersArray.append(indiResult);
-                            let orderItem = ShoppingItemModel(id:result.1["order_id"].string ?? "", item_id: result.1["order_id"].string ?? "", name: result.1["order_total"].string ?? "", qty: result.1["payment_done"].int ?? 0, price: result.1["payment_done"].double ?? 0.00)
-                            self.ordersArray.append(orderItem)
+                            
+                            
                             SVProgressHUD.dismiss()
                             self.tableView.reloadData()
                         }
