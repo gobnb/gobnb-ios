@@ -23,6 +23,7 @@ class PaymentItemTableViewCell: UITableViewCell {
 
 class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var hideCountDownConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var countdown: CountdownLabel!
     @IBOutlet weak var shoppingCartView: ShoppingCartView!
@@ -41,16 +42,18 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 65.0
-        countdown.setCountDownTime(minutes: 60*30)
-        countdown.start()
+        
         
         if(orderId != ""){
             //if the user is coming from "Your Buy Order" or "Your Sell Order" we will need to do a server round-trip with the orderId
             let uuid = Constants.basicUUID.sha256()
             let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
+            SVProgressHUD.show()
             let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=orderDetails&orderId=\(orderId)"
             fetchOrders(url: addressToQuery)
         }else{
+            countdown.setCountDownTime(minutes: 60*30)
+            countdown.start()
             ordersArray = ShoppingCartModel.shoppingCartArray //re-using cart item instead of doing a server query if the user is just coming from the shopping cart
         }
     }
@@ -64,18 +67,30 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                         for result in resultJSON{
                             print(result)
                             for item in result.1 {
-                                print(item.1["item_qty"].intValue)
                                 let orderItem = ShoppingItemModel(id:item.1["item_id"].string ?? "", item_id: item.1["item_id"].string ?? "", name: item.1["item_name"].string ?? "", qty: item.1["item_qty"].intValue, price: item.1["item_price"].doubleValue )
                                 self.ordersArray.append(orderItem)
                             }
-                            var indiResult = [String]()
-                            indiResult.append(result.1["order_id"].string ?? "");
-                            indiResult.append(result.1["order_total"].string ?? "");
-                            indiResult.append(result.1["order_currency"].string ?? "");
-                            indiResult.append(result.1["payment_done"].string ?? "");
-                            indiResult.append(result.1["order_time"].string ?? "");
-                            //self.ordersArray.append(indiResult);
-                            
+                            //print(result.1["order_time"])
+                            if result.0 == "order_time"{
+                                print(result.1)
+                                let orderTime = result.1.doubleValue
+                                print(orderTime)
+                                let timeInterval = NSDate().timeIntervalSince1970
+                                print(timeInterval)
+                                let secondsAgo = timeInterval - Double(orderTime)
+                                print("seconds ago \(secondsAgo)")
+                                var countDownTime = 0.00
+                                let timeLeft = 1800 - secondsAgo
+                                if (timeLeft > 1800){
+                                    countDownTime = 0
+                                }else{
+                                    countDownTime = timeLeft
+                                }
+                                self.countdown.setCountDownTime(minutes: countDownTime)
+                                self.countdown.start()
+                                
+                            }
+                            //let orderTime = result["order_time"].stringValue
                             
                             SVProgressHUD.dismiss()
                             self.tableView.reloadData()
