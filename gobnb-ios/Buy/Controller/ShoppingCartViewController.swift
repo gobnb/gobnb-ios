@@ -135,11 +135,10 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
                 SVProgressHUD.dismiss()
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "OrderProgressVC") as? UIViewController {
-                    self.present(viewController, animated: true, completion: nil)
+                    //self.present(viewController, animated: true, completion: nil)
                 }
                 break
             case .failure( _):
-                
                 SVProgressHUD.dismiss()
                 let alert = Helper.presentAlert(title: "Error", description: "Could not place order, please try again later!", buttonText: "OK")
                 self.present(alert, animated: true)

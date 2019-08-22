@@ -30,7 +30,8 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     
     var ordersViewType = "" //passed while calling this from OrdersViewController
     var orderId = "" //if coming from "Your Buy Orders" or "Your Sell Orders", this will have a value
-    var totalPriceInCart : Double = 0.00
+    var paymentToCharge : Double = 0.00
+    var currencySymbol : String = ""
     var totalItemsInCart : Int = 0
     var addressToPay:String = ""
     var ordersArray = [ShoppingItemModel]()
@@ -115,6 +116,8 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                         if (orderCurrency != "" && orderTotal != 0.00){
                             self.shoppingCartView.totalPrice.text = "\(orderTotal) \(orderCurrency)"
                             self.shoppingCartView.totalQty.text = "\(self.ordersArray.count)"
+                            self.paymentToCharge = orderTotal
+                            self.currencySymbol = orderCurrency
                         }
                         SVProgressHUD.dismiss()
                         self.tableView.reloadData()
@@ -130,9 +133,10 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     
     override func viewWillAppear(_ animated: Bool) {
         if (orderId == ""){
-            totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+            paymentToCharge = UserDefaults.standard.double(forKey: "totalPriceInCart")
             totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-            shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
+            currencySymbol = UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? ""
+            shoppingCartView.totalPrice.text = "\(paymentToCharge) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
             shoppingCartView.totalQty.text = "\(totalItemsInCart)"
             shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
             shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
@@ -183,9 +187,9 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
             wallet.synchronise() { (error) in
                 
                 //print("wallet.init", wallet, error)
-                let currencySymbol = UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? ""
+                
                 // Create a new transfer
-                let msgTransfer = Message.transfer(symbol: currencySymbol, amount: self.totalPriceInCart, to: self.addressToPay, wallet: wallet)
+                let msgTransfer = Message.transfer(symbol: self.currencySymbol, amount: self.paymentToCharge, to: self.addressToPay, wallet: wallet)
                 
                 //let msg = Message.newOrder(symbol: "BNB_BTC.B-918", orderType: .limit, side: .buy, price: 100, quantity: 1, timeInForce: .goodTillExpire, wallet: wallet)
                 
