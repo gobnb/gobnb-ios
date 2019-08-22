@@ -36,12 +36,11 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         fetchOrders(url: addressToQuery)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        SVProgressHUD.show()
-    }
+
     
     
     func fetchOrders(url: String){
+        SVProgressHUD.show()
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {

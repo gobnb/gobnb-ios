@@ -59,6 +59,11 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     }
     
     func fetchOrders(url: String){
+        var orderTime = 0.00
+        var paymentDone = 0
+        var paymentAddress = ""
+        var orderCurrency = ""
+        var orderTotal = 0.00
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {
@@ -70,31 +75,49 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                                 let orderItem = ShoppingItemModel(id:item.1["item_id"].string ?? "", item_id: item.1["item_id"].string ?? "", name: item.1["item_name"].string ?? "", qty: item.1["item_qty"].intValue, price: item.1["item_price"].doubleValue )
                                 self.ordersArray.append(orderItem)
                             }
-                            //print(result.1["order_time"])
                             if result.0 == "order_time"{
-                                print(result.1)
-                                let orderTime = result.1.doubleValue
-                                print(orderTime)
-                                let timeInterval = NSDate().timeIntervalSince1970
-                                print(timeInterval)
-                                let secondsAgo = timeInterval - Double(orderTime)
-                                print("seconds ago \(secondsAgo)")
-                                var countDownTime = 0.00
-                                let timeLeft = 1800 - secondsAgo
-                                if (timeLeft > 1800){
-                                    countDownTime = 0
-                                }else{
-                                    countDownTime = timeLeft
-                                }
-                                self.countdown.setCountDownTime(minutes: countDownTime)
-                                self.countdown.start()
+                                orderTime = result.1.doubleValue
                                 
+                            }else if (result.0 == "payment_done"){
+                                paymentDone = result.1.intValue
+                            }else if (result.0 == "payment_address"){
+                                paymentAddress = result.1.stringValue
+                            }else if (result.0 == "order_currency"){
+                                orderCurrency = result.1.stringValue
+                            }else if (result.0 == "order_total"){
+                                orderTotal = result.1.doubleValue
                             }
-                            //let orderTime = result["order_time"].stringValue
                             
-                            SVProgressHUD.dismiss()
-                            self.tableView.reloadData()
+                            
                         }
+                        if orderTime != 0.00{
+                            let secondsAgo = NSDate().timeIntervalSince1970 - Double(orderTime)
+                            var countDownTime = 0.00
+                            let timeLeft = 1800 - secondsAgo
+                            if (timeLeft > 1800){
+                                countDownTime = 0
+                            }else{
+                                countDownTime = timeLeft
+                            }
+                            self.countdown.setCountDownTime(minutes: countDownTime)
+                            self.countdown.start()
+                        }
+                        if (paymentDone == 1){
+                            self.shoppingCartView.viewCartButton.setTitle("Paid", for: .normal)
+                            
+                        }else{
+                            self.shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
+                            self.shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
+                        }
+                        if (paymentAddress != ""){
+                            self.addressToPay = paymentAddress
+                        }
+                        if (orderCurrency != "" && orderTotal != 0.00){
+                            self.shoppingCartView.totalPrice.text = "\(orderTotal) \(orderCurrency)"
+                            self.shoppingCartView.totalQty.text = "\(self.ordersArray.count)"
+                        }
+                        SVProgressHUD.dismiss()
+                        self.tableView.reloadData()
                     }else{
                         SVProgressHUD.dismiss()
                     }
@@ -106,13 +129,15 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
-        totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-        shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
-        shoppingCartView.totalQty.text = "\(totalItemsInCart)"
-        shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
-        shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
-        addressToPay = UserDefaults.standard.string(forKey: "peopleAddress") ?? ""
+        if (orderId == ""){
+            totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+            totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
+            shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
+            shoppingCartView.totalQty.text = "\(totalItemsInCart)"
+            shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
+            shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
+            addressToPay = UserDefaults.standard.string(forKey: "peopleAddress") ?? ""
+        }
     }
     
     //MARK:- TableView Functions
