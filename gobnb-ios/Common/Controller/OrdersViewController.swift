@@ -25,6 +25,11 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 100
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:  #selector(refreshTableView), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
         if (ordersViewType == "sell"){
             topNavigation.title = "Your Sell Orders"
         }else {
@@ -37,15 +42,26 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
 
+    @objc func refreshTableView(){
+        let uuid = Constants.basicUUID.sha256()
+        let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
+        let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=orderList"
+        fetchOrders(url: addressToQuery)
+    }
     
     
     func fetchOrders(url: String){
         SVProgressHUD.show()
-        Alamofire.request(url, method: .get)
+        
+        let urlRequest = URLRequest(url: URL(string: url)!)
+        
+        URLCache.shared.removeCachedResponse(for: urlRequest)
+        Alamofire.request(urlRequest)
             .responseJSON { response in
                 if response.result.isSuccess {
                     let resultJSON : JSON = JSON(response.result.value!)
                     if(resultJSON[0] != "No orders"){
+                        self.ordersArray.removeAll()
                         for result in resultJSON{
                             var indiResult = [String]()
                             indiResult.append(result.1["order_id"].string ?? "")
@@ -57,6 +73,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
                         }
                         SVProgressHUD.dismiss()
                         self.tableView.reloadData()
+                        self.tableView.refreshControl?.endRefreshing()
                     }else{
                         SVProgressHUD.dismiss()
                         self.tableView.backgroundView = self.alertView

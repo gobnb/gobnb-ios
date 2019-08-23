@@ -44,8 +44,8 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 65.0
         
-        
-        if(orderId != ""){
+        print(orderId)
+        if(ordersViewType != ""){
             //if the user is coming from "Your Buy Order" or "Your Sell Order" we will need to do a server round-trip with the orderId
             let uuid = Constants.basicUUID.sha256()
             let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
@@ -107,8 +107,12 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                             self.shoppingCartView.viewCartButton.setTitle("Paid", for: .normal)
                             
                         }else{
-                            self.shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
-                            self.shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
+                            if (self.ordersViewType == "sell"){
+                                self.shoppingCartView.viewCartButton.setTitle("Unpaid", for: .normal)
+                            }else{
+                                self.shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
+                                self.shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
+                            }
                         }
                         if (paymentAddress != ""){
                             self.addressToPay = paymentAddress
@@ -132,7 +136,7 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if (orderId == ""){
+        if (ordersViewType == ""){
             paymentToCharge = UserDefaults.standard.double(forKey: "totalPriceInCart")
             totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
             currencySymbol = UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? ""
@@ -141,6 +145,10 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
             shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
             shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
             addressToPay = UserDefaults.standard.string(forKey: "peopleAddress") ?? ""
+        }else{
+            shoppingCartView.totalPrice.text = "..."
+            shoppingCartView.totalQty.text = "..."
+            shoppingCartView.viewCartButton.setTitle("...", for: .normal)
         }
     }
     
@@ -200,18 +208,40 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                         let alert = Helper.presentAlert(title: "Error", description: "Could not process payment. Please check if you have enough \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "") tokens in your wallet!", buttonText: "Close")
                         self.present(alert, animated: true)
                         return print(error)
+                    }else{
+                        let transactionUrl = NSURL(string: "\(Constants.testnetURL)\(response.broadcast[0].hash)")! as URL
+                        let uuid = Constants.basicUUID.sha256()
+                        let urlToUpdate = "\(Constants.backendServerURLBase)updateOrderPayment.php?order_id=\(self.orderId)&uuid=\(uuid)"
+                        Alamofire.request(urlToUpdate, method: .get)
+                            .responseJSON { response in
+                                if response.result.isSuccess {
+                                    let resultJSON : JSON = JSON(response.result.value!)
+                                    if(resultJSON[0] == "Updated record"){
+                                        SVProgressHUD.dismiss()
+                                        let alertTitle = NSLocalizedString("Success", comment: "")
+                                        let alertMessage = NSLocalizedString("Your Transaction has been complete!", comment: "")
+                                        let okButtonText = NSLocalizedString("View Transaction", comment: "")
+                                        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                                        
+                                        alert.addAction(UIAlertAction(title: okButtonText, style: .default, handler: { (action: UIAlertAction) in
+                                            UIApplication.shared.openURL(transactionUrl)
+                                        }))
+                                        alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                                        self.present(alert, animated: true)
+                                    }else{
+                                        SVProgressHUD.dismiss()
+                                        let alert = Helper.presentAlert(title: "Partial Success", description: "Payment has been made but could not update server!", buttonText: "Close")
+                                        self.present(alert, animated: true)
+                                    }
+                                }else{
+                                    let alert = Helper.presentAlert(title: "Partial Success", description: "Payment has been made but could not update server!", buttonText: "Close")
+                                    self.present(alert, animated: true)
+                                    SVProgressHUD.dismiss()
+                                }
+                        }
+                        
+                        
                     }
-                    let alertTitle = NSLocalizedString("Success", comment: "")
-                    let alertMessage = NSLocalizedString("Your Transaction has been complete!", comment: "")
-                    let okButtonText = NSLocalizedString("View Transaction", comment: "")
-                    let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: okButtonText, style: .default, handler: { (action: UIAlertAction) in
-                        print(response.broadcast[0].hash)
-                        UIApplication.shared.openURL(NSURL(string: "\(Constants.testnetURL)\(response.broadcast[0].hash)")! as URL)
-                    }))
-                    alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
                 }
             }
             

@@ -131,11 +131,12 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
             response in
             switch response.result {
             case .success:
-                print(response)
                 SVProgressHUD.dismiss()
+                let json = JSON(response.result.value)
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "OrderProgressVC") as? UIViewController {
-                    //self.present(viewController, animated: true, completion: nil)
+                if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "OrderProgressVC") as? OrderProgressAndPaymentViewController {
+                    viewController.orderId = "\(json[1])"
+                    self.present(viewController, animated: true, completion: nil)
                 }
                 break
             case .failure( _):
