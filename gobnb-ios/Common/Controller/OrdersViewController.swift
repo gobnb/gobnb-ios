@@ -25,7 +25,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 100
-        
+        SVProgressHUD.show()
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(refreshTableView), for: .valueChanged)
         tableView.refreshControl = refreshControl
@@ -51,10 +51,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
     
     
     func fetchOrders(url: String){
-        SVProgressHUD.show()
-        
         let urlRequest = URLRequest(url: URL(string: url)!)
-        
         URLCache.shared.removeCachedResponse(for: urlRequest)
         Alamofire.request(urlRequest)
             .responseJSON { response in
@@ -71,8 +68,8 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
                             indiResult.append(result.1["order_time"].string ?? "")
                             self.ordersArray.append(indiResult)
                         }
-                        SVProgressHUD.dismiss()
                         self.tableView.reloadData()
+                        SVProgressHUD.dismiss()
                         self.tableView.refreshControl?.endRefreshing()
                     }else{
                         SVProgressHUD.dismiss()

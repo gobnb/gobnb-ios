@@ -34,6 +34,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         self.tableView.separatorStyle = .none
         tableView.rowHeight = 200
+        SVProgressHUD.show()
         //add shopping cart subview
         shoppingCartView.frame = CGRect(x: 0,
                                      y: self.view.bounds.size.height - shoppingCartView.bounds.size.height,
@@ -85,13 +86,13 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                         self.itemsArray.append(indiResult);
                     }
                     self.tableView.reloadData()
+                    SVProgressHUD.dismiss()
                 }
         }
     }
     
     //Fetch store base currency
     func fetchSupportedBaseCurrency(url: String){
-        SVProgressHUD.show()
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {
@@ -103,16 +104,13 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                             UserDefaults.standard.set(result.1["currency_symbol"].string ?? "", forKey: "storeBaseCurrency")
                         }else{
                             SVProgressHUD.dismiss()
+                            print("no record")
                         }
                         
                     }
                     
                 }
         }
-    }
-    
-    func itemTapped(){
-        print("hello")
     }
     
     // MARK: - Table view data source
