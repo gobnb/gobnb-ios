@@ -769,7 +769,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6134E39D484612B54BAA8E38 /* Pods-gobnb-ios.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YFV22SC6UJ;
 				INFOPLIST_FILE = "$(SRCROOT)/gobnb-ios/Info.plist";
@@ -788,7 +788,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F2D15193839FF7DDFFDAB4B /* Pods-gobnb-ios.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YFV22SC6UJ;
 				INFOPLIST_FILE = "$(SRCROOT)/gobnb-ios/Info.plist";
