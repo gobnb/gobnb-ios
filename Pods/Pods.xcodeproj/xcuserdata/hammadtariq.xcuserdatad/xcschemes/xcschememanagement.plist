@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FAQView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+		</dict>
 		<key>HDWalletKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>

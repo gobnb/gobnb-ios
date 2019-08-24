@@ -8,11 +8,12 @@
 
 import UIKit
 import SideMenu
+import SwiftKeychainWrapper
 
 class SideMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    let navArray = ["Your Buy Orders", "Payments", "Settings", "Help"]
+    let navArray = ["Your Buy Orders", "Your Wallet", "Help", "Log Out"]
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -67,11 +68,22 @@ class SideMenuViewController: UIViewController, UITableViewDataSource, UITableVi
                 present(viewController, animated: true, completion: nil)
             }
             
-        }else if itemAtThePath == "Payments" {
+        }else if itemAtThePath == "Your Wallet" {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "SellPaymentsVC") as? UIViewController {
-                _ = UINavigationController(rootViewController: viewController)
-                self.navigationController?.pushViewController(viewController, animated: true)
+            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "YourWalletVC") as? UIViewController {
+                self.present(viewController, animated: true)
+            }
+        }else if itemAtThePath == "Help" {
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "HelpVC") as? UIViewController {
+                self.present(viewController, animated: true)
+            }
+        }else if itemAtThePath == "Log Out" {
+            let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
+            if removeSuccessful {
+                let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+                let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+                self.present(vc1, animated: true, completion: nil)
             }
         }
     }

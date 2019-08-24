@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class SellSideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    let navArray = ["Your Store", "Your Sell Orders", "Customer Orders", "Payments", "Help"]
+    let navArray = ["Your Store", "Your Sell Orders", "Your Wallet", "Help", "Log Out"]
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -76,7 +77,23 @@ class SellSideMenuViewController: UIViewController, UITableViewDelegate, UITable
                 viewController.ordersViewType = "sell"
                 present(viewController, animated: true, completion: nil)
             }
-            
+        }else if itemAtThePath == "Your Wallet" {
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "YourWalletVC") as? UIViewController {
+                self.present(viewController, animated: true)
+            }
+        }else if itemAtThePath == "Help" {
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "HelpVC") as? UIViewController {
+                self.present(viewController, animated: true)
+            }
+        }else if itemAtThePath == "Log Out" {
+            let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
+            if removeSuccessful {
+                let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+                let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+                self.present(vc1, animated: true, completion: nil)
+            }
         }
     }
 

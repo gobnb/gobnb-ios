@@ -18,6 +18,7 @@ class WalletViewController: UIViewController, UITableViewDataSource, UITableView
     var transactionsArray = [[String]]()
     @IBOutlet weak var tokenBalance: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var usdsbBalance: UILabel!
     var walletAddress:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +40,34 @@ class WalletViewController: UIViewController, UITableViewDataSource, UITableView
         binance.account(address: walletAddress) { (response) in
             //print(response.account.balances)
             let balances = response.account.balances
+            var bnbBalance = ""
+            var usdsbBalance = ""
             for balance in balances{
-                print(balance.free.toString())
+                print(balance)
                 if(balance.symbol == "BNB"){
+                    bnbBalance = String(format:"%.5f", balance.free)
                     
-                    self.tokenBalance.text = "BNB Balance: \(String(format:"%.5f", balance.free))"
-                    self.tokenBalance.sizeToFit()
+                }
+                if(balance.symbol == "USDS.B"){
+                    usdsbBalance = String(format:"%.5f", balance.free)
                 }
             }
+            
+            if(bnbBalance != ""){
+                self.tokenBalance.text = "BNB Balance: \(bnbBalance)"
+                self.tokenBalance.sizeToFit()
+            }else{
+                self.tokenBalance.text = "BNB Balance: 0.00000"
+                self.tokenBalance.sizeToFit()
+            }
+            if(usdsbBalance != ""){
+                self.usdsbBalance.text = "USDSB Balance: \(usdsbBalance)"
+                self.usdsbBalance.sizeToFit()
+            }else{
+                self.usdsbBalance.text = "USDSB Balance: 0.00000"
+                self.usdsbBalance.sizeToFit()
+            }
+            
         }
     }
     
@@ -88,12 +109,8 @@ class WalletViewController: UIViewController, UITableViewDataSource, UITableView
         UIApplication.shared.openURL(NSURL(string: "\(testnet)\(transactionsArray[indexPath.row][1])")! as URL)
     }
 
-    @IBAction func logOutPressed(_ sender: Any) {
-        let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
-        if removeSuccessful {
-            let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
-            self.present(vc1, animated: true, completion: nil)
-        }
+    @IBAction func dismissButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
+    
 }

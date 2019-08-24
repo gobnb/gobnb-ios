@@ -10,6 +10,7 @@
 		2683DE28586C7EFC519DC325 /* Pods_gobnb_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720D861A0523EAFCFCEAB53 /* Pods_gobnb_iosTests.framework */; };
 		43F851FE39159C306570116C /* Pods_gobnb_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14865D3F1064FE0C1E1C4E85 /* Pods_gobnb_ios.framework */; };
 		45071992C603E498DC296DC1 /* Pods_gobnb_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26ACF454BF3A18125BE11F1 /* Pods_gobnb_iosUITests.framework */; };
+		A306382D23116F96003E2875 /* FAQsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A306382C23116F96003E2875 /* FAQsViewController.swift */; };
 		A3093ECC23088C21006EF4C4 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3093ECB23088C21006EF4C4 /* OrdersViewController.swift */; };
 		A312C55522CCDF7E00813510 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */; };
 		A3171D0E22CE01E5006B3416 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3171D0D22CE01E5006B3416 /* Helper.swift */; };
@@ -33,7 +34,6 @@
 		A3726AAD228F801E0032717B /* BinancePayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3726AAC228F801E0032717B /* BinancePayUITests.swift */; };
 		A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EC22908930006DB2F9 /* WalletViewController.swift */; };
 		A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */; };
-		A389C3C823003A090000DC78 /* SellPaymentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A389C3C723003A090000DC78 /* SellPaymentsViewController.swift */; };
 		A39F070E22CB81B300C01D32 /* ShoppingCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39F070D22CB81B300C01D32 /* ShoppingCartView.xib */; };
 		A39F071022CB834700C01D32 /* ShoppingCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F070F22CB834700C01D32 /* ShoppingCartView.swift */; };
 		A39FADD622C642CE00BA1FFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39FADD522C642CE00BA1FFF /* Constants.swift */; };
@@ -69,6 +69,7 @@
 		85DDF36EEBD0895CC3C84780 /* Pods-gobnb-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gobnb-iosTests.debug.xcconfig"; path = "Target Support Files/Pods-gobnb-iosTests/Pods-gobnb-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		94F0ED9FC0AEF4A443525E5B /* Pods-BinancePayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePayUITests.release.xcconfig"; path = "Target Support Files/Pods-BinancePayUITests/Pods-BinancePayUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9BD780BE652EBDD61F09ED29 /* Pods-BinancePay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinancePay.release.xcconfig"; path = "Target Support Files/Pods-BinancePay/Pods-BinancePay.release.xcconfig"; sourceTree = "<group>"; };
+		A306382C23116F96003E2875 /* FAQsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQsViewController.swift; sourceTree = "<group>"; };
 		A3093ECB23088C21006EF4C4 /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		A3171D0D22CE01E5006B3416 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -98,7 +99,6 @@
 		A3726AAE228F801E0032717B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A37BD5EC22908930006DB2F9 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
-		A389C3C723003A090000DC78 /* SellPaymentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellPaymentsViewController.swift; sourceTree = "<group>"; };
 		A39F070D22CB81B300C01D32 /* ShoppingCartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartView.xib; sourceTree = "<group>"; };
 		A39F070F22CB834700C01D32 /* ShoppingCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartView.swift; sourceTree = "<group>"; };
 		A39FADD522C642CE00BA1FFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -167,7 +167,6 @@
 				A37BD5EE2290C7B0006DB2F9 /* ScanViewController.swift */,
 				A3C613AA22B12621000BDA99 /* ItemsTableViewController.swift */,
 				A347334822910A5300D7F8B0 /* ItemDetailViewController.swift */,
-				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
 				A312C55422CCDF7E00813510 /* ShoppingCartViewController.swift */,
 				A320932322DF323B00BF2C27 /* SideMenuViewController.swift */,
 			);
@@ -187,6 +186,8 @@
 			children = (
 				A3093ECB23088C21006EF4C4 /* OrdersViewController.swift */,
 				A358D95C22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift */,
+				A37BD5EC22908930006DB2F9 /* WalletViewController.swift */,
+				A306382C23116F96003E2875 /* FAQsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -225,7 +226,6 @@
 				A34F5A6822E1CA6200CC350D /* SellItemsViewController.swift */,
 				A34F5A6A22E1F77900CC350D /* YourStoreViewController.swift */,
 				A3222DEB22EF096F009A1E42 /* AddEditItemViewController.swift */,
-				A389C3C723003A090000DC78 /* SellPaymentsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -460,6 +460,7 @@
 				"${BUILT_PRODUCTS_DIR}/CountdownLabel/CountdownLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/FAQView/FAQView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
@@ -480,6 +481,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountdownLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CropViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FAQView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
@@ -585,10 +587,10 @@
 				A3726A8D228F801B0032717B /* AppDelegate.swift in Sources */,
 				A37BD5ED22908931006DB2F9 /* WalletViewController.swift in Sources */,
 				A347334D2291344B00D7F8B0 /* WalletScanViewController.swift in Sources */,
-				A389C3C823003A090000DC78 /* SellPaymentsViewController.swift in Sources */,
 				A34F5A6922E1CA6200CC350D /* SellItemsViewController.swift in Sources */,
 				A34F5A6B22E1F77A00CC350D /* YourStoreViewController.swift in Sources */,
 				A320932622DF4F1000BF2C27 /* SellSideMenuViewController.swift in Sources */,
+				A306382D23116F96003E2875 /* FAQsViewController.swift in Sources */,
 				A3222DEC22EF096F009A1E42 /* AddEditItemViewController.swift in Sources */,
 				A358D95D22D8B4A3008EBDC5 /* OrderProgressAndPaymentViewController.swift in Sources */,
 				A37BD5EF2290C7B0006DB2F9 /* ScanViewController.swift in Sources */,

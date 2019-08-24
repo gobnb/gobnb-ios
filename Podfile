@@ -13,6 +13,7 @@ target 'gobnb-ios' do
   pod 'CountdownLabel'
   pod 'SideMenu', '~> 6.0.0'
   pod 'CropViewController'
+  pod 'FAQView', '~> 0.5.0'
 
   target 'gobnb-iosTests' do
     inherit! :search_paths
