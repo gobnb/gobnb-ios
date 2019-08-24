@@ -26,7 +26,6 @@ class WalletViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
         self.tableView.separatorStyle = .none
         walletAddress = UserDefaults.standard.string(forKey: "walletAddress") ?? ""
-        print(walletAddress)
         SVProgressHUD.show()
         getAccount()
         getTransactions()

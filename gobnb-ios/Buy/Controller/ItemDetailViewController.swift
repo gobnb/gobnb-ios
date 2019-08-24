@@ -95,7 +95,7 @@ class ItemDetailViewController: UIViewController {
         if helper.isKeyPresentInUserDefaults(key: "peopleAddress"){
             let oldPeopleAddress = UserDefaults.standard.string(forKey: "peopleAddress") ?? ""
             if oldPeopleAddress != addressToPay {
-                helper.emptyTheCart() //empty the cart by resetting all userdefaults and shoppingcartmodel array
+                Helper.emptyTheCart() //empty the cart by resetting all userdefaults and shoppingcartmodel array
                 UserDefaults.standard.set(addressToPay, forKey: "peopleAddress")
                 let alertTitle = NSLocalizedString("Changing Cart", comment: "")
                 let alertMessage = NSLocalizedString("You have changed restaurant/café! We have dropped the previous cart and created a new one for you!", comment: "")
@@ -150,50 +150,6 @@ class ItemDetailViewController: UIViewController {
         if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCartVC") as? UIViewController {
             self.present(viewController, animated: true, completion: nil)
         }
-    }
-    
-    @IBAction func payButtonPressed(_ sender: Any) {
-        SVProgressHUD.show()
-        let binance = BinanceChain(endpoint: .testnet)
-        let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
-        if walletKey != nil {
-        let wallet = Wallet(mnemonic: walletKey!, endpoint: .testnet)
-            wallet.synchronise() { (error) in
-                
-                print("wallet.init", wallet, error)
-                // Create a new transfer
-                let amount : Double = self.totalPrice ?? 0.00
-                let currencySymbol = UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? ""
-                let msgTransfer = Message.transfer(symbol: currencySymbol, amount: amount, to: self.addressToPay, wallet: wallet)
-                
-                //let msg = Message.newOrder(symbol: "BNB_BTC.B-918", orderType: .limit, side: .buy, price: 100, quantity: 1, timeInForce: .goodTillExpire, wallet: wallet)
-                
-                // Broadcast the message
-                binance.broadcast(message: msgTransfer, sync: true) { (response) in
-                    SVProgressHUD.dismiss()
-                    if let error = response.error {
-                        let alert = Helper.presentAlert(title: "Error", description: "Could not process payment. Please check if you have enough \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "") tokens in your wallet!", buttonText: "Close")
-                        self.present(alert, animated: true)
-                        return print(error) }
-                    let alertTitle = NSLocalizedString("Success", comment: "")
-                    let alertMessage = NSLocalizedString("Your Transaction has been complete!", comment: "")
-                    let okButtonText = NSLocalizedString("View Transaction", comment: "")
-                    let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: okButtonText, style: .default, handler: { (action: UIAlertAction) in
-                        print(response.broadcast[0].hash)
-                        UIApplication.shared.openURL(NSURL(string: "\(self.testnet)\(response.broadcast[0].hash)")! as URL)
-                    }))
-                    alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
-                }
-            }
-        
-        }
-    }
-    
-    func transactionSuccess(){
-        print("pohanch hi gaye")
     }
     
 }

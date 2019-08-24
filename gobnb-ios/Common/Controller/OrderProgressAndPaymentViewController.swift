@@ -56,6 +56,7 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
             countdown.setCountDownTime(minutes: 60*30)
             countdown.start()
             ordersArray = ShoppingCartModel.shoppingCartArray //re-using cart item instead of doing a server query if the user is just coming from the shopping cart
+            Helper.emptyTheCart()
         }
     }
     
@@ -183,7 +184,9 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     }
     
     @IBAction func closeButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
+
     }
     
     @objc func paymentButtonTapped(_ sender: UIButton){

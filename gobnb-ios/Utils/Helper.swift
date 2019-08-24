@@ -27,7 +27,7 @@ class Helper {
         UserDefaults.standard.set(totalItemsInCart, forKey: "totalItemsInCart")
     }
     
-    func emptyTheCart(){
+    static func emptyTheCart(){
         ShoppingCartModel.shoppingCartArray.removeAll()
         UserDefaults.standard.set(0.00, forKey: "totalPriceInCart")
         UserDefaults.standard.set(0, forKey: "totalItemsInCart")
