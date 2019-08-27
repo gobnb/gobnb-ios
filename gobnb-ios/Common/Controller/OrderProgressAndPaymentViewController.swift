@@ -56,7 +56,6 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
             countdown.setCountDownTime(minutes: 60*30)
             countdown.start()
             ordersArray = ShoppingCartModel.shoppingCartArray //re-using cart item instead of doing a server query if the user is just coming from the shopping cart
-            Helper.emptyTheCart()
         }
     }
     
@@ -146,6 +145,7 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
             shoppingCartView.viewCartButton.setTitle("Pay Now", for: .normal)
             shoppingCartView.viewCartButton.addTarget(self, action: Selector(("paymentButtonTapped:")), for: .touchUpInside)
             addressToPay = UserDefaults.standard.string(forKey: "peopleAddress") ?? ""
+            Helper.emptyTheCart()
         }else{
             shoppingCartView.totalPrice.text = "..."
             shoppingCartView.totalQty.text = "..."
