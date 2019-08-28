@@ -14,7 +14,7 @@ import SVProgressHUD
 import SwiftKeychainWrapper
 import BinanceChain
 
-class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
+class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var addEditPictureOutlet: UIButton!
     @IBOutlet weak var pickedImage: UIImageView!
@@ -32,6 +32,8 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     var uuid = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameTextField.delegate = self
+        descriptionTextArea.delegate = self
         baseCurrencyPicker.delegate = self
         baseCurrencyPicker.dataSource = self
         nameTextField.autocapitalizationType = .sentences
@@ -375,6 +377,25 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         //self.view.textAreaBottomConstraint = keyboardHeight
                         self.view.layoutIfNeeded() },
                        completion: nil)
+    }
+    
+    //MARK:- String Prune Functions
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        return updatedText.count <= 30
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        
+        return changedText.count <= 30
     }
     
     @IBAction func dismissButtonPressed(_ sender: Any) {

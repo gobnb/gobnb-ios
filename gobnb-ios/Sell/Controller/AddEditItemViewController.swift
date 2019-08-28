@@ -14,7 +14,7 @@ import SVProgressHUD
 import SwiftKeychainWrapper
 import BinanceChain
 
-class AddEditItemViewController: UIViewController, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate {
+class AddEditItemViewController: UIViewController, UIImagePickerControllerDelegate, CropViewControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var addEditPictureOutlet: UIButton!
     @IBOutlet weak var pickedImage: UIImageView!
@@ -23,7 +23,6 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var itemPriceTextField: UITextField!
     
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
-    
     
     @IBOutlet weak var baseCurrencyLabel: UILabel!
     
@@ -35,7 +34,11 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     var uuid = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        nameTextField.delegate = self
+        itemPriceTextField.delegate = self
+        nameTextField.tag = 1
+        itemPriceTextField.tag = 2
+        descriptionTextArea.delegate = self
         nameTextField.autocapitalizationType = .sentences
         itemPriceTextField.keyboardType = UIKeyboardType.decimalPad
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
@@ -57,6 +60,38 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    //MARK:- String Prune Functions
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        print(textField.tag)
+        
+        var returnCount = 0
+        switch textField.tag {
+            
+        case 1:
+            returnCount = 30
+        case 2:
+            returnCount = 4
+        default:
+            returnCount = 30
+        }
+        
+        return updatedText.count <= returnCount
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        
+        return changedText.count <= 60
     }
     
     @IBAction func addEditPictureButtonTapped(_ sender: Any) {
