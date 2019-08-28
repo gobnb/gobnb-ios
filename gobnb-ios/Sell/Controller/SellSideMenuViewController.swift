@@ -62,14 +62,7 @@ class SellSideMenuViewController: UIViewController, UITableViewDelegate, UITable
         if itemAtThePath == "Your Store" {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "YourStoreVC") as? UIViewController {
-                _ = UINavigationController(rootViewController: viewController)
-                self.navigationController?.pushViewController(viewController, animated: true)
-            }
-        }else if itemAtThePath == "Payments" {
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "SellPaymentsVC") as? UIViewController {
-                _ = UINavigationController(rootViewController: viewController)
-                self.navigationController?.pushViewController(viewController, animated: true)
+                self.present(viewController, animated: true)
             }
         }else if itemAtThePath == "Your Sell Orders" {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)

@@ -68,6 +68,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
                     self.itemsArray.removeAll()
                     SVProgressHUD.dismiss()
                     if (resultJSON[0] == "No store record"){
+                        self.alertViewButton.addTarget(self, action: #selector(self.alertViewSetupStoreButtonAction), for: .touchUpInside)
                         self.tableView.backgroundView = self.setupShopAlertView
                     }else{
                         if(resultJSON[0] != "No items record"){
@@ -161,6 +162,13 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
     
     @objc func alertViewAddItemButtonAction (){
         performSegue(withIdentifier: "goToAddEditItem", sender: self)
+    }
+    
+    @objc func alertViewSetupStoreButtonAction (){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "YourStoreVC") as? UIViewController {
+            self.present(viewController, animated: true)
+        }
     }
     
 

@@ -21,7 +21,9 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextArea: UITextView!
     @IBOutlet weak var itemPriceTextField: UITextField!
+    
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
+    
     
     @IBOutlet weak var baseCurrencyLabel: UILabel!
     
@@ -43,13 +45,13 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
             let itemToQuery = "\(Constants.backendServerURLBase)getItem.php?uuid=\(uuid)&item=\(existingItemRecordId)"
             fetchItemInformation(url: itemToQuery)
         }
+        let fetchBaseCurrencyURL = "\(Constants.backendServerURLBase)getBaseCurrency.php?uuid=\(uuid)&address=\(walletAddress)"
+        fetchSupportedBaseCurrency(url: fetchBaseCurrencyURL)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
-        let fetchBaseCurrencyURL = "\(Constants.backendServerURLBase)getBaseCurrency.php?uuid=\(uuid)&address=\(walletAddress)"
-        fetchSupportedBaseCurrency(url: fetchBaseCurrencyURL)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -156,6 +158,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
                                     print("Data is nil. I don't know what to do :(")
                                 }
                             }
+                            SVProgressHUD.dismiss()
                         }else{
                             SVProgressHUD.dismiss()
                         }
@@ -242,8 +245,8 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
                     if let json = response.data {
                         do{
                             let data = try JSON(data: json)
-                            print("printing data")
-                            print(data)
+                            //print("printing data")
+                            //print(data)
                             if(data[0] != "Inserted Record"){
                                 let alert = Helper.presentAlert(title: "Error", description: "Could not save changes, please try again!", buttonText: "Close")
                                 self.present(alert, animated: true)

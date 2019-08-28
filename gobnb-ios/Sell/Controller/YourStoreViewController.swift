@@ -21,8 +21,8 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextArea: UITextView!
     @IBOutlet weak var baseCurrencyPicker: UIPickerView!
-    @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
     var supportedCurrencies = [[String]]()
     //There is no 0 in the backend table. However, this variable gets the val of existing store record id if there is one
     var existingStoreRecordId: String = "0"
@@ -39,14 +39,14 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
         uuid = Constants.basicUUID.sha256()
         let addressToQuery = "\(Constants.backendServerURLBase)getStore.php?uuid=\(uuid)&address=\(walletAddress)"
         fetchStoreInformation(url: addressToQuery)
-        
+        let fetchCurrenciesURL = "\(Constants.backendServerURLBase)getCurrencies.php?uuid=\(uuid)"
+        fetchSupportedCurrencies(url: fetchCurrenciesURL)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
-        let fetchCurrenciesURL = "\(Constants.backendServerURLBase)getCurrencies.php?uuid=\(uuid)"
-        fetchSupportedCurrencies(url: fetchCurrenciesURL)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -112,7 +112,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                     let resultJSON : JSON = JSON(response.result.value!)
                     for result in resultJSON{
                         
-                        print(result.1)
+                        //print(result.1)
                         if(result.1 != "No record"){
                             print("record")
                             var indiResult = [String]()
@@ -120,6 +120,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                             indiResult.append(result.1["currency_symbol"].string ?? "")
                             self.supportedCurrencies.append(indiResult)
                             self.baseCurrencyPicker.reloadAllComponents()
+                            SVProgressHUD.dismiss()
                         }else{
                             let alert = Helper.presentAlert(title: "Error", description: "Could not load supported currencies from the remote server. Please try again later!", buttonText: "Close")
                             self.present(alert, animated: true)
@@ -375,6 +376,11 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         self.view.layoutIfNeeded() },
                        completion: nil)
     }
+    
+    @IBAction func dismissButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
 }
 extension UIImage {
