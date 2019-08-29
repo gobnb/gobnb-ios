@@ -16,6 +16,7 @@ class StartViewController: UIViewController {
    
     
     @IBOutlet weak var textAreaButtonBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var textAreaOutlet: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +99,7 @@ class StartViewController: UIViewController {
             } else {
                 newHeight = keyboardFrame.cgRectValue.height
             }
-            let keyboardHeight = newHeight  + 10 // **10 is bottom margin of View**  and **this newHeight will be keyboard height**
+            let keyboardHeight = newHeight  - 170 // **10 is bottom margin of View**  and **this newHeight will be keyboard height**
             print(keyboardHeight)
             UIView.animate(withDuration: duration,
                            delay: TimeInterval(0),
@@ -114,7 +115,7 @@ class StartViewController: UIViewController {
     
     func keyboardWillHide(){
         print("keyboard hidden")
-        self.textAreaButtonBottomConstraint.constant = 125 //hard-code resetting to original constant value
+        self.textAreaButtonBottomConstraint.constant = 259 //hard-code resetting to original constant value
     }
     
 }

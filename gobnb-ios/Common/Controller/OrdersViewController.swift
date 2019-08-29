@@ -24,7 +24,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        self.tableView.rowHeight = 100
+        self.tableView.rowHeight = 65
         SVProgressHUD.show()
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(refreshTableView), for: .valueChanged)

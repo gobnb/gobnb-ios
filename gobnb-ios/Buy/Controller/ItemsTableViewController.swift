@@ -87,6 +87,14 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                     }
                     self.tableView.reloadData()
                     SVProgressHUD.dismiss()
+                }else{
+                    SVProgressHUD.dismiss()
+                    //let alert = Helper.presentAlert(title: "Error", description: "Store or person not found in our database, please scan correct QR code again", buttonText: "Close")
+                    // create the alert
+                    let alert = UIAlertController(title: "Error", message: "We could not find scanned QR code in our database. Please try again!", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        _ = self.navigationController?.popToRootViewController(animated: true)}))
+                    self.present(alert, animated: true, completion: nil)
                 }
         }
     }

@@ -30,8 +30,8 @@ import SideMenu
         
         let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
         //check if wallet key exists, also which side of nav user was before, buy or sell?
-        let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey") ?? ""
-        if walletKey != nil || walletKey != "" {
+        let walletKey: String? = KeychainWrapper.standard.string(forKey: "walletKey")
+        if walletKey != nil {
             let startSideVC = UserDefaults.standard.string(forKey: "StartSideVC")
             if startSideVC != nil {
                 if startSideVC == "sellSideNav" {
@@ -46,7 +46,7 @@ import SideMenu
                 self.window?.rootViewController = vc2
             }
         }else {
-            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewVCNav")
             self.window?.rootViewController = vc1
         }
         
