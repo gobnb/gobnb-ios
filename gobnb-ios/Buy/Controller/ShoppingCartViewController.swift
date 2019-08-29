@@ -38,7 +38,9 @@ class CartItemTableViewCell: SwipeTableViewCell {
             {
                 if item.id == idOfTheRecord {
                     item.qty = item.qty - 1
-                    itemPriceLabel.text = "\(Double(item.qty) * item.price) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
+                    var itemPriceAfterQty = Double(item.qty) * item.price
+                    itemPriceAfterQty = round (itemPriceAfterQty * 1000)/1000
+                    itemPriceLabel.text = "\(itemPriceAfterQty) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
                     ShoppingCartModel.shoppingCartArray[i] = item
                     break
                 }
@@ -62,7 +64,9 @@ class CartItemTableViewCell: SwipeTableViewCell {
             {
                 if item.id == idOfTheRecord {
                     item.qty = item.qty + 1
-                    itemPriceLabel.text = "\(Double(item.qty) * item.price) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
+                    var itemPriceAfterQty = Double(item.qty) * item.price
+                    itemPriceAfterQty = round (itemPriceAfterQty * 1000)/1000
+                    itemPriceLabel.text = "\(itemPriceAfterQty) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
                     ShoppingCartModel.shoppingCartArray[i] = item
                     break
                 }
@@ -166,7 +170,8 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         cell.idOfTheRecord = ShoppingCartModel.shoppingCartArray[indexPath.row].id
         cell.itemNameLabel.text = ShoppingCartModel.shoppingCartArray[indexPath.row].name
         cell.qtyLabel.text = "\(ShoppingCartModel.shoppingCartArray[indexPath.row].qty)"
-        let updatedPriceAfterQty = "\(Double(ShoppingCartModel.shoppingCartArray[indexPath.row].qty) * ShoppingCartModel.shoppingCartArray[indexPath.row].price)"
+        var updatedPriceAfterQty = Double(ShoppingCartModel.shoppingCartArray[indexPath.row].qty) * ShoppingCartModel.shoppingCartArray[indexPath.row].price
+        updatedPriceAfterQty = round(updatedPriceAfterQty * 1000)/1000
         cell.itemPriceLabel.text = "\(updatedPriceAfterQty) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         return cell
     }
@@ -215,4 +220,6 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     func qtyChanged(){
         updateCartValues()
     }
+    
 }
+

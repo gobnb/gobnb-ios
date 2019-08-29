@@ -164,7 +164,8 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
         //var order = ordersArray[indexPath.item]
         cell.itemLabel?.text = ordersArray[indexPath.row].name
         cell.itemQty.text = "\(ordersArray[indexPath.row].qty)"
-        let updatedPriceAfterQty = "\(Double(ordersArray[indexPath.row].qty) * ordersArray[indexPath.row].price)"
+        var updatedPriceAfterQty = Double(ordersArray[indexPath.row].qty) * ordersArray[indexPath.row].price
+        updatedPriceAfterQty = round (updatedPriceAfterQty * 1000)/1000
         cell.itemPrice.text = "\(updatedPriceAfterQty) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         if (indexPath.row % 2 == 0){

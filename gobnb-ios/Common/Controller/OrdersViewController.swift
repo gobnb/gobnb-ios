@@ -103,13 +103,13 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" //Specify your format that you want
         let strDate = dateFormatter.string(from: date)
         cell.detailTextLabel?.text = NSLocalizedString("\(strDate)", comment: "")
-        if (indexPath.row % 2 == 0){
+        //if (indexPath.row % 2 == 0){
             cell.backgroundColor = #colorLiteral(red: 0, green: 0.7215686275, blue: 0.5803921569, alpha: 1)
             cell.textLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             cell.detailTextLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        }else{
-            cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        }
+//        }else{
+//            cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//        }
         
         if (order[3] == "0"){
             cell.backgroundColor = #colorLiteral(red: 0.8823529412, green: 0.4392156863, blue: 0.3333333333, alpha: 1)

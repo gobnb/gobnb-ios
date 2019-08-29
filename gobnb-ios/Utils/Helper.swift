@@ -23,6 +23,7 @@ class Helper {
             totalPriceInCart = oneItemIntoQty + totalPriceInCart
             totalItemsInCart = ShoppingCartModel.shoppingCartArray[i].qty + totalItemsInCart
         }
+        totalPriceInCart = totalPriceInCart.roundToDecimal(3)
         UserDefaults.standard.set(totalPriceInCart, forKey: "totalPriceInCart")
         UserDefaults.standard.set(totalItemsInCart, forKey: "totalItemsInCart")
     }
@@ -43,5 +44,12 @@ class Helper {
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonText, style: .cancel, handler: nil))
         return alert
+    }
+    
+}
+extension Double {
+    func roundToDecimal(_ fractionDigits: Int) -> Double {
+        let multiplier = pow(10, Double(fractionDigits))
+        return Darwin.round(self * multiplier) / multiplier
     }
 }

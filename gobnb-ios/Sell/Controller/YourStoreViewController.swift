@@ -39,6 +39,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
         nameTextField.autocapitalizationType = .sentences
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         uuid = Constants.basicUUID.sha256()
+        
         let addressToQuery = "\(Constants.backendServerURLBase)getStore.php?uuid=\(uuid)&address=\(walletAddress)"
         fetchStoreInformation(url: addressToQuery)
         let fetchCurrenciesURL = "\(Constants.backendServerURLBase)getCurrencies.php?uuid=\(uuid)"

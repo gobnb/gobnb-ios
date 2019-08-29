@@ -38,7 +38,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.separatorStyle = .none
         tableView.rowHeight = 200
         SVProgressHUD.show()
-        fetchPeople(url: Obfuscator().reveal(key: Constants.backendServerURL))
+        let uuid = Constants.basicUUID.sha256()
+        fetchPeople(url: "http://zerobillion.com/binancepay/index.php?uuid=\(uuid)")
         //getWallet();
     }
     
@@ -80,6 +81,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     }
                     self.tableView.reloadData()
                     SVProgressHUD.dismiss()
+                }else{
+                    SVProgressHUD.dismiss()
+                    let alert = Helper.presentAlert(title: "Error", description: "Could not connect to the server, please try again later!", buttonText: "OK")
+                    self.present(alert, animated: true, completion: nil)
                 }
         }
     }
