@@ -80,11 +80,11 @@ class SideMenuViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }else if itemAtThePath == "Log Out" {
             let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
-            if removeSuccessful {
+            //if removeSuccessful {
                 let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
                 let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
                 self.present(vc1, animated: true, completion: nil)
-            }
+            //}
         }
     }
 }

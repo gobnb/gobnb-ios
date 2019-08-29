@@ -106,7 +106,8 @@ class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjects
                 let binance = BinanceChain()
                 // Get account metadata for an address
                 binance.account(address: walletAddress) { (response) in
-                    print(response.account.publicKey)
+                    //print(response.account.publicKey)
+                    KeychainWrapper.standard.set(wallet.account, forKey: "walletAddress")
                     if(response.account.accountNumber == 0){
                         SVProgressHUD.dismiss()
                         print("account is invalid")

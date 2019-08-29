@@ -11,6 +11,7 @@ import BinanceChain
 import Alamofire
 import SwiftyJSON
 import SVProgressHUD
+import SwiftKeychainWrapper
 
 class peopleTableViewCell: UITableViewCell {
     
@@ -38,7 +39,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.rowHeight = 200
         SVProgressHUD.show()
         fetchPeople(url: Obfuscator().reveal(key: Constants.backendServerURL))
-        getWallet();
+        //getWallet();
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +129,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     func getWallet(){
-        let walletKey = UserDefaults.standard.string(forKey: "walletKey") ?? ""
+        
+        let walletKey = KeychainWrapper.standard.string(forKey: "walletKey") ?? ""
+        print("wallet key is here")
+        print(walletKey)
         // Restore with a mnemonic phrase
         let wallet = Wallet(mnemonic: walletKey, endpoint: .testnet)
 
@@ -138,11 +142,21 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        print(wallet.mnemonic)
 //        print(wallet.account)
 //        print(wallet.address)
-        UserDefaults.standard.set(wallet.account, forKey: "walletAddress")
+        KeychainWrapper.standard.set(wallet.account, forKey: "walletAddress")
         // Synchronise with the remote node before using the wallet
         wallet.synchronise() { (error) in
-
-            if let error = error { return print(error) }
+            
+            if let error = error {
+                
+                let alert = Helper.presentAlert(title: "Error", description: "Could not load wallet, please try again!", buttonText: "Close")
+                self.present(alert, animated: true, completion: {
+                    let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
+                    print(removeSuccessful)
+                    //Log out should happen here
+                    
+                })
+                return print(error)
+            }
 
             // Generate a new order ID
             //let id = wallet.nextAvailableOrderId()

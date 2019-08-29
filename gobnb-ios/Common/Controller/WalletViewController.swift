@@ -25,7 +25,7 @@ class WalletViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.separatorStyle = .none
-        walletAddress = UserDefaults.standard.string(forKey: "walletAddress") ?? ""
+        walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress") ?? ""
         SVProgressHUD.show()
         getAccount()
         getTransactions()
@@ -42,7 +42,7 @@ class WalletViewController: UIViewController, UITableViewDataSource, UITableView
             var bnbBalance = ""
             var usdsbBalance = ""
             for balance in balances{
-                print(balance)
+                //print(balance)
                 if(balance.symbol == "BNB"){
                     bnbBalance = String(format:"%.5f", balance.free)
                     
