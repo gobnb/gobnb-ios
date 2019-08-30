@@ -42,7 +42,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
         nameTextField.autocapitalizationType = .sentences
         itemPriceTextField.keyboardType = UIKeyboardType.decimalPad
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
-        uuid = Constants.basicUUID.sha256()
+        uuid = Helper.returnUUID().sha256()
         
         if (existingItemRecordId != "0") {
             let itemToQuery = "\(Constants.backendServerURLBase)getItem.php?uuid=\(uuid)&item=\(existingItemRecordId)"

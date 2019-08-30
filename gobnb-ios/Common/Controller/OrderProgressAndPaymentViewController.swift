@@ -44,10 +44,10 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 65.0
         
-        print(orderId)
+        //print(orderId)
         if(ordersViewType != ""){
             //if the user is coming from "Your Buy Order" or "Your Sell Order" we will need to do a server round-trip with the orderId
-            let uuid = Constants.basicUUID.sha256()
+            let uuid = Helper.returnUUID().sha256()
             let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
             SVProgressHUD.show()
             let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=orderDetails&orderId=\(orderId)"
@@ -214,7 +214,7 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                         return print(error)
                     }else{
                         let transactionUrl = NSURL(string: "\(Constants.testnetURL)\(response.broadcast[0].hash)")! as URL
-                        let uuid = Constants.basicUUID.sha256()
+                        let uuid = Helper.returnUUID().sha256()
                         let urlToUpdate = "\(Constants.backendServerURLBase)updateOrderPayment.php?order_id=\(self.orderId)&uuid=\(uuid)"
                         Alamofire.request(urlToUpdate, method: .get)
                             .responseJSON { response in

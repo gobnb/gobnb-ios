@@ -44,7 +44,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         refreshControl.addTarget(self, action:  #selector(refreshTableView), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
-        uuid = Constants.basicUUID.sha256()
+        uuid = Helper.returnUUID().sha256()
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         
         

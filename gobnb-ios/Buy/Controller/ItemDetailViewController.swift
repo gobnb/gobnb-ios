@@ -121,7 +121,14 @@ class ItemDetailViewController: UIViewController {
         {
             if item.name == titleOfItem.text! {
                 item.qty = item.qty + cartCounter
-                ShoppingCartModel.shoppingCartArray[i] = item
+                if(item.qty > 9){
+                    item.qty = 9
+                    let alert = Helper.presentAlert(title: "Error", description: "You can only add up to 9 items of each product at a time!", buttonText: "OK")
+                    self.present(alert, animated: true, completion: nil)
+                }
+                if(item.qty < 10 ){
+                    ShoppingCartModel.shoppingCartArray[i] = item
+                }
                 itemFound = 1
                 break
             }

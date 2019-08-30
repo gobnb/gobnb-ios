@@ -19,7 +19,6 @@ class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjects
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hello")
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
         

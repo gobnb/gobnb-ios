@@ -40,7 +40,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                                      y: self.view.bounds.size.height - shoppingCartView.bounds.size.height,
                                      width: self.view.bounds.size.width,
                                      height: shoppingCartView.bounds.size.height)
-        uuid = Constants.basicUUID.sha256()
+        uuid = Helper.returnUUID().sha256()
         let fetchBaseCurrencyURL = "\(Constants.backendServerURLBase)getBaseCurrency.php?uuid=\(uuid)&address=\(peopleAddress)"
         fetchSupportedBaseCurrency(url: fetchBaseCurrencyURL)
         let addressToQuery = "\(Constants.backendServerURLBase)getItems.php?address=\(peopleAddress)&uuid=\(uuid)"
@@ -74,6 +74,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {
+                    //print(response.result.value)
                     let resultJSON : JSON = JSON(response.result.value!)
                     
                     for result in resultJSON{

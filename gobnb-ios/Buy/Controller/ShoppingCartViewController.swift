@@ -51,7 +51,6 @@ class CartItemTableViewCell: SwipeTableViewCell {
         }else{
             cartItemDelegate?.showDeleteButtonOnSwipe(tableView: tableView!, at: indexPath!)
         }
-        
     }
     
     @IBAction func addButtonDidPress(_ sender: Any) {
@@ -127,7 +126,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
         let currency_id = UserDefaults.standard.string(forKey: "storeBaseCurrencyId") ?? ""
-        let uuid = Constants.basicUUID.sha256()
+        let uuid = Helper.returnUUID().sha256()
         let parameters = ["address_to_pay": addressToPay, "order_address" : walletAddress, "total": "\(totalPriceInCart)", "currency_id": currency_id, "uuid": uuid, "cart_items": cartItems] as [String : Any]
         
         SVProgressHUD.show()
@@ -198,13 +197,21 @@ class ShoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         let alertMessage = "Delete Item"
         let message = "Do you really want to delete this item from the shopping cart?"
         let alert = UIAlertController(title: alertMessage, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in ShoppingCartModel.shoppingCartArray.remove(at: indexPath.row)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in ShoppingCartModel.shoppingCartArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.reloadData()
             tableView.tableFooterView = UIView()
             if ShoppingCartModel.shoppingCartArray.isEmpty {
                 self.dismiss(animated: true, completion: nil)
             }
+            
+            //update the cart
+            let helper = Helper()
+            helper.updateCartPriceAndQty()
+            let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+            let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
+            self.shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
+            self.shoppingCartView.totalQty.text = "\(totalItemsInCart)"
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in let cell = tableView.cellForRow(at: indexPath) as! CartItemTableViewCell
             cell.hideSwipe(animated: true)

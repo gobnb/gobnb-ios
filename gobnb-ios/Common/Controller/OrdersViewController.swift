@@ -35,7 +35,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
         }else {
             topNavigation.title = "Your Buy Orders"
         }
-        let uuid = Constants.basicUUID.sha256()
+        let uuid = Helper.returnUUID().sha256()
         let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=orderList"
         fetchOrders(url: addressToQuery)
@@ -43,7 +43,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
     
 
     @objc func refreshTableView(){
-        let uuid = Constants.basicUUID.sha256()
+        let uuid = Helper.returnUUID().sha256()
         let walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         let addressToQuery = "\(Constants.backendServerURLBase)getOrders.php?address=\(walletAddress)&uuid=\(uuid)&buy_or_sell=\(ordersViewType)&fetch_type=orderList"
         fetchOrders(url: addressToQuery)

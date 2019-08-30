@@ -38,8 +38,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.separatorStyle = .none
         tableView.rowHeight = 200
         SVProgressHUD.show()
-        let uuid = Constants.basicUUID.sha256()
-        fetchPeople(url: "http://zerobillion.com/binancepay/index.php?uuid=\(uuid)")
+        //let uuid = Constants.basicUUID.sha256()
+        let uuid = Helper.returnUUID().sha256()
+        fetchPeople(url: "\(Constants.backendServerURLBase)index.php?uuid=\(uuid)")
         //getWallet();
     }
     
@@ -83,8 +84,19 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     SVProgressHUD.dismiss()
                 }else{
                     SVProgressHUD.dismiss()
-                    let alert = Helper.presentAlert(title: "Error", description: "Could not connect to the server, please try again later!", buttonText: "OK")
-                    self.present(alert, animated: true, completion: nil)
+                    let alertMessage = "Error"
+                    let message = "Could not connect to the server, please try again later!"
+                    let alert = UIAlertController(title: alertMessage, message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { _ in
+                        let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
+                        if removeSuccessful {
+                            let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+                            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+                            self.present(vc1, animated: true, completion: nil)
+                        }
+                    }))
+                    self.present(alert, animated: true, completion:nil)
+                    
                 }
         }
     }
@@ -120,7 +132,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let tappedItem = peopleArray[indexPath.item]
         peopleAddress = tappedItem[3]
         performSegue(withIdentifier: "goToItems", sender: self)
-        //navigationController?.pushViewController(vc, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
