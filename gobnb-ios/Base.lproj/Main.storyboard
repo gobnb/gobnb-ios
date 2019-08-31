@@ -1686,7 +1686,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkT-Mp-Mnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4902" y="-1146"/>
+            <point key="canvasLocation" x="5841" y="-1043"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dto-lI-WhF">
@@ -1717,7 +1717,7 @@
         <image name="subtract-white" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e5W-Y6-RB9"/>
+        <segue reference="XP5-3f-8KR"/>
         <segue reference="o1F-VC-Qf1"/>
         <segue reference="2Y6-e3-F22"/>
     </inferredMetricsTieBreakers>

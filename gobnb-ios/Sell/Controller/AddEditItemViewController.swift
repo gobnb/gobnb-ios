@@ -28,6 +28,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     
     //There is no 0 in the backend table. However, this variable gets the val of existing store record id if there is one
     var existingItemRecordId: String = "0"
+    
     //flag to let backend know if uploaded image should be kept or discarded (if its changed)
     var imageChanged = 0
     var walletAddress = ""
@@ -43,7 +44,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
         itemPriceTextField.keyboardType = UIKeyboardType.decimalPad
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
         uuid = Helper.returnUUID().sha256()
-        
+        print(existingItemRecordId)
         if (existingItemRecordId != "0") {
             let itemToQuery = "\(Constants.backendServerURLBase)getItem.php?uuid=\(uuid)&item=\(existingItemRecordId)"
             fetchItemInformation(url: itemToQuery)
@@ -280,8 +281,8 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
                     if let json = response.data {
                         do{
                             let data = try JSON(data: json)
-                            //print("printing data")
-                            //print(data)
+                            print("printing data")
+                            print(data)
                             if(data[0] != "Inserted Record"){
                                 let alert = Helper.presentAlert(title: "Error", description: "Could not save changes, please try again!", buttonText: "Close")
                                 self.present(alert, animated: true)
@@ -373,6 +374,7 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
                         self.view.layoutIfNeeded() },
                        completion: nil)
     }
+    
     
 }
 

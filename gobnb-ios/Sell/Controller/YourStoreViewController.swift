@@ -239,6 +239,8 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
             }
             if let imageData = pickedImage.image?.jpeg(.lowest) {
                 let name = self.nameTextField.text
+                //print("basecurrencyPickedId")
+                //print(baseCurrencyPickedId)
                 let parameters = ["existingStoreRecordId": self.existingStoreRecordId, "name" : name!, "desc": self.descriptionTextArea.text!, "address": walletAddress, "uuid": uuid, "basecurrency": baseCurrencyPickedId, "imageChanged": self.imageChanged] as [String : Any]
                 requestWith(url: "\(Constants.backendServerURLBase)insertStore.php", imageData: imageData, parameters: parameters, fileName: fileName)
             }
@@ -291,6 +293,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
                     if let json = response.data {
                         do{
                             let data = try JSON(data: json)
+                            print(data)
                             if(data[0] != "Inserted Record"){
                                 let alert = Helper.presentAlert(title: "Error", description: "Could not save changes, please try again!", buttonText: "Close")
                                 self.present(alert, animated: true)
