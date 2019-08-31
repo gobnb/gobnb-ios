@@ -84,7 +84,7 @@ class SellSideMenuViewController: UIViewController, UITableViewDelegate, UITable
             let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
             if removeSuccessful {
                 let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-                let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+                let vc1 = sb.instantiateViewController(withIdentifier: "StartViewVCNav")
                 self.present(vc1, animated: true, completion: nil)
             }
         }

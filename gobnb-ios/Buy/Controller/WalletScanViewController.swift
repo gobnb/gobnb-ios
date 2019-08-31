@@ -99,6 +99,11 @@ class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjects
         
         let saveSuccessful: Bool = KeychainWrapper.standard.set(code, forKey: "walletKey")
         if saveSuccessful {
+            //set the root view controller first
+            let sb : UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
+            UIApplication.shared.keyWindow?.rootViewController = vc2
+            
             let wallet = Wallet(mnemonic: code, endpoint: .testnet)
             wallet.synchronise() { (error) in
                 let walletAddress = wallet.account
@@ -145,7 +150,7 @@ class WalletScanViewController: UIViewController, AVCaptureMetadataOutputObjects
         let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
         if removeSuccessful {
             let sb:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewController")
+            let vc1 = sb.instantiateViewController(withIdentifier: "StartViewVCNav")
             self.present(vc1, animated: true, completion: nil)
         }
     }

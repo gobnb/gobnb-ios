@@ -59,6 +59,9 @@ class AddEditItemViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        existingItemRecordId = "0"
+        print("existing")
+        print(existingItemRecordId)
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }

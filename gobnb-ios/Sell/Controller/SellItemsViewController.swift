@@ -39,6 +39,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         //tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         
+       
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(refreshTableView), for: .valueChanged)
@@ -49,6 +50,8 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         
         
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         refreshTableView()
@@ -146,23 +149,26 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         //print(itemsArray[indexPath.item])
         existingItemRecordId = itemsArray[indexPath.item][4]
         //itemArrayToPass.append(peopleAddress)
-        performSegue(withIdentifier: "goToAddEditItem", sender: self)
+        performSegue(withIdentifier: "goToEditItem", sender: self)
         
         //navigationController?.pushViewController(vc, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if segue.destination is AddEditItemViewController
-        {
-            let vc = segue.destination as? AddEditItemViewController
-            vc?.existingItemRecordId = existingItemRecordId
+        if segue.identifier == "goToEditItem" {
+            if segue.destination is AddEditItemViewController
+            {
+                let vc = segue.destination as? AddEditItemViewController
+                vc?.existingItemRecordId = existingItemRecordId
+            }
         }
     }
     
     @objc func alertViewAddItemButtonAction (){
-        performSegue(withIdentifier: "goToAddEditItem", sender: self)
+        performSegue(withIdentifier: "goToAddItem", sender: self)
     }
+    
     
     @objc func alertViewSetupStoreButtonAction (){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)

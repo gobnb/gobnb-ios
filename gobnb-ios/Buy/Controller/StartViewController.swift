@@ -37,6 +37,18 @@ class StartViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
+    @IBAction func createNewWalletPressed(_ sender: Any) {
+        guard let url = URL(string: "https://testnet.binance.org/en/create") else {
+            return //be safe
+        }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
     @IBAction func submitPressed(_ sender: Any) {
         SVProgressHUD.show()
         let saveSuccessful: Bool = KeychainWrapper.standard.set(textAreaOutlet.text, forKey: "walletKey")
@@ -51,7 +63,7 @@ class StartViewController: UIViewController {
                     if(response.account.accountNumber == 0){
                         SVProgressHUD.dismiss()
                         KeychainWrapper.standard.removeObject(forKey: "walletKey")
-                        print("account is invalid")
+                        //print("account is invalid")
                         let alertTitle = NSLocalizedString("Error", comment: "")
                         let alertMessage = NSLocalizedString("Could not find Binance Chain account. Please try again with correct mnemonic key!", comment: "")
                         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
@@ -59,6 +71,10 @@ class StartViewController: UIViewController {
                         self.present(alert, animated: true)
                     }else{
                         SVProgressHUD.dismiss()
+                        //set the root view controller first
+                        let sb : UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+                        let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
+                        UIApplication.shared.keyWindow?.rootViewController = vc2
                         KeychainWrapper.standard.set(walletAddress, forKey: "walletAddress")
                         self.performSegue(withIdentifier: "goToScan", sender: self)
                     }
@@ -98,7 +114,7 @@ class StartViewController: UIViewController {
             } else {
                 newHeight = keyboardFrame.cgRectValue.height
             }
-            let keyboardHeight = newHeight  - 250 // **10 is bottom margin of View**  and **this newHeight will be keyboard height**
+            let keyboardHeight = newHeight  - 230 // **10 is bottom margin of View**  and **this newHeight will be keyboard height**
             print(keyboardHeight)
             UIView.animate(withDuration: duration,
                            delay: TimeInterval(0),

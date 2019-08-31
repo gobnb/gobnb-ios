@@ -221,6 +221,8 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
                                 if response.result.isSuccess {
                                     let resultJSON : JSON = JSON(response.result.value!)
                                     if(resultJSON[0] == "Updated record"){
+                                        self.shoppingCartView.viewCartButton.setTitle("Paid", for: .normal)
+                                        self.shoppingCartView.viewCartButton.removeTarget(nil, action: nil, for: .allEvents)
                                         SVProgressHUD.dismiss()
                                         let alertTitle = NSLocalizedString("Success", comment: "")
                                         let alertMessage = NSLocalizedString("Your Transaction has been complete!", comment: "")

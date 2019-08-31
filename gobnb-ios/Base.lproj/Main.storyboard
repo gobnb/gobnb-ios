@@ -895,10 +895,33 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZY8-bh-6kh">
+                                                <rect key="frame" x="129.5" y="251" width="116" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="29" id="0vO-yQ-k2r"/>
+                                                    <constraint firstAttribute="width" constant="116" id="geF-aA-URf"/>
+                                                </constraints>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Create New Wallet">
+                                                            <attributes>
+                                                                <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                                <integer key="NSUnderline" value="1"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <connections>
+                                                    <action selector="createNewWalletPressed:" destination="SKZ-Sz-sc9" eventType="touchUpInside" id="guM-8n-gYI"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.72156862749999995" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="ZY8-bh-6kh" firstAttribute="centerX" secondItem="dEM-WI-AfF" secondAttribute="centerX" id="4Dd-hR-hzU"/>
                                             <constraint firstAttribute="height" constant="344" id="4Ry-O1-TQH"/>
+                                            <constraint firstItem="ZY8-bh-6kh" firstAttribute="top" secondItem="EKP-s1-QfL" secondAttribute="bottom" constant="20" id="5XV-Yp-F90"/>
                                             <constraint firstItem="EKP-s1-QfL" firstAttribute="leading" secondItem="dEM-WI-AfF" secondAttribute="leading" constant="71" id="6J8-py-Mq7"/>
                                             <constraint firstItem="UKj-43-ZpV" firstAttribute="top" secondItem="dEM-WI-AfF" secondAttribute="top" id="Jvb-li-5Iv"/>
                                             <constraint firstItem="uvR-qF-eDI" firstAttribute="trailing" secondItem="EKP-s1-QfL" secondAttribute="trailing" id="KDt-fL-a4W"/>
@@ -1226,7 +1249,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="pL3-p2-gw9">
                             <connections>
-                                <segue destination="Pol-hf-iVE" kind="show" identifier="goToAddEditItem" id="LWx-eo-K5w"/>
+                                <segue destination="Pol-hf-iVE" kind="show" identifier="goToAddItem" id="LWx-eo-K5w"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1235,6 +1258,7 @@
                         <outlet property="alertViewMessage" destination="DSc-HU-W7o" id="yok-2n-aiD"/>
                         <outlet property="setupShopAlertView" destination="X1M-Sg-E0w" id="Bp9-Qd-ira"/>
                         <outlet property="tableView" destination="yyp-l5-iZq" id="WaP-ng-mJa"/>
+                        <segue destination="Pol-hf-iVE" kind="show" identifier="goToEditItem" id="hYc-23-R2a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hjb-v6-k2N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1717,8 +1741,9 @@
         <image name="subtract-white" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XP5-3f-8KR"/>
-        <segue reference="o1F-VC-Qf1"/>
+        <segue reference="LWx-eo-K5w"/>
+        <segue reference="e5W-Y6-RB9"/>
+        <segue reference="jQ8-dy-MAS"/>
         <segue reference="2Y6-e3-F22"/>
     </inferredMetricsTieBreakers>
 </document>

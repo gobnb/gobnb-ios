@@ -42,6 +42,7 @@ import SideMenu
                     self.window?.rootViewController = vc2
                 }
             }else{
+                UserDefaults.standard.set("buySideNav", forKey: "StartSideVC")
                 let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
                 self.window?.rootViewController = vc2
             }
