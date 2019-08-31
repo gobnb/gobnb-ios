@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class Helper {
+    
+    static var dynUUID = ""
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
@@ -44,6 +46,16 @@ class Helper {
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonText, style: .cancel, handler: nil))
         return alert
+    }
+    
+    static func returnUUID() -> String {
+//        let date = NSDate()
+//        let timestamp = UInt64(floor(date.timeIntervalSince1970))
+//        let numberAsString = String(timestamp)
+//        let subString = numberAsString.dropLast(2)
+//        let trimmedNumber = Int(subString) ?? 0
+        dynUUID = "\(Constants.basicUUID)"
+        return dynUUID
     }
     
 }
