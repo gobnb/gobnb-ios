@@ -34,6 +34,9 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         self.tableView.separatorStyle = .none
         tableView.rowHeight = 200
+        if let rootVC = navigationController?.viewControllers.first {
+            navigationController?.viewControllers = [rootVC, self]
+        }
         SVProgressHUD.show()
         //add shopping cart subview
         shoppingCartView.frame = CGRect(x: 0,

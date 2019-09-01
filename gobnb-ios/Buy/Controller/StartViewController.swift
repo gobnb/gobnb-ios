@@ -50,38 +50,44 @@ class StartViewController: UIViewController {
     }
     
     @IBAction func submitPressed(_ sender: Any) {
+        if textAreaOutlet.text != "" {
         SVProgressHUD.show()
         let saveSuccessful: Bool = KeychainWrapper.standard.set(textAreaOutlet.text, forKey: "walletKey")
-        if saveSuccessful {
-            let wallet = Wallet(mnemonic: textAreaOutlet.text, endpoint: .testnet)
-            wallet.synchronise() { (error) in
-                let walletAddress = wallet.account
-                let binance = BinanceChain()
-                // Get account metadata for an address
-                binance.account(address: walletAddress) { (response) in
-                    print(response.account.publicKey)
-                    if(response.account.accountNumber == 0){
-                        SVProgressHUD.dismiss()
-                        KeychainWrapper.standard.removeObject(forKey: "walletKey")
-                        //print("account is invalid")
-                        let alertTitle = NSLocalizedString("Error", comment: "")
-                        let alertMessage = NSLocalizedString("Could not find Binance Chain account. Please try again with correct mnemonic key!", comment: "")
-                        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
-                    }else{
-                        SVProgressHUD.dismiss()
-                        //set the root view controller first
-                        let sb : UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-                        let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
-                        UIApplication.shared.keyWindow?.rootViewController = vc2
-                        KeychainWrapper.standard.set(walletAddress, forKey: "walletAddress")
-                        self.performSegue(withIdentifier: "goToScan", sender: self)
+            if saveSuccessful {
+                let wallet = Wallet(mnemonic: textAreaOutlet.text, endpoint: .testnet)
+                wallet.synchronise() { (error) in
+                    let walletAddress = wallet.account
+                    let binance = BinanceChain()
+                    // Get account metadata for an address
+                    binance.account(address: walletAddress) { (response) in
+                        print(response.account.publicKey)
+                        if(response.account.accountNumber == 0){
+                            SVProgressHUD.dismiss()
+                            KeychainWrapper.standard.removeObject(forKey: "walletKey")
+                            //print("account is invalid")
+                            let alertTitle = NSLocalizedString("Error", comment: "")
+                            let alertMessage = NSLocalizedString("Could not find Binance Chain account. Please try again with correct mnemonic key!", comment: "")
+                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                            self.present(alert, animated: true)
+                        }else{
+                            SVProgressHUD.dismiss()
+                            KeychainWrapper.standard.set(walletAddress, forKey: "walletAddress")
+                            //set the root view controller first
+                            let sb : UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+                            let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
+                            UIApplication.shared.keyWindow?.rootViewController = vc2
+                            
+                            //self.performSegue(withIdentifier: "goToScan", sender: self)
+                        }
                     }
                 }
+            }else {
+                print("error")
             }
-        }else {
-            print("error")
+        }else{
+            let alert = Helper.presentAlert(title: "Error", description: "Please fill mnemonic keywords in the textarea provided!", buttonText: "OK")
+            present(alert, animated: true, completion: nil)
         }
     }
     

@@ -185,8 +185,11 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
     }
     
     @IBAction func closeButtonPressed(_ sender: Any) {
-        //self.dismiss(animated: true, completion: nil)
-        UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
+        if (ordersViewType != "") {
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        }
 
     }
     
