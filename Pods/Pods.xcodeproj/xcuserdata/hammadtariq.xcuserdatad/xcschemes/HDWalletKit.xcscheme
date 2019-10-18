@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2F24712DAC8A0FEF7F9FAE6EEF029D9C"
+               BlueprintIdentifier = "7033BAB71137EB66282154CEDB1057A8"
                BuildableName = "HDWalletKit.framework"
                BlueprintName = "HDWalletKit"
                ReferencedContainer = "container:Pods.xcodeproj">

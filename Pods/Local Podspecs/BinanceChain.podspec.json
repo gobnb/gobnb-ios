@@ -23,7 +23,7 @@
   "pod_target_xcconfig": {
     "OTHER_SWIFT_FLAGS[config=Debug]": "-D DEBUG"
   },
-  "swift_version": "5",
+  "swift_versions": "5",
   "default_subspecs": "Core",
   "static_framework": true,
   "subspecs": [
@@ -79,5 +79,6 @@
       "name": "Libraries",
       "source_files": "BinanceChain/Sources/Libraries/*/*.swift"
     }
-  ]
+  ],
+  "swift_version": "5"
 }

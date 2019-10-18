@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.8.2)
+  - Alamofire (4.9.0)
   - BinanceChain (1.0.0-beta):
     - BinanceChain/Core (= 1.0.0-beta)
   - BinanceChain/Core (1.0.0-beta):
@@ -27,14 +27,14 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - secp256k1.swift (0.1.4)
-  - SideMenu (6.0.2)
-  - Starscream (3.1.0)
+  - SideMenu (6.0.9)
+  - Starscream (3.1.1)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.0.3)
-  - SwiftKeychainWrapper (3.3.0)
-  - SwiftProtobuf (1.5.0)
+  - SwiftKeychainWrapper (3.4.0)
+  - SwiftProtobuf (1.7.0)
   - SwiftyJSON (4.3.0)
-  - SwipeCellKit (2.6.0)
+  - SwipeCellKit (2.7.1)
   - XCGLogger (7.0.0):
     - XCGLogger/Core (= 7.0.0)
   - XCGLogger/Core (7.0.0):
@@ -51,7 +51,7 @@ DEPENDENCIES:
   - SwipeCellKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - CountdownLabel
     - CropViewController
@@ -80,8 +80,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/mh7821/SwiftBinanceChain.git
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  BinanceChain: 0fafd2d808e5be8c80fdc46d0e33a9df1c0c54e7
+  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
+  BinanceChain: a80213ab0252f2152c2068b279697935497cb053
   CountdownLabel: c9975e3f329140b5e7d1f45cd63b1300badd1712
   CropViewController: 10ba7af75e302f2db7eb913f8aa1156f95cfe88e
   CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
@@ -89,16 +89,16 @@ SPEC CHECKSUMS:
   HDWalletKit: f0268857289221d4d6c2041d43ee78f1e84fc8e5
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
-  SideMenu: 940fb4f25477ffd09d9b7ce573af1b6a3e293107
-  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
+  SideMenu: 12c42f4bb9405c602f0d75493206cd405911a153
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 8d4f14bf1ef68e95094511504856547bf9e3e1a6
-  SwiftKeychainWrapper: ef5ad793bc0e08e24a5913f28345b8f7bc8e4123
-  SwiftProtobuf: 241400280f912735c1e1b9fe675fdd2c6c4d42e2
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
+  SwiftProtobuf: 4fd9645e69b72cbae6ec8da5be0cdd20ca6565dd
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
-  SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
 PODFILE CHECKSUM: 52d4e5bafa9a87dc90561b9abb4430b7dc885d50
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.8.3

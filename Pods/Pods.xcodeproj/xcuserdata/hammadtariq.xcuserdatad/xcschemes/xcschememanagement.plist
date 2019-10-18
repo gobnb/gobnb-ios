@@ -37,7 +37,7 @@
 		<key>FAQView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<false/>
 		</dict>
 		<key>HDWalletKit.xcscheme</key>
 		<dict>

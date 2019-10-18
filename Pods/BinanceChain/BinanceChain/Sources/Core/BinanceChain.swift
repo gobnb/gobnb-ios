@@ -139,15 +139,12 @@ public class BinanceChain {
     public func broadcast(message: Message, sync: Bool = true, completion: Completion? = nil) {
 
         do {
-            print(message)
             let bytes = try message.encode()
-            print(bytes);
             self.broadcast(message: bytes, sync: sync, completion: completion)
         } catch let error {
             let response = Response()
             response.isError = true
             response.error = error
-            print(response)
             if let completion = completion {
                 completion(response)
             }
@@ -157,9 +154,7 @@ public class BinanceChain {
 
     public func broadcast(message bytes: Data, sync: Bool = true, completion: Completion? = nil) {
         var path = Path.broadcast.rawValue
-        print(path)
         if (sync) { path += "/?sync=1" }
-        print(path)
         self.api(path: path, method: .post, body: bytes, parser: BroadcastParser(), completion: completion)
     }
 
@@ -247,12 +242,10 @@ public class BinanceChain {
 
     @discardableResult
     internal func api(path: String, method: HTTPMethod = .get, parameters: Parameters = [:], body: Data? = nil, parser: Parser = Parser(), completion: Completion? = nil) -> Request? {
-        print("hello")
 
         var encoding: ParameterEncoding = URLEncoding.default
         if let body = body { encoding = HexEncoding(data: body) }
         let url = String(format: "%@/%@", self.endpoint, path)
-        print(url)
         let request = Alamofire.request(url, method: method, parameters: parameters, encoding: encoding)
         request.validate(statusCode: 200..<300)
         request.responseData() { (http) -> Void in
