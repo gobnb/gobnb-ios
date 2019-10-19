@@ -95,10 +95,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         performSegue(withIdentifier: "goToResults", sender: self)
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
