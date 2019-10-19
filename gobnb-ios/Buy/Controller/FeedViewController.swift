@@ -38,10 +38,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.separatorStyle = .none
         tableView.rowHeight = 200
         SVProgressHUD.show()
-        //let uuid = Constants.basicUUID.sha256()
         let uuid = Helper.returnUUID().sha256()
         fetchPeople(url: "\(Constants.backendServerURLBase)index.php?uuid=\(uuid)")
-        //getWallet();
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,7 +105,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultsCellMain", for: indexPath) as! peopleTableViewCell
-        var people = peopleArray[indexPath.item]
+        let people = peopleArray[indexPath.item]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.placeLabel.text = people[0]
         cell.descriptionLabel.text = NSLocalizedString("\(people[1])", comment: "")
@@ -142,52 +140,5 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             vc?.peopleAddress = peopleAddress
         }
     }
-    
-    
-    func getWallet(){
-        
-        let walletKey = KeychainWrapper.standard.string(forKey: "walletKey") ?? ""
-        print("wallet key is here")
-        print(walletKey)
-        // Restore with a mnemonic phrase
-        let wallet = Wallet(mnemonic: walletKey, endpoint: .testnet)
-
-        // Access keys
-//        print(wallet.privateKey)
-//        print(wallet.publicKey)
-//        print(wallet.mnemonic)
-//        print(wallet.account)
-//        print(wallet.address)
-        KeychainWrapper.standard.set(wallet.account, forKey: "walletAddress")
-        // Synchronise with the remote node before using the wallet
-        wallet.synchronise() { (error) in
-            
-            if let error = error {
-                
-                let alert = Helper.presentAlert(title: "Error", description: "Could not load wallet, please try again!", buttonText: "Close")
-                self.present(alert, animated: true, completion: {
-                    let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: "walletKey")
-                    print(removeSuccessful)
-                    //Log out should happen here
-                    
-                })
-                return print(error)
-            }
-
-            // Generate a new order ID
-            //let id = wallet.nextAvailableOrderId()
-
-            // Sign a message
-            //let data = wallet.sign(message: data)
-
-            // Access details
-//            print(wallet.accountNumber)
-//            print(wallet.sequence)
-
-        }
-    }
-
-    
-
 }
 

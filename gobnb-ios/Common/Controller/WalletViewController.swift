@@ -31,13 +31,8 @@ class WalletViewController: UIViewController, UITableViewDataSource, UITableView
         getTransactions()
     }
     
-//    override var prefersStatusBarHidden: Bool {
-//        return true
-//    }
-    
     func getAccount(){
         binance.account(address: walletAddress) { (response) in
-            //print(response.account.balances)
             let balances = response.account.balances
             var bnbBalance = ""
             var usdsbBalance = ""

@@ -370,8 +370,7 @@ class YourStoreViewController: UIViewController, UIPickerViewDataSource, UIPicke
     }
     
     func keyboardWillHide(){
-        print("keyboard hidden")
-        
+        //keyboard hidden
         UIView.animate(withDuration: 0.2,
                        delay: TimeInterval(0),
                        options: UIView.AnimationOptions(rawValue: 1),

@@ -73,6 +73,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    //Fetch items from the server
     func fetchItems(url: String){
         Alamofire.request(url, method: .get)
             .responseJSON { response in
@@ -93,7 +94,6 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
                     SVProgressHUD.dismiss()
                 }else{
                     SVProgressHUD.dismiss()
-                    //let alert = Helper.presentAlert(title: "Error", description: "Store or person not found in our database, please scan correct QR code again", buttonText: "Close")
                     // create the alert
                     let alert = UIAlertController(title: "Error", message: "We could not find scanned QR code in our database. Please try again!", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -135,7 +135,7 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultsCellItems", for: indexPath) as! ItemTableViewCell
         
-        var items = itemsArray[indexPath.item]
+        let items = itemsArray[indexPath.item]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.itemTitle.text = items[0]
         cell.itemDescription.text = NSLocalizedString("\(items[1])", comment: "")
@@ -149,7 +149,6 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
             if let data = response.data {
                 let image = UIImage(data: data)
                 cell.itemImage.image = image
-                //cell.thumbnailImage.image = image
             } else {
                 print("Data is nil. I don't know what to do :(")
             }
@@ -162,12 +161,9 @@ class ItemsTableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print(itemsArray[indexPath.item])
         itemArrayToPass = itemsArray[indexPath.item]
         itemArrayToPass.append(peopleAddress)
         performSegue(withIdentifier: "goToPayment", sender: self)
-        
-        //navigationController?.pushViewController(vc, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

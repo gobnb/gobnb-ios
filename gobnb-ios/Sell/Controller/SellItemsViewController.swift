@@ -36,10 +36,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.rowHeight = 100
-        //tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
-        
-       
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(refreshTableView), for: .valueChanged)
@@ -47,11 +44,7 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         
         uuid = Helper.returnUUID().sha256()
         walletAddress = KeychainWrapper.standard.string(forKey: "walletAddress")!
-        
-        
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         refreshTableView()
@@ -113,9 +106,8 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sellItemsCell", for: indexPath)
-        var items = itemsArray[indexPath.item]
+        let items = itemsArray[indexPath.item]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        //cell.cellItemName.text = items[0]
         cell.textLabel?.text = items[0]
         cell.detailTextLabel?.text = NSLocalizedString("\(items[1])", comment: "")
         if (indexPath.row % 2 == 0){
@@ -125,33 +117,12 @@ class SellItemsViewController: UIViewController, UITableViewDataSource, UITableV
         }else{
             cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
-//        cell.cellItemDescription.text = NSLocalizedString("\(items[1])", comment: "")
-//        cell.cellItemPrice.text = "\(items[3])"
-//        cell.cellItemName.sizeToFit()
-//        cell.cellItemDescription.sizeToFit()
-//        //cell.itemPrice.sizeToFit()
-//        //cell.backgroundColor = UIColor(red:1.00, green:0.92, blue:0.65, alpha:1.0)
-        
-//        Alamofire.request(Constants.backendServerURLBase + Constants.itemsImageBaseFolder + items[2] ).response { response in
-//            if let data = response.data {
-//                let image = UIImage(data: data)
-//                //cell.cellItemImage.image = image
-//                cell.imageView?.image = image
-//                //cell.thumbnailImage.image = image
-//            } else {
-//                print("Data is nil. I don't know what to do :(")
-//            }
-//        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print(itemsArray[indexPath.item])
         existingItemRecordId = itemsArray[indexPath.item][4]
-        //itemArrayToPass.append(peopleAddress)
         performSegue(withIdentifier: "goToEditItem", sender: self)
-        
-        //navigationController?.pushViewController(vc, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

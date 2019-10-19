@@ -201,12 +201,8 @@ class OrderProgressAndPaymentViewController : UIViewController, UITableViewDataS
             let wallet = Wallet(mnemonic: walletKey!, endpoint: .testnet)
             wallet.synchronise() { (error) in
                 
-                //print("wallet.init", wallet, error)
-                
-                // Create a new transfer
+                // Create a new transfer message
                 let msgTransfer = Message.transfer(symbol: self.currencySymbol, amount: self.paymentToCharge, to: self.addressToPay, wallet: wallet)
-                
-                //let msg = Message.newOrder(symbol: "BNB_BTC.B-918", orderType: .limit, side: .buy, price: 100, quantity: 1, timeInForce: .goodTillExpire, wallet: wallet)
                 
                 // Broadcast the message
                 binance.broadcast(message: msgTransfer, sync: true) { (response) in

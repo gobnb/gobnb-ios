@@ -77,8 +77,6 @@ class StartViewController: UIViewController {
                             let sb : UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
                             let vc2 = sb.instantiateViewController(withIdentifier: "MainNavigationController")
                             UIApplication.shared.keyWindow?.rootViewController = vc2
-                            
-                            //self.performSegue(withIdentifier: "goToScan", sender: self)
                         }
                     }
                 }
@@ -126,16 +124,14 @@ class StartViewController: UIViewController {
                            delay: TimeInterval(0),
                            options: animationCurve,
                            animations: {
-                            //self.textAreaOutlet.frame.origin.y = keyboardHeight
                             self.textAreaButtonBottomConstraint.constant = keyboardHeight
-                            //self.view.textAreaBottomConstraint = keyboardHeight
-                                self.view.layoutIfNeeded() },
+                            self.view.layoutIfNeeded()
+                            },
                            completion: nil)
         }
     }
     
     func keyboardWillHide(){
-        print("keyboard hidden")
         self.textAreaButtonBottomConstraint.constant = 259 //hard-code resetting to original constant value
     }
     

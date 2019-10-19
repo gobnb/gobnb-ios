@@ -89,7 +89,7 @@ class OrdersTableViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ordersCell", for: indexPath)
-        var order = ordersArray[indexPath.item]
+        let order = ordersArray[indexPath.item]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         if (order[3] == "0"){
             cell.textLabel?.text = "\(order[1]) \(order[2]) (Unpaid)"

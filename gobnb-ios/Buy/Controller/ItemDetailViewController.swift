@@ -14,7 +14,6 @@ import SVProgressHUD
 import SwiftKeychainWrapper
 
 class ItemDetailViewController: UIViewController {
-    let testnet = "https://testnet-explorer.binance.org/tx/"
     
     @IBOutlet weak var shoppingCartCounterLabel: UILabel!
     @IBOutlet weak var shoppingCartView: ShoppingCartView!
@@ -39,6 +38,21 @@ class ItemDetailViewController: UIViewController {
         showShoppingCartView()
     }
     
+    //Update shopping cart subview at the bottom of the screen
+    func showShoppingCartView(){
+        if ShoppingCartModel.shoppingCartArray.isEmpty {
+            shoppingCartView.isHidden = true
+        }else{
+            let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
+            let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
+            shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
+            shoppingCartView.totalQty.text = "\(totalItemsInCart)"
+            shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
+            shoppingCartView.isHidden = false
+        }
+    }
+    
+    //Fill items details since we have fetched them already, only need to fetch image again
     func fillDetails(){
         titleOfItem.text = itemArray[0]
         itemPrice.text = "\(itemArray[3]) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
@@ -55,18 +69,6 @@ class ItemDetailViewController: UIViewController {
         }
     }
     
-    func showShoppingCartView(){
-        if ShoppingCartModel.shoppingCartArray.isEmpty {
-            shoppingCartView.isHidden = true
-        }else{
-            let totalPriceInCart = UserDefaults.standard.double(forKey: "totalPriceInCart")
-            let totalItemsInCart = UserDefaults.standard.integer(forKey: "totalItemsInCart")
-            shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
-            shoppingCartView.totalQty.text = "\(totalItemsInCart)"
-            shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
-            shoppingCartView.isHidden = false
-        }
-    }
     
     // BUTTON ACTIONS
     
@@ -82,8 +84,6 @@ class ItemDetailViewController: UIViewController {
             cartCounter = cartCounter + 1
             shoppingCartCounterLabel.text = "\(cartCounter)"
         }
-        
-        
         showShoppingCartView()
     }
     
@@ -148,7 +148,7 @@ class ItemDetailViewController: UIViewController {
         shoppingCartView.totalPrice.text = "\(totalPriceInCart) \(UserDefaults.standard.string(forKey: "storeBaseCurrency") ?? "")"
         shoppingCartView.totalQty.text = "\(totalItemsInCart)"
         
-        shoppingCartView.viewCartButton.addTarget(self, action: Selector(("cartButtonTapped:")), for: .touchUpInside)
+        shoppingCartView.viewCartButton.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         showShoppingCartView()
     }
     

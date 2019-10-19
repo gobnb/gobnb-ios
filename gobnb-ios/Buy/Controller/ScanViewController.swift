@@ -16,7 +16,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("hello its scan screen")
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
         
